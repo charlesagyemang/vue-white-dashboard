@@ -73,11 +73,15 @@
           </td>
 
           <td class="status">
-            <badge :type="row.statusColor">{{row.status}}</badge>
+            <badge :type="statusColor(row.status)">{{row.status}}</badge>
           </td>
 
-          <td class="cars">
+          <td v-if="row.cars" class="">
             {{row.cars.length}}
+          </td>
+
+          <td v-else class="cars">
+              {{row.address}}
           </td>
 
         </template>
@@ -173,28 +177,21 @@ import store from '@/store/store'
       title: String
     },
     methods: {
+      statusColor(stat){
+        if (stat === "active") {
+          return "success"
+        } else {
+          return "danger"
+        }
+      },
       handleAttachCarToOwner() {
         // UpdateOwnerInfo By Adding A New Car
         alert(JSON.stringify(this.selectedCarToAttach));
       },
       handleUpdateOwnerStatus() {
-        let currentOwner = this.owner.owner;
-        let ownerId = currentOwner.id;
-        delete currentOwner.status;
-        delete currentOwner.statusColor;
-        delete currentOwner.id;
-        let statusColor = "danger";
-        if (this.selectedOwnerStatus === "active") {
-          statusColor = "success"
-        }
-        currentOwner = {
-          ...currentOwner,
-          status: this.selectedOwnerStatus,
-          statusColor
-        };
         store.dispatch('owner/editOwner', {
-          ownerId,
-          ownerDataToUpdate: currentOwner
+          ownerId: this.owner.owner.id,
+          ownerDataToUpdate: { status: this.selectedOwnerStatus }
         })
         .then((owner) =>{
           // notify

@@ -14,7 +14,7 @@ export const mutations = {
 }
 
 export const actions = {
-  login ({ commit, dispatch }, dataToSend) {
+  login ({ commit }, dataToSend) {
     return UserService.login(dataToSend)
       .then((response) => {
         commit('SET_USER', response.data)
@@ -22,33 +22,22 @@ export const actions = {
         // eslint-disable-next-line
         localStorage.uberToken = user.token;
         // eslint-disable-next-line
-        localStorage.uberName = user.name;
+
+        if (user.role === "ADMIN") {
+          localStorage.uberName = user.email.split("@")[0];
+        } else if (user.role === "OWNER") {
+          localStorage.uberName = user.owner.fullName;
+        } else {
+          localStorage.uberName = user.driver.fullName;
+        }
         // eslint-disable-next-line
         localStorage.uberEmail = user.email;
         // eslint-disable-next-line
         localStorage.uberId = user.id;
-        const notification = {
-          type: 'success',
-          message: 'Logged In Successfully'
-        }
-        dispatch('notification/add', notification, { root: true })
+        return user;
+
       })
       .catch((error) => {
-        if (error.message === 'Network Error') {
-          const notification = {
-            type: 'error',
-            message: 'Please Check Your Internet Connectivity'
-          }
-          dispatch('notification/add', notification, { root: true })
-        } else {
-          const errorResponse = error.response
-          const errorMessage = errorResponse.data
-          const notification = {
-            type: 'error',
-            message: 'There was a problem logging you in: ' + errorMessage
-          }
-          dispatch('notification/add', notification, { root: true })
-        }
         throw error
       })
   },

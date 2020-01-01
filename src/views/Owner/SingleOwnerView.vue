@@ -9,7 +9,7 @@
             <div class="row">
                 <div class="col-xl-4 order-xl-2 mb-5 mb-xl-0">
                     <div class="card card-profile shadow">
-                        <badge :type="model.statusColor">{{model.status}}</badge>
+                        <badge :type="statusColor(model.status)">{{model.status}}</badge>
                         <div class="card-header text-center border-0 pt-8 pt-md-4 pb-0 pb-md-4">
                           <div class="d-flex justify-content-between">
                               <router-link to="/dashboard/add-an-owner" class="btn btn-success">Add A New Owner</router-link><br>
@@ -109,6 +109,15 @@
       },
       currentOwnerId(){
         return this.$route.params.id
+      },
+    },
+    methods: {
+      statusColor(stat){
+        if (stat === "active") {
+          return "success"
+        } else {
+          return "danger"
+        }
       },
     },
   };

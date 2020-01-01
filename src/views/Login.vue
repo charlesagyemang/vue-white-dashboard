@@ -52,16 +52,27 @@
       handleLogin() {
         const nonthingIsEmpty = this.validateBody(this.model);
         if (nonthingIsEmpty) {
-          console.log("Log User In");
-          console.log(JSON.stringify(this.model));
 
           //========== LOGIN ===========//
               this.$store
               .dispatch("user/login", this.model)
-              .then(() => {
-                this.$router.push({
-                  name: "dashboard",
-                });
+              .then((resp) => {
+                console.log(resp);
+                if (resp.role === "ADMIN") {
+                  this.$router.push({
+                    name: "dashboard",
+                  });
+                } else if (resp.role === "OWNER") {
+                  this.$router.push({
+                    path: `/owner/dashboard/${resp.owner.id}`,
+                  });
+                } else {
+                  this.$router.push({
+                    path: `/driver/details/loobi${resp.driver.id}`,
+                  });
+                }
+                console.log("logssss",resp.role);
+
               })
               .catch(() => {
                 alert("Wrong Username And Password")

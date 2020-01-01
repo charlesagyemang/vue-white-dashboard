@@ -116,17 +116,27 @@ import { mapState } from 'vuex'
 export default {
   methods: {
     handleEditOwner() {
-      alert(JSON.stringify(this.model))
+      let ownerId = this.model.id;
       let ownerDataToUpdate = this.model;
-      delete ownerDataToUpdate.id;
+
+      delete ownerDataToUpdate.id
+      delete ownerDataToUpdate.createdAt
+      delete ownerDataToUpdate.updatedAt
+      delete ownerDataToUpdate.cars
+      delete ownerDataToUpdate.userId
+      delete ownerDataToUpdate.other
+      delete ownerDataToUpdate.imageUrl
+      delete ownerDataToUpdate.status
+
+      console.log(JSON.stringify(ownerId))
+      console.log(JSON.stringify(ownerDataToUpdate))
 
       this.$store.dispatch('owner/editOwner', {
-        ownerId: this.model.id,
+        ownerId,
         ownerDataToUpdate,
       })
       .then((owner) =>{
         // notify
-
         this.$notify({
           type: 'success',
           title: `Status Updated Successfully. Changed To ${owner.status}`,
@@ -134,13 +144,11 @@ export default {
         this.$router.push({path: '/dashboard/owner-list'})
       }).catch((error) => {
         // this.owner.status = currentOwner.status;
-    
         this.$notify({
           type: 'danger',
           title: `Status Failed To Update: Error => ${error.message}`,
         });
       });
-
     },
     validateBody(payload){
       delete payload.other

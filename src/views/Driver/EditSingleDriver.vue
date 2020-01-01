@@ -185,7 +185,7 @@
                                 </div>
                             </div>
                             <div class="pl-lg-4">
-                              <a href="#" class="btn btn-dark">Update Driver Details</a>
+                              <button @click.prevent="handleEditOwner" class="btn btn-dark">Update Driver Details</button>
                             </div>
                         </form>
                     </template>
@@ -210,15 +210,34 @@ export default {
     },
   },
   methods: {
-    handleCreateOwner() {
-      const noneIsEmpty = this.validateBody(this.model);
-      if (noneIsEmpty) {
-        console.log("noneIsEmpty", "Go Agead Create Owner");
-        // CREATE OWNER
-        console.log(JSON.stringify(this.model));
-      } else {
-        alert("Error!! Please Fill All Required Fields")
-      }
+    handleEditOwner() {
+      const data = this.model;
+      const dataId = data.id;
+
+      delete data.carId
+      delete data.userId
+      delete data.other
+      delete data.createdAt
+      delete data.updatedAt
+      delete data.id
+
+      this.$store.dispatch('driver/editDriver', {
+        driverId: dataId,
+        ownerDataToUpdate: data})
+      .then((driver) =>{
+        console.log("=====", driver);
+        this.$notify({
+          type: 'success',
+          title: `Status Updated Successfully`,
+        });
+        this.$router.push({path: '/dashboard/driver-list'})
+      }).catch((error) => {
+        this.$notify({
+          type: 'danger',
+          title: `Status Failed To Update: Error => ${error.message}`,
+        });
+      });
+
     },
     validateBody(payload){
       delete payload.other

@@ -50,7 +50,7 @@
           <th scope="fullname">
             <div class="media align-items-center">
               <a href="#" class="avatar rounded-circle mr-3">
-                <img alt="Car Image" :src="row.imageUrl">
+                <img alt="Car Image" src="/img/cars/picanto2.jpg">
               </a>
               <div class="media-body">
                 <span class="name mb-0 text-sm">{{row.fullName}}</span>
@@ -221,23 +221,15 @@ import store from '@/store/store'
 
       handleDriverCarAssignmentStatus() {
 
-        let currentDriver = this.currentlySelectedDriver;
-        let driverId = currentDriver.id;
+        let driverId = this.currentlySelectedDriver.id;
 
-        console.log(driverId);
-
-        delete currentDriver.carAssignmentStatus;
-        delete currentDriver.id;
-        currentDriver = {
-          ...currentDriver,
+        let driverDataToUpdate = {
           carAssignmentStatus: this.selectedCarAssignmentStatus,
         };
 
-        console.log(JSON.stringify(currentDriver));
-
         store.dispatch('driver/editDriver', {
           driverId,
-          driverDataToUpdate: currentDriver
+          driverDataToUpdate,
         })
         .then((driver) =>{
           this.modals.changeCarAssignmentModal = false;
@@ -256,17 +248,13 @@ import store from '@/store/store'
       },//handleDriverCarAssignmentStatus
 
       handleUpdateDriverStatus() {
+
         let currentDriver = this.currentlySelectedDriver;
         let driverId = currentDriver.id;
-        console.log(driverId);
-        delete currentDriver.driverStatus;
-        delete currentDriver.id;
+
         currentDriver = {
-          ...currentDriver,
           driverStatus: this.selectedDriverStatus,
         };
-
-        console.log(JSON.stringify(currentDriver));
 
         store.dispatch('driver/editDriver', {
           driverId,

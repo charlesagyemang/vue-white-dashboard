@@ -42,11 +42,11 @@
                            </div>
                            <div class="col-md-3">
                              <h5 class="text-uppercase text-muted">Car Owner</h5>
-                             <multiselect v-model="carForm.carOwner" :options="carOwnersList"></multiselect>
+                             <multiselect v-model="carForm.carOwner" label="fullName" :options="owner.owners"></multiselect>
                            </div>
                            <div class="col-md-3">
                                <h5 class="text-uppercase text-muted">Current Driver</h5>
-                               <multiselect v-model="carForm.currentDriver" :options="allDriversList"></multiselect>
+                               <multiselect v-model="carForm.currentDriverId"  label="fullName" :options="driver.drivers"></multiselect>
                            </div>
                            <div class="col-md-3">
                              <h5 class="text-uppercase text-muted">Car Type</h5>
@@ -73,29 +73,29 @@
                            </div>
                            <div class="col-md-3">
                                <h5 class="text-uppercase text-muted">Car Number</h5>
-                               <base-input addon-left-icon="ni ni-delivery-fast" placeholder="E.g GS 4098 - 20"></base-input>
+                               <base-input v-model="carForm.carNumber" addon-left-icon="ni ni-delivery-fast" placeholder="E.g GS 4098 - 20"></base-input>
                            </div>
                            <div class="col-md-3">
                              <h5 class="text-uppercase text-muted">Cost Of Purchase In USD</h5>
-                             <base-input placeholder="Eg. $10,000" ></base-input>
+                             <base-input v-model="carForm.costOfAquiring" placeholder="Eg. $10,000" ></base-input>
                            </div>
                          </div>
                          <div class="row">
                            <div class="col-md-3">
                                <h5 class="text-uppercase text-muted">Cost Of Shipping In Usd</h5>
-                               <base-input addon-left-icon="ni ni-cart" placeholder="E.g $2,000"></base-input>
+                               <base-input  v-model="carForm.costOfShipping " addon-left-icon="ni ni-cart" placeholder="E.g $2,000"></base-input>
                            </div>
                            <div class="col-md-3">
                              <h5 class="text-uppercase text-muted">Cost Of Clearing In Ghc</h5>
-                             <base-input placeholder="Eg. GHC 15,000" ></base-input>
+                             <base-input v-model="carForm.costOfClearing " placeholder="Eg. GHC 15,000" ></base-input>
                            </div>
                            <div class="col-md-3">
                                <h5 class="text-uppercase text-muted">Cost Of Setting Up In ghc</h5>
-                               <base-input addon-left-icon="ni ni-settings-gear-65" placeholder="Eg. GHC 8,000"></base-input>
+                               <base-input v-model="carForm.costOfSettingUp" addon-left-icon="ni ni-settings-gear-65" placeholder="Eg. GHC 8,000"></base-input>
                            </div>
                            <div class="col-md-3">
                              <h5 class="text-uppercase text-muted">Car Image Link</h5>
-                             <base-input placeholder="Put An Image Link Here" ></base-input>
+                             <base-input v-model="carForm.imageUrl" placeholder="Put An Image Link Here" ></base-input>
                            </div>
                          </div>
                          <div class="row">
@@ -120,7 +120,24 @@
 </template>
 
 <script>
+import {mapState} from 'vuex'
 export default {
+  beforeCreate(){
+    if (this.$store.state.driver.drivers.length < 1) {
+      this.$store.dispatch('driver/fetchDrivers').then(() =>{
+          console.log(this.driver.drivers );
+      });
+    }
+
+    if (this.$store.state.owner.owners.length < 1) {
+      this.$store.dispatch('owner/fetchOwners').then(() =>{
+          console.log(this.owner.owners );
+      });
+    }
+  },
+  computed: {
+    ...mapState(['driver', 'owner']),
+  },
   data(){
     return {
       carForm: {
@@ -129,17 +146,12 @@ export default {
         color: '', // RED || RED & YELLOW
         carStatus: '', // BOUGHT, SHIPPED, SETTING_UP, PROBATION, WORKING, SOLD, GIVEN_OUT
         carWorkingCity: '', //ACCRA GHANA
-        carOwner: '', // OWNERID
-        carOwners: [], // LIST OF OWNERS NOT JUST IDS
-        currentDriver: '', // FULL DRIVER DETAILS
-        allDrivers: [], // LIST OF DRIVERS NOT JUST IDS
+        carOwnerId: '', // OWNERID
+        currentDriverId: '', // FULL DRIVER DETAILS
         carType: '', // UT-TYPE, TRUCK-SIZE
         serviceType: '', // UBER-SERVICES, TAXI-SERVICES, DUMP-TRACK-SEVICES
         dateRegistered: '', // 22ND MARCH 2021
         carNumber: '', // GS 4567 - 20
-        insuranceDetails: [], // [{year: '', type: '', status: '', amount: ''}],
-        roadWorthyDetails: [], // [{year: '', period: '', amount: '', renewalDate: ''}]
-        incomeTaxDetails: [], // [{year: '', period: '', amount: '', renewalDate: ''}]
         costOfAquiring: '', // $10,000
         costOfShipping: '', // $890
         costOfClearing: '', // GHC 39493

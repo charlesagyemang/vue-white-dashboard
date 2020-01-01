@@ -59,6 +59,7 @@ export const actions = {
 
   editOwner ({ commit }, { ownerId, ownerDataToUpdate }) {
     // eslint-disable-next-line
+    console.log("Details", ownerDataToUpdate);
     return OwnerService.editOwner(localStorage.uberToken, ownerId, ownerDataToUpdate)
     .then((response) => {
       commit('UPDATE_OWNER', response.data)

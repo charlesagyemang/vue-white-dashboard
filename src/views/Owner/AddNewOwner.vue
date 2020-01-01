@@ -141,6 +141,7 @@ export default {
         email: '',
         phoneNumber: '',
         alternatePhoneNumber: '',
+        imageUrl: '/img/cars/picanto2.jpg',
         address: '',
         city: '',
         country: '',
@@ -155,6 +156,17 @@ export default {
       if (noneIsEmpty) {
         console.log("noneIsEmpty", "Go Agead Create Owner");
         // CREATE OWNER
+        this.$store.dispatch('owner/createOwner', this.model).then((owner) =>{
+          console.log("==== Created ====", owner);
+          this.$router.push({
+            path: '/dashboard/owner-list',
+          });
+          this.$notify({
+            type: 'success',
+            title: `Owner Created successfully`,
+          });
+
+        });
         alert(JSON.stringify(this.model));
       } else {
         alert("Error!! Please Fill All Required Fields")

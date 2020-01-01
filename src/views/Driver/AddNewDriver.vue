@@ -212,7 +212,21 @@ export default {
       if (noneIsEmpty) {
         console.log("noneIsEmpty", "Go Agead Create Owner");
         // CREATE OWNER
-        console.log(JSON.stringify(this.createDriver));
+        this.$store.dispatch('driver/createDriver', this.createDriver)
+        .then((driver) => {
+          console.log(driver);
+          this.$router.push({
+            path: '/dashboard/driver-list',
+          });
+          this.$notify({
+            type: 'success',
+            title: `Driver Created successfully`,
+          });
+        })
+        .catch((err) => {
+          console.log(err);
+        })
+
       } else {
         console.log(JSON.stringify(this.createDriver))
         alert("Error!! Please Fill All Required Fields")

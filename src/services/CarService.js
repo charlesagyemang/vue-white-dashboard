@@ -10,7 +10,7 @@ const headers = (token) => {
 
 export default {
   getCars (token) {
-    return apiClient.get('/mock/cars', headers(token));
+    return apiClient.get('/car/get/all', headers(token));
   },
   getCar (token, id) {
     return apiClient.get(`/mock/cars/${id}`, headers(token))

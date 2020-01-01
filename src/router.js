@@ -142,7 +142,7 @@ export default new Router({
       component: OwnerDashboardLayout,
       children: [
         {
-          path: '/owner/dashboard',
+          path: '/owner/dashboard/:id',
           name: 'owner-dashboard',
           component: () => import('./views/Externals/OwnerDashboard.vue')
         },

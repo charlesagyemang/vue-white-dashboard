@@ -10,18 +10,18 @@ const headers = (token) => {
 
 export default {
   getDrivers (token) {
-    return apiClient.get('/mock/drivers', headers(token));
+    return apiClient.get('/driver/get/all', headers(token));
   },
   getDriver (token, id) {
-    return apiClient.get(`/mock/drivers/${id}`, headers(token))
+    return apiClient.get(`/driver/${id}`, headers(token))
   },
   postDriver (token, driver) {
-    return apiClient.post('/mock/create.new', driver, headers(token))
+    return apiClient.post('/driver/create', driver, headers(token))
   },
   editDriver (token, driverId, driverDataToUpdate) {
-    return apiClient.patch(`/mock/drivers/edit/${driverId}`, driverDataToUpdate, headers(token))
+    return apiClient.patch(`/driver/edit/${driverId}`, driverDataToUpdate, headers(token))
   },
   deleteDriver (token, driverIdToDelete) {
-    return apiClient.delete(`/mock/drivers/delete/${driverIdToDelete}`, headers(token))
+    return apiClient.delete(`/driver/delete/${driverIdToDelete}`, headers(token))
   }
 }
