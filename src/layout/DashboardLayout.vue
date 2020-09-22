@@ -49,7 +49,7 @@
     },
     data() {
       return {
-        sidebarBackground: 'vue' //vue|blue|orange|green|red|primary
+        sidebarBackground: 'red' //vue|blue|orange|green|red|primary
       };
     },
     methods: {
