@@ -43,8 +43,8 @@ export default new Router({
         },
         {
           path: '/dashboard/tests',
-          name: 'tests',
-          component: () => import('./views/Test.vue')
+          name: 'Cars',
+          component: () => import('./views/Car.vue')
         }
       ]
     },

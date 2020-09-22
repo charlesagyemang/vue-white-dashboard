@@ -1,63 +1,104 @@
 <template lang="html">
   <div class="">
-
     <base-header type="gradient-success" class="pb-6 pb-8 pt-5 pt-md-8">
-        <!-- Card stats -->
-        <div class="row">
-            <div class="col-xl-3 col-lg-6">
-                <stats-card title="Total traffic"
-                            type="gradient-red"
-                            sub-title="350,897"
-                            icon="ni ni-active-40"
-                            class="mb-4 mb-xl-0">
-
-                    <template slot="footer">
-                        <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> 3.48%</span>
-                        <span class="text-nowrap">Since last month</span>
-                    </template>
-                </stats-card>
-            </div>
-            <div class="col-xl-3 col-lg-6">
-                <stats-card title="Total traffic"
-                            type="gradient-orange"
-                            sub-title="2,356"
-                            icon="ni ni-chart-pie-35"
-                            class="mb-4 mb-xl-0">
-
-                    <template slot="footer">
-                        <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> 12.18%</span>
-                        <span class="text-nowrap">Since last month</span>
-                    </template>
-                </stats-card>
-            </div>
-            <div class="col-xl-3 col-lg-6">
-                <stats-card title="Sales"
-                            type="gradient-green"
-                            sub-title="924"
-                            icon="ni ni-money-coins"
-                            class="mb-4 mb-xl-0">
-
-                    <template slot="footer">
-                        <span class="text-danger mr-2"><i class="fa fa-arrow-down"></i> 5.72%</span>
-                        <span class="text-nowrap">Since last month</span>
-                    </template>
-                </stats-card>
-
-            </div>
-            <div class="col-xl-3 col-lg-6">
-                <stats-card title="Performance"
-                            type="gradient-info"
-                            sub-title="49,65%"
-                            icon="ni ni-chart-bar-32"
-                            class="mb-4 mb-xl-0">
-
-                    <template slot="footer">
-                        <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> 54.8%</span>
-                        <span class="text-nowrap">Since last month</span>
-                    </template>
-                </stats-card>
-            </div>
-        </div>
+            <!--
+            carStatus: '', // BOUGHT, SHIPPED, SETTING_UP, PROBATION, WORKING, SOLD, GIVEN_OUT
+            carWorkingCity: '', //ACCRA GHANA
+            carOwner: '', // OWNERID
+            carOwners: [], // LIST OF OWNERS NOT JUST IDS
+            currentDriver: '', // FULL DRIVER DETAILS
+            allDrivers: [], // LIST OF DRIVERS NOT JUST IDS
+            carType: '', // UT-TYPE, TRUCK-SIZE
+            serviceType: '', // UBER-SERVICES, TAXI-SERVICES, DUMP-TRACK-SEVICES
+            dateResigtered: '', // 22ND MARCH 2021
+            carNumber: '', // GS 4567 - 20
+            insuranceDetails: [], // [{year: '', type: '', status: '', amount: ''}],
+            roadWorthyDetails: [], // [{year: '', period: '', amount: '', renewalDate: ''}]
+            incomeTaxDetails: [], // [{year: '', period: '', amount: '', renewalDate: ''}]
+            costOfAquiring: '', // $10,000
+            costOfShipping: '', // $890
+            costOfClearing: '', // GHC 39493
+            costOfSettingUp: '', // GHC 7,000
+            imageUrl: '',
+           -->
+           <form class="">
+             <h1 class="text-white text-uppercase">Add New Car</h1><br>
+              <div class="row">
+                <div class="col-md-3">
+                    <h5 class="text-white text-uppercase">Model Name</h5>
+                    <base-input addon-left-icon="ni ni-delivery-fast" placeholder="E.g Kia Morning Lx"></base-input>
+                </div>
+                <div class="col-md-3">
+                  <h5 class="text-white text-uppercase">Model Year</h5>
+                  <base-input addon-left-icon="ni ni-calendar-grid-58" placeholder="Eg. 2009" ></base-input>
+                </div>
+                <div class="col-md-3">
+                    <h5 class="text-white text-uppercase">Color</h5>
+                    <base-input addon-left-icon="ni ni-world" placeholder="E.g Kia Morning Lx"></base-input>
+                </div>
+                <div class="col-md-3">
+                  <h5 class="text-white text-uppercase">Car Status</h5>
+                  <base-input addon-left-icon="ni ni-check-bold" placeholder="Disabled" ></base-input>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-3">
+                    <h5 class="text-white text-uppercase">Car Working City</h5>
+                    <base-input addon-left-icon="fa fa-bicycle" placeholder="E.g Kia Morning Lx"></base-input>
+                </div>
+                <div class="col-md-3">
+                  <h5 class="text-white text-uppercase">Car Owner</h5>
+                  <base-input placeholder="Disabled" ></base-input>
+                </div>
+                <div class="col-md-3">
+                    <h5 class="text-white text-uppercase">Current Driver</h5>
+                    <base-input addon-left-icon="ni ni-delivery-fast" placeholder="E.g Kia Morning Lx"></base-input>
+                </div>
+                <div class="col-md-3">
+                  <h5 class="text-white text-uppercase">Cost Of Purchase</h5>
+                  <base-input placeholder="Disabled" ></base-input>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-3">
+                    <h5 class="text-white text-uppercase">Service Type</h5>
+                    <base-input addon-left-icon="ni ni-delivery-fast" placeholder="E.g Kia Morning Lx"></base-input>
+                </div>
+                <div class="col-md-3">
+                  <h5 class="text-white text-uppercase">Date Registed</h5>
+                  <base-input placeholder="Disabled" ></base-input>
+                </div>
+                <div class="col-md-3">
+                    <h5 class="text-white text-uppercase">Car Number</h5>
+                    <base-input addon-left-icon="ni ni-delivery-fast" placeholder="E.g Kia Morning Lx"></base-input>
+                </div>
+                <div class="col-md-3">
+                  <h5 class="text-white text-uppercase">Cost Of Purchase</h5>
+                  <base-input placeholder="Disabled" ></base-input>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-3">
+                    <h5 class="text-white text-uppercase">Cost Of Shipping</h5>
+                    <base-input addon-left-icon="ni ni-delivery-fast" placeholder="E.g Kia Morning Lx"></base-input>
+                </div>
+                <div class="col-md-3">
+                  <h5 class="text-white text-uppercase">Cost Of Clearing</h5>
+                  <base-input placeholder="Disabled" ></base-input>
+                </div>
+                <div class="col-md-3">
+                    <h5 class="text-white text-uppercase">Cost Of Setting Up</h5>
+                    <base-input addon-left-icon="ni ni-delivery-fast" placeholder="E.g Kia Morning Lx"></base-input>
+                </div>
+                <div class="col-md-3">
+                  <h5 class="text-white text-uppercase">Car Image Link</h5>
+                  <base-input placeholder="Disabled" ></base-input>
+                </div>
+              </div>
+              <div class="text-center">
+                  <base-button type="default" class="my-4">Add New Car</base-button>
+              </div>
+             </form>
     </base-header>
     <div class="container-fluid">
         <br>
