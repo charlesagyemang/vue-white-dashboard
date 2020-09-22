@@ -40,6 +40,11 @@ export default new Router({
           path: '/dashboard/tables',
           name: 'tables',
           component: () => import(/* webpackChunkName: "demo" */ './views/Tables.vue')
+        },
+        {
+          path: '/dashboard/tests',
+          name: 'tests',
+          component: () => import('./views/Test.vue')
         }
       ]
     },
