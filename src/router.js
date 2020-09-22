@@ -5,6 +5,7 @@ import AuthLayout from '@/layout/AuthLayout'
 Vue.use(Router)
 
 export default new Router({
+  mode: 'history',
   linkExactActiveClass: 'active',
   routes: [
     {
@@ -21,22 +22,22 @@ export default new Router({
           component: () => import(/* webpackChunkName: "demo" */ './views/Dashboard.vue')
         },
         {
-          path: '/icons',
+          path: '/dashboard/icons',
           name: 'icons',
           component: () => import(/* webpackChunkName: "demo" */ './views/Icons.vue')
         },
         {
-          path: '/profile',
+          path: '/dashboard/profile',
           name: 'profile',
           component: () => import(/* webpackChunkName: "demo" */ './views/UserProfile.vue')
         },
         {
-          path: '/maps',
+          path: '/dashboard/maps',
           name: 'maps',
           component: () => import(/* webpackChunkName: "demo" */ './views/Maps.vue')
         },
         {
-          path: '/tables',
+          path: '/dashboard/tables',
           name: 'tables',
           component: () => import(/* webpackChunkName: "demo" */ './views/Tables.vue')
         }
