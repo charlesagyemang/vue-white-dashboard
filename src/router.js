@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import DashboardLayout from '@/layout/DashboardLayout'
 import AuthLayout from '@/layout/AuthLayout'
-import AuthLayoutTwo from '@/layout/AuthLayout'
+import ExternalLayout from '@/layout/ExternalLayout'
 Vue.use(Router)
 
 export default new Router({
@@ -96,7 +96,7 @@ export default new Router({
 
     {
       path: '/',
-      component: AuthLayoutTwo,
+      component: ExternalLayout,
       children: [
         {
           path: '/driver/temp',
@@ -104,9 +104,9 @@ export default new Router({
           component: () => import('./views/Login.vue')
         },
         {
-          path: '/driver/toulouse',
+          path: '/driver/details/:id',
           name: 'toulouse',
-          component: () => import('./views/Register.vue')
+          component: () => import('./views/Externals/ExternalDriverProfile.vue')
         },
       ]
     },

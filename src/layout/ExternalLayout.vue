@@ -36,8 +36,8 @@
                 <div class="header-body text-center mb-7">
                     <div class="row justify-content-center">
                         <div class="col-lg-5 col-md-6">
-                            <h1 class="text-white">Kehilla Fleet Management App</h1>
-                            <p class="text-lead text-white">Worlds Most Advanced Fleet Management Software. Enter Your Details Below To Login</p>
+                            <h1 class="text-white">Kehillah Tranport Services</h1>
+                            <p class="text-lead text-white">Driver Services</p>
                         </div>
                     </div>
                 </div>
@@ -94,6 +94,13 @@
     name: 'auth-layout',
     components: {
       SlideYUpTransition
+    },
+    props: {
+      message: {
+        type: String,
+        required: false,
+        default: ''
+      }
     },
     data() {
       return {
