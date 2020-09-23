@@ -77,11 +77,6 @@ export default new Router({
       component: AuthLayout,
       children: [
         {
-          path: '/',
-          name: 'login',
-          component: () => import('./views/Login.vue')
-        },
-        {
           path: '/login',
           name: 'login',
           component: () => import('./views/Login.vue')

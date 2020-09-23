@@ -44,8 +44,8 @@
                                             <span class="description">Weeks Done</span>
                                         </div>
                                         <div>
-                                            <span class="heading">89</span>
-                                            <span class="description">Comments</span>
+                                            <span class="heading">{{150 - 22}}</span>
+                                            <span class="description">Weeks Left</span>
                                         </div>
                                     </div>
                                 </div>
