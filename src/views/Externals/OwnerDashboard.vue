@@ -25,19 +25,19 @@
                                 class="mb-4 mb-xl-0"
                     >
                         <template slot="footer">
-                          <router-link to="/dashboard/driver-list" size="sm"  class="btn btn-success" name="button">All My Drivers</router-link>
+                          <router-link to="/owner/dashboard/drivers" size="sm"  class="btn btn-success" name="button">All My Drivers</router-link>
                         </template>
                     </stats-card>
                 </div>
                 <div class="col-xl-3 col-lg-6">
-                    <stats-card title="Accounts"
+                    <stats-card title="Settings"
                                 type="gradient-info"
                                 sub-title="4"
-                                icon="ni ni-money-coins"
+                                icon="ni ni-settings-gear-65"
                                 class="mb-4 mb-xl-0"
                     >
                         <template slot="footer">
-                          <router-link to="/dashboard/driver-list" size="sm"  class="btn btn-info" name="button">Account Details</router-link>
+                          <router-link to="/owner/dashboard/profile" size="sm"  class="btn btn-info" name="button">User Details</router-link>
                         </template>
                     </stats-card>
                 </div>
