@@ -1,6 +1,7 @@
 <template lang="html">
   <div class="">
     <base-header type="gradient-default" class="pb-6 pb-8 pt-5 pt-md-8">
+      <span class="mask bg-info opacity-8"></span>
            <form class="">
              <h1 class="text-white text-uppercase">Fill Form Below To Add New A Car Or <router-link to="/dashboard/car-list" class="btn btn-primary">CLICK HERE TO VIEW ALL CARS</router-link></h1><br>
               <div class="row">

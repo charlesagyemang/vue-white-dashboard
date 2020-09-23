@@ -2,46 +2,46 @@
     <div>
         <base-header type="gradient-success" class="pb-6 pb-8 pt-5 pt-md-8">
             <!-- Card stats -->
+            <span class="mask bg-info opacity-8"></span>
             <div class="row">
                 <div class="col-xl-3 col-lg-6">
                     <stats-card title="Owners"
                                 type="gradient-red"
-                                sub-title="350,897"
-                                icon="ni ni-active-40"
+                                sub-title="1"
+                                icon="ni ni-circle-08"
                                 class="mb-4 mb-xl-0"
                     >
 
                         <template slot="footer">
-                            <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> 3.48%</span>
-                            <span class="text-nowrap">Since last month</span>
+                          <router-link to="/dashboard/owner-list" size="sm"  class="btn btn-danger" name="button">All</router-link>
+                          <router-link to="/dashboard/add-an-owner" size="sm"  class="btn btn-danger" name="button">Create</router-link>
                         </template>
                     </stats-card>
                 </div>
                 <div class="col-xl-3 col-lg-6">
                     <stats-card title="Cars"
                                 type="gradient-orange"
-                                sub-title="2,356"
-                                icon="ni ni-chart-pie-35"
+                                sub-title="3"
+                                icon="ni ni-delivery-fast"
                                 class="mb-4 mb-xl-0"
                     >
 
                         <template slot="footer">
-                            <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> 12.18%</span>
-                            <span class="text-nowrap">Since last month</span>
+                          <router-link to="/dashboard/car-list" size="sm"  class="btn btn-warning" name="button">All</router-link>
+                          <router-link to="/dashboard/add-a-car" size="sm"   class="btn btn-warning" name="button">Create</router-link>
                         </template>
                     </stats-card>
                 </div>
                 <div class="col-xl-3 col-lg-6">
                     <stats-card title="Drivers"
                                 type="gradient-green"
-                                sub-title="924"
-                                icon="ni ni-money-coins"
+                                sub-title="3"
+                                icon="ni ni-bus-front-12"
                                 class="mb-4 mb-xl-0"
                     >
-
                         <template slot="footer">
-                            <span class="text-danger mr-2"><i class="fa fa-arrow-down"></i> 5.72%</span>
-                            <span class="text-nowrap">Since last month</span>
+                          <router-link to="/dashboard/driver-list" size="sm"  class="btn btn-success" name="button">All</router-link>
+                          <router-link to="/dashboard/add-a-driver" size="sm"   class="btn btn-success" name="button">Create</router-link>
                         </template>
                     </stats-card>
 
@@ -49,14 +49,14 @@
                 <div class="col-xl-3 col-lg-6">
                     <stats-card title="Sales"
                                 type="gradient-info"
-                                sub-title="49,65%"
-                                icon="ni ni-chart-bar-32"
+                                sub-title="4"
+                                icon="ni ni-money-coins"
                                 class="mb-4 mb-xl-0"
                     >
 
                         <template slot="footer">
-                            <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> 54.8%</span>
-                            <span class="text-nowrap">Since last month</span>
+                          <router-link to="/dashboard/driver-list" size="sm"  class="btn btn-info" name="button">All</router-link>
+                          <router-link to="/dashboard/add-a-driver" size="sm"   class="btn btn-info" name="button">Create</router-link>
                         </template>
                     </stats-card>
                 </div>

@@ -2,7 +2,8 @@
   <div class="">
     <base-header type="gradient-default" class="pb-6 pb-8 pt-5 pt-md-8">
       <form class="">
-        <router-link class="btn btn-primary" to="/dashboard/add-a-driver">BACK TO ADD A NEW DRIVER</router-link>
+        <span class="mask bg-info opacity-8"></span>
+        <router-link class="btn btn-primary" to="/dashboard/add-a-driver">ADD A NEW DRIVER</router-link>
       </form>
     </base-header>
     <div class="container-fluid mt--7">
