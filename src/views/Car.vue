@@ -26,47 +26,56 @@
               <div class="row">
                 <div class="col-md-3">
                     <h5 class="text-white text-uppercase">Model Name</h5>
-                    <base-input addon-left-icon="ni ni-delivery-fast" placeholder="E.g Kia Morning Lx"></base-input>
+                    <base-input v-model="carForm.modelName" addon-left-icon="ni ni-delivery-fast" placeholder="E.g Kia Morning Lx"></base-input>
                 </div>
                 <div class="col-md-3">
                   <h5 class="text-white text-uppercase">Model Year</h5>
-                  <base-input addon-left-icon="ni ni-calendar-grid-58" placeholder="Eg. 2009" ></base-input>
+                  <base-input v-model="carForm.modelYear" addon-left-icon="ni ni-calendar-grid-58" placeholder="Eg. 2009" ></base-input>
                 </div>
                 <div class="col-md-3">
                     <h5 class="text-white text-uppercase">Color</h5>
-                    <base-input addon-left-icon="ni ni-world" placeholder="E.g Kia Morning Lx"></base-input>
+                    <base-input v-model="carForm.color" addon-left-icon="ni ni-world" placeholder="E.g Blue"></base-input>
                 </div>
                 <div class="col-md-3">
                   <h5 class="text-white text-uppercase">Car Status</h5>
-                  <base-input addon-left-icon="ni ni-check-bold" placeholder="Disabled" ></base-input>
+                  <multiselect v-model="carForm.carStatus" :options="carStatusList"></multiselect>
                 </div>
               </div>
               <div class="row">
                 <div class="col-md-3">
                     <h5 class="text-white text-uppercase">Car Working City</h5>
-                    <base-input addon-left-icon="fa fa-bicycle" placeholder="E.g Kia Morning Lx"></base-input>
+                    <base-input addon-left-icon="ni ni-square-pin" placeholder="E.g Accra"></base-input>
                 </div>
                 <div class="col-md-3">
                   <h5 class="text-white text-uppercase">Car Owner</h5>
-                  <base-input placeholder="Disabled" ></base-input>
+                  <multiselect v-model="carForm.carOwner" :options="carOwnersList"></multiselect>
                 </div>
                 <div class="col-md-3">
                     <h5 class="text-white text-uppercase">Current Driver</h5>
-                    <base-input addon-left-icon="ni ni-delivery-fast" placeholder="E.g Kia Morning Lx"></base-input>
+                    <multiselect v-model="carForm.currentDriver" :options="allDriversList"></multiselect>
                 </div>
                 <div class="col-md-3">
-                  <h5 class="text-white text-uppercase">Cost Of Purchase</h5>
-                  <base-input placeholder="Disabled" ></base-input>
+                  <h5 class="text-white text-uppercase">Cost Of Purchase In USD</h5>
+                  <base-input placeholder="Eg. $10,000" ></base-input>
                 </div>
               </div>
               <div class="row">
                 <div class="col-md-3">
                     <h5 class="text-white text-uppercase">Service Type</h5>
-                    <base-input addon-left-icon="ni ni-delivery-fast" placeholder="E.g Kia Morning Lx"></base-input>
+                    <multiselect v-model="carForm.serviceType" :options="carServiceTypeList"></multiselect>
                 </div>
                 <div class="col-md-3">
                   <h5 class="text-white text-uppercase">Date Registed</h5>
-                  <base-input placeholder="Disabled" ></base-input>
+                    <base-input addon-left-icon="ni ni-calendar-grid-58">
+                        <flat-pickr slot-scope="{focus, blur}"
+                                     @on-open="focus"
+                                     @on-close="blur"
+                                     :config="{allowInput: true}"
+                                     class="form-control datepicker"
+                                     v-model="carForm.dateResigtered"
+                                     >
+                        </flat-pickr>
+                    </base-input>
                 </div>
                 <div class="col-md-3">
                     <h5 class="text-white text-uppercase">Car Number</h5>
@@ -315,7 +324,31 @@ export default {
         other: {},
       },
       validationError: false,
-    }
+      carStatusList: [
+        'BOUGHT',
+        'SHIPPED',
+        'SETTING_UP',
+        'PROBATION',
+        'WORKING',
+        'SOLD',
+        'GIVEN_OUT'
+      ],
+      carOwnersList: [
+        'Owner 1',
+        'Owner 2',
+        'Owner 3',
+      ],
+      allDriversList: [
+        'Driver 1',
+        'Driver 2',
+        'Driver 3',
+      ],
+      carServiceTypeList: [
+        'UBER-SERVICES',
+        'TAXI-SERVICES',
+        'DUMP-TRACK-SEVICES',
+      ],
+    }// end of data
   },
   methods: {
     handleCreateOwner() {
