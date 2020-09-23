@@ -4,7 +4,7 @@
            <form class="">
               <div class="container">
                 <h1 class="text-white text-uppercase">Fill Form Below To Add New A Driver Or
-                  <router-link class="btn btn-primary" to="/dashboard/driver-list">BACK TO ADD A NEW DRIVER</router-link>
+                  <router-link class="btn btn-primary" to="/dashboard/driver-list">VIEW ALL DRIVERS</router-link>
                 </h1><br>
                 <div class="row">
                   <div class="col">
