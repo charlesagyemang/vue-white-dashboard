@@ -13,15 +13,16 @@
             path: '/dashboard'
           }"
         />
+        
+        <sidebar-item :link="{name: 'Owners', icon: 'ni ni-circle-08', path: '/dashboard/owner-list'}"/>
+        <sidebar-item :link="{name: 'Cars', icon: 'ni ni-delivery-fast', path: '/dashboard/add-a-car'}"/>
+        <sidebar-item :link="{name: 'Drivers', icon: 'ni ni-bus-front-12', path: '/dashboard/add-a-driver'}"/>
+        <sidebar-item :link="{name: 'Login', icon: 'ni ni-key-25', path: '/login'}"/>
+        <sidebar-item :link="{name: 'Register', icon: 'ni ni-circle-08', path: '/register'}"/>
+        <sidebar-item :link="{name: 'Icons', icon: 'ni ni-planet', path: '/dashboard/icons'}"/>
+        <sidebar-item :link="{name: 'User Profile', icon: 'ni ni-single-02', path: '/dashboard/profile'}"/>
 
-        <sidebar-item :link="{name: 'Icons', icon: 'ni ni-planet text-dark', path: '/dashboard/icons'}"/>
-        <sidebar-item :link="{name: 'Owners', icon: 'ni ni-delivery-fast text-dark', path: '/dashboard/owner-list'}"/>
-        <sidebar-item :link="{name: 'Maps', icon: 'ni ni-pin-3 text-dark', path: '/dashboard/maps'}"/>
-        <sidebar-item :link="{name: 'User Profile', icon: 'ni ni-single-02 text-dark', path: '/dashboard/profile'}"/>
-        <sidebar-item :link="{name: 'Tables', icon: 'ni ni-bullet-list-67 text-dark', path: '/dashboard/tables'}"/>
-        <sidebar-item :link="{name: 'Cars', icon: 'ni ni-delivery-fast text-dark', path: '/dashboard/add-a-car'}"/>
-        <sidebar-item :link="{name: 'Login', icon: 'ni ni-key-25 text-dark', path: '/login'}"/>
-        <sidebar-item :link="{name: 'Register', icon: 'ni ni-circle-08 text-dark', path: '/register'}"/>
+
 
       </template>
     </side-bar>

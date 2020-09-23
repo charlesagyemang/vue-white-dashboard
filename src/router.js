@@ -44,17 +44,32 @@ export default new Router({
         {
           path: '/dashboard/add-a-car',
           name: 'Add A Car',
-          component: () => import('./views/Car.vue')
+          component: () => import('./views/Car/Car.vue')
         },
         {
           path: '/dashboard/car-list',
           name: 'Car List',
-          component: () => import('./views/CarList.vue')
+          component: () => import('./views/Car/CarList.vue')
         },
         {
           path: '/dashboard/owner-list',
           name: 'Owner List',
-          component: () => import('./views/OwnerList.vue')
+          component: () => import('./views/Owner/OwnerList.vue')
+        },
+        {
+          path: '/dashboard/add-an-owner',
+          name: 'Add An Owner',
+          component: () => import('./views/Owner/Owner.vue')
+        },
+        {
+          path: '/dashboard/driver-list',
+          name: 'Driver List',
+          component: () => import('./views/Driver/DriverList.vue')
+        },
+        {
+          path: '/dashboard/add-a-driver',
+          name: 'Add A Driver',
+          component: () => import('./views/Driver/Driver.vue')
         }
       ]
     },
