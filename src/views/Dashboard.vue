@@ -81,15 +81,12 @@
 </template>
 <script>
   // Tables
-  import SocialTrafficTable from './Dashboard/SocialTrafficTable';
-  import PageVisitsTable from './Dashboard/PageVisitsTable';
+
   import CarsTable from '@/views/Tables/CarsTable'
   import OwnersTable from '@/views/Tables/OwnersTable'
 
   export default {
     components: {
-      PageVisitsTable,
-      SocialTrafficTable,
       CarsTable,
       OwnersTable,
     },
