@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import DashboardLayout from '@/layout/DashboardLayout'
 import AuthLayout from '@/layout/AuthLayout'
+import AuthLayoutTwo from '@/layout/AuthLayout'
 Vue.use(Router)
 
 export default new Router({
@@ -89,8 +90,26 @@ export default new Router({
           path: '/register',
           name: 'register',
           component: () => import('./views/Register.vue')
-        }
+        },
       ]
-    }
+    },
+
+    {
+      path: '/',
+      component: AuthLayoutTwo,
+      children: [
+        {
+          path: '/driver/temp',
+          name: 'driver-temp',
+          component: () => import('./views/Login.vue')
+        },
+        {
+          path: '/driver/toulouse',
+          name: 'toulouse',
+          component: () => import('./views/Register.vue')
+        },
+      ]
+    },
+
   ]
 })
