@@ -1,5 +1,5 @@
 <template>
-  <div class="header bg-dark">
+  <div class="header bg-info">
     <div class="container-fluid">
       <div class="header-body">
         <slot></slot>

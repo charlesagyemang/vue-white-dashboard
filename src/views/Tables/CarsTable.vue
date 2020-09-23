@@ -99,7 +99,7 @@
 
     <div class="card-footer d-flex justify-content-end"
          :class="type === 'dark' ? 'bg-transparent': ''">
-      <base-pagination total="30"></base-pagination>
+      <base-pagination :total="total" ></base-pagination>
     </div>
 
   </div>
@@ -115,14 +115,12 @@
     },
     data() {
       return {
+        total: 30,
         tableData: [
           {
             imageUrl: '/img/cars/picanto2.jpg',
             modelName: 'KIA Morning',
-            budget: '$2500 USD',
             status: 'BOUGHT',
-            statusType: 'warning',
-            completion: 60,
             modelYear: '2009',
             costOfAquiring: '$3,000',
             carWorkingCity: 'Accra',
@@ -141,10 +139,7 @@
           {
             imageUrl: '/img/cars/dump-truck.jpg',
             modelName: 'Dump Track',
-            budget: '$1800 USD',
             status: 'SHIPPED',
-            statusType: 'success',
-            completion: 100,
             modelYear: '2020',
             costOfAquiring: '$3,000',
             carWorkingCity: 'Accra',
@@ -162,10 +157,7 @@
           {
             imageUrl: '/img/cars/picanto2.jpg',
             modelName: 'KIA Morning Lx',
-            budget: '$3150 USD',
             status: 'SETTING_UP',
-            statusType: 'danger',
-            completion: 72,
             modelYear: '2009',
             costOfAquiring: '$3,000',
             carWorkingCity: 'Accra',
@@ -183,10 +175,7 @@
           {
             imageUrl: '/img/cars/dump-truck.jpg',
             modelName: 'Dump Track',
-            budget: '$4400 USD',
             status: 'PROBATION',
-            statusType: 'info',
-            completion: 90,
             modelYear: '2020',
             costOfAquiring: '$3,000',
             carWorkingCity: 'Accra',
@@ -204,10 +193,7 @@
           {
             imageUrl: '/img/cars/picanto2.jpg',
             modelName: 'KIA Morning Lx',
-            budget: '$2200 USD',
             status: 'WORKING',
-            statusType: 'success',
-            completion: 100,
             modelYear: '2010',
             costOfAquiring: '$3,000',
             carWorkingCity: 'Accra',
@@ -225,10 +211,7 @@
           {
             imageUrl: '/img/cars/dump-truck.jpg',
             modelName: 'Dump Track',
-            budget: '$4400 USD',
             status: 'SOLD',
-            statusType: 'info',
-            completion: 90,
             modelYear: '2020',
             costOfAquiring: '$3,000',
             carWorkingCity: 'Accra',
@@ -246,10 +229,7 @@
           {
             imageUrl: '/img/cars/picanto2.jpg',
             modelName: 'KIA Morning Lx',
-            budget: '$2200 USD',
             status: 'GIVEN_OUT',
-            statusType: 'success',
-            completion: 100,
             modelYear: '2010',
             costOfAquiring: '$3,000',
             carWorkingCity: 'Accra',

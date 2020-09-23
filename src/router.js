@@ -42,9 +42,19 @@ export default new Router({
           component: () => import(/* webpackChunkName: "demo" */ './views/Tables.vue')
         },
         {
-          path: '/dashboard/tests',
-          name: 'Cars',
+          path: '/dashboard/add-a-car',
+          name: 'Add A Car',
           component: () => import('./views/Car.vue')
+        },
+        {
+          path: '/dashboard/car-list',
+          name: 'Car List',
+          component: () => import('./views/CarList.vue')
+        },
+        {
+          path: '/dashboard/owner-list',
+          name: 'Owner List',
+          component: () => import('./views/OwnerList.vue')
         }
       ]
     },

@@ -2,7 +2,7 @@
   <div class="">
     <base-header type="gradient-default" class="pb-6 pb-8 pt-5 pt-md-8">
            <form class="">
-             <h1 class="text-white text-uppercase">Add New Car</h1><br>
+             <h1 class="text-white text-uppercase">Fill Form Below To Add New A Car Or <a href="/dashboard/car-list" class="btn btn-primary">CLICK HERE TO VIEW ALL CARS</a></h1><br>
               <div class="row">
                 <div class="col-md-3">
                     <h5 class="text-white text-uppercase">Model Name</h5>
@@ -89,14 +89,6 @@
               </div>
              </form>
     </base-header>
-
-    <div class="container-fluid mt--7">
-        <div class="row">
-            <div class="col">
-                <cars-table title="All Cars Table"></cars-table>
-            </div>
-        </div>
-    </div>
 
     <div class="container-fluid">
         <br>
@@ -268,12 +260,10 @@
 
 <script>
 import Modal from '@/components/Modal'
-import CarsTable from './Tables/CarsTable'
 
 export default {
   components: {
     Modal,
-    CarsTable,
   },
   data(){
     return {

@@ -15,10 +15,11 @@
         />
 
         <sidebar-item :link="{name: 'Icons', icon: 'ni ni-planet text-dark', path: '/dashboard/icons'}"/>
+        <sidebar-item :link="{name: 'Owners', icon: 'ni ni-delivery-fast text-dark', path: '/dashboard/owner-list'}"/>
         <sidebar-item :link="{name: 'Maps', icon: 'ni ni-pin-3 text-dark', path: '/dashboard/maps'}"/>
         <sidebar-item :link="{name: 'User Profile', icon: 'ni ni-single-02 text-dark', path: '/dashboard/profile'}"/>
         <sidebar-item :link="{name: 'Tables', icon: 'ni ni-bullet-list-67 text-dark', path: '/dashboard/tables'}"/>
-        <sidebar-item :link="{name: 'Cars', icon: 'ni ni-delivery-fast text-dark', path: '/dashboard/tests'}"/>
+        <sidebar-item :link="{name: 'Cars', icon: 'ni ni-delivery-fast text-dark', path: '/dashboard/add-a-car'}"/>
         <sidebar-item :link="{name: 'Login', icon: 'ni ni-key-25 text-dark', path: '/login'}"/>
         <sidebar-item :link="{name: 'Register', icon: 'ni ni-circle-08 text-dark', path: '/register'}"/>
 
@@ -50,7 +51,7 @@
     },
     data() {
       return {
-        sidebarBackground: 'red' //vue|blue|orange|green|red|primary
+        sidebarBackground: 'primary' //vue|blue|orange|green|red|primary
       };
     },
     methods: {
