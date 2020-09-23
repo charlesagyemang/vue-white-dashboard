@@ -2,22 +2,10 @@
         <div class="row justify-content-center">
             <div class="col-lg-5 col-md-7">
                 <div class="card bg-secondary shadow border-0">
-                    <div class="card-header bg-transparent pb-5">
-                        <div class="text-muted text-center mt-2 mb-3"><small>Sign in with</small></div>
-                        <div class="btn-wrapper text-center">
-                            <a href="#" class="btn btn-neutral btn-icon">
-                                <span class="btn-inner--icon"><img src="img/icons/common/github.svg"></span>
-                                <span class="btn-inner--text">Github</span>
-                            </a>
-                            <a href="#" class="btn btn-neutral btn-icon">
-                                <span class="btn-inner--icon"><img src="img/icons/common/google.svg"></span>
-                                <span class="btn-inner--text">Google</span>
-                            </a>
-                        </div>
-                    </div>
+
                     <div class="card-body px-lg-5 py-lg-5">
                         <div class="text-center text-muted mb-4">
-                            <small>Or sign in with credentials</small>
+                            <h1>Sign In </h1>
                         </div>
                         <form role="form">
                             <base-input class="input-group-alternative mb-3"
@@ -33,11 +21,8 @@
                                         v-model="model.password">
                             </base-input>
 
-                            <base-checkbox class="custom-control-alternative">
-                                <span class="text-muted">Remember me</span>
-                            </base-checkbox>
                             <div class="text-center">
-                                <base-button type="primary" class="my-4">Sign in</base-button>
+                                <base-button @click="handleLogin" type="primary" class="my-4">Sign in</base-button>
                             </div>
                         </form>
                     </div>
@@ -47,7 +32,6 @@
                         <a href="#" class="text-light"><small>Forgot password?</small></a>
                     </div>
                     <div class="col-6 text-right">
-                        <router-link to="/register" class="text-light"><small>Create new account</small></router-link>
                     </div>
                 </div>
             </div>
@@ -63,7 +47,45 @@
           password: ''
         }
       }
-    }
+    },
+    methods: {
+      handleLogin() {
+        const nonthingIsEmpty = this.validateBody(this.model);
+        if (nonthingIsEmpty) {
+          console.log("Log User In");
+          console.log(JSON.stringify(this.model));
+
+          //========== LOGIN ===========//
+              this.$store
+              .dispatch("user/login", this.model)
+              .then(() => {
+                this.$router.push({
+                  name: "dashboard",
+                });
+              })
+              .catch(() => {
+                alert("Wrong Username And Password")
+              });
+            // console.log(dataToSend);
+          //========= LOGIN ===========//
+        } else {
+          alert('Error!! Please Fill All required Fields')
+        }
+      },
+      validateBody(payload){
+        delete payload.other
+        let meto = true
+        for (var item in payload){
+          if (!this.isNotEmpty(payload[`${item}`])) {
+            meto = false
+          }
+        }
+        return meto
+      },
+      isNotEmpty(value){
+        return value !== '' && value !== undefined && value !== null
+      },
+    },
   }
 </script>
 <style>

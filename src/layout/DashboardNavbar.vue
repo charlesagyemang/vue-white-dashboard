@@ -13,7 +13,7 @@
                   <img alt="Image placeholder" src="/img/theme/team-4-800x800.jpg">
                 </span>
                         <div class="media-body ml-2 d-none d-lg-block">
-                            <span class="mb-0 text-sm  font-weight-bold">Jessica Jones</span>
+                            <span class="mb-0 text-sm  font-weight-bold">{{ namer }}</span>
                         </div>
                     </div>
 
@@ -56,6 +56,11 @@
       toggleMenu() {
         this.showMenu = !this.showMenu;
       }
-    }
+    },
+    computed: {
+      namer() {
+        return localStorage.uberName
+      }
+    },
   };
 </script>
