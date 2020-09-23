@@ -14,9 +14,9 @@
           }"
         />
 
-        <sidebar-item :link="{name: 'Owners', icon: 'ni ni-circle-08 text-red', path: '/dashboard/owner-list'}"/>
-        <sidebar-item :link="{name: 'Cars', icon: 'ni ni-delivery-fast text-warning', path: '/dashboard/car-list'}"/>
-        <sidebar-item :link="{name: 'Drivers', icon: 'ni ni-bus-front-12 text-success', path: '/dashboard/driver-list'}"/>
+        <sidebar-item :link="{name: 'Owners', icon: 'ni ni-circle-08', path: '/dashboard/owner-list'}"/>
+        <sidebar-item :link="{name: 'Cars', icon: 'ni ni-delivery-fast', path: '/dashboard/car-list'}"/>
+        <sidebar-item :link="{name: 'Drivers', icon: 'ni ni-bus-front-12', path: '/dashboard/driver-list'}"/>
         <sidebar-item :link="{name: 'Login', icon: 'ni ni-key-25', path: '/login'}"/>
         <sidebar-item :link="{name: 'Register', icon: 'ni ni-circle-08', path: '/register'}"/>
         <sidebar-item :link="{name: 'Icons', icon: 'ni ni-planet', path: '/dashboard/icons'}"/>
