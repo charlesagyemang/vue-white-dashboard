@@ -1,26 +1,6 @@
 <template lang="html">
   <div class="">
-    <base-header type="gradient-success" class="pb-6 pb-8 pt-5 pt-md-8">
-            <!--
-            carStatus: '', // BOUGHT, SHIPPED, SETTING_UP, PROBATION, WORKING, SOLD, GIVEN_OUT
-            carWorkingCity: '', //ACCRA GHANA
-            carOwner: '', // OWNERID
-            carOwners: [], // LIST OF OWNERS NOT JUST IDS
-            currentDriver: '', // FULL DRIVER DETAILS
-            allDrivers: [], // LIST OF DRIVERS NOT JUST IDS
-            carType: '', // UT-TYPE, TRUCK-SIZE
-            serviceType: '', // UBER-SERVICES, TAXI-SERVICES, DUMP-TRACK-SEVICES
-            dateResigtered: '', // 22ND MARCH 2021
-            carNumber: '', // GS 4567 - 20
-            insuranceDetails: [], // [{year: '', type: '', status: '', amount: ''}],
-            roadWorthyDetails: [], // [{year: '', period: '', amount: '', renewalDate: ''}]
-            incomeTaxDetails: [], // [{year: '', period: '', amount: '', renewalDate: ''}]
-            costOfAquiring: '', // $10,000
-            costOfShipping: '', // $890
-            costOfClearing: '', // GHC 39493
-            costOfSettingUp: '', // GHC 7,000
-            imageUrl: '',
-           -->
+    <base-header type="gradient-default" class="pb-6 pb-8 pt-5 pt-md-8">
            <form class="">
              <h1 class="text-white text-uppercase">Add New Car</h1><br>
               <div class="row">
@@ -34,7 +14,7 @@
                 </div>
                 <div class="col-md-3">
                     <h5 class="text-white text-uppercase">Color</h5>
-                    <base-input v-model="carForm.color" addon-left-icon="ni ni-world" placeholder="E.g Blue"></base-input>
+                    <base-input v-model="carForm.color" addon-left-icon="ni ni-palette" placeholder="E.g Blue"></base-input>
                 </div>
                 <div class="col-md-3">
                   <h5 class="text-white text-uppercase">Car Status</h5>
@@ -55,8 +35,8 @@
                     <multiselect v-model="carForm.currentDriver" :options="allDriversList"></multiselect>
                 </div>
                 <div class="col-md-3">
-                  <h5 class="text-white text-uppercase">Cost Of Purchase In USD</h5>
-                  <base-input placeholder="Eg. $10,000" ></base-input>
+                  <h5 class="text-white text-uppercase">Car Type</h5>
+                  <multiselect v-model="carForm.carType" :options="carTypeList"></multiselect>
                 </div>
               </div>
               <div class="row">
@@ -79,36 +59,45 @@
                 </div>
                 <div class="col-md-3">
                     <h5 class="text-white text-uppercase">Car Number</h5>
-                    <base-input addon-left-icon="ni ni-delivery-fast" placeholder="E.g Kia Morning Lx"></base-input>
+                    <base-input addon-left-icon="ni ni-delivery-fast" placeholder="E.g GS 4098 - 20"></base-input>
                 </div>
                 <div class="col-md-3">
-                  <h5 class="text-white text-uppercase">Cost Of Purchase</h5>
-                  <base-input placeholder="Disabled" ></base-input>
+                  <h5 class="text-white text-uppercase">Cost Of Purchase In USD</h5>
+                  <base-input placeholder="Eg. $10,000" ></base-input>
                 </div>
               </div>
               <div class="row">
                 <div class="col-md-3">
-                    <h5 class="text-white text-uppercase">Cost Of Shipping</h5>
-                    <base-input addon-left-icon="ni ni-delivery-fast" placeholder="E.g Kia Morning Lx"></base-input>
+                    <h5 class="text-white text-uppercase">Cost Of Shipping In Usd</h5>
+                    <base-input addon-left-icon="ni ni-cart" placeholder="E.g $2,000"></base-input>
                 </div>
                 <div class="col-md-3">
-                  <h5 class="text-white text-uppercase">Cost Of Clearing</h5>
-                  <base-input placeholder="Disabled" ></base-input>
+                  <h5 class="text-white text-uppercase">Cost Of Clearing In Ghc</h5>
+                  <base-input placeholder="Eg. GHC 15,000" ></base-input>
                 </div>
                 <div class="col-md-3">
-                    <h5 class="text-white text-uppercase">Cost Of Setting Up</h5>
-                    <base-input addon-left-icon="ni ni-delivery-fast" placeholder="E.g Kia Morning Lx"></base-input>
+                    <h5 class="text-white text-uppercase">Cost Of Setting Up In ghc</h5>
+                    <base-input addon-left-icon="ni ni-settings-gear-65" placeholder="Eg. GHC 8,000"></base-input>
                 </div>
                 <div class="col-md-3">
                   <h5 class="text-white text-uppercase">Car Image Link</h5>
-                  <base-input placeholder="Disabled" ></base-input>
+                  <base-input placeholder="Put An Image Link Here" ></base-input>
                 </div>
               </div>
               <div class="text-center">
-                  <base-button type="default" class="my-4">Add New Car</base-button>
+                  <base-button block type="warning" size="lg" class="my-4">Add New Car</base-button>
               </div>
              </form>
     </base-header>
+
+    <div class="container-fluid mt--7">
+        <div class="row">
+            <div class="col">
+                <cars-table title="All Cars Table"></cars-table>
+            </div>
+        </div>
+    </div>
+
     <div class="container-fluid">
         <br>
       <div class="row">
@@ -279,10 +268,12 @@
 
 <script>
 import Modal from '@/components/Modal'
+import CarsTable from './Tables/CarsTable'
 
 export default {
   components: {
     Modal,
+    CarsTable,
   },
   data(){
     return {
@@ -348,6 +339,11 @@ export default {
         'TAXI-SERVICES',
         'DUMP-TRACK-SEVICES',
       ],
+      carTypeList: [
+        'SALOON',
+        'HUNCK BACK',
+        'TRUCK'
+      ]
     }// end of data
   },
   methods: {
