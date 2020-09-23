@@ -68,10 +68,10 @@
             <!--Tables-->
             <div class="row mt-5">
                 <div class="col-xl-8 mb-5 mb-xl-0">
-                    <page-visits-table></page-visits-table>
+                    <cars-table></cars-table>
                 </div>
                 <div class="col-xl-4">
-                    <social-traffic-table></social-traffic-table>
+                    <owners-table></owners-table>
                 </div>
             </div>
             <!--End tables-->
@@ -83,11 +83,15 @@
   // Tables
   import SocialTrafficTable from './Dashboard/SocialTrafficTable';
   import PageVisitsTable from './Dashboard/PageVisitsTable';
+  import CarsTable from '@/views/Tables/CarsTable'
+  import OwnersTable from '@/views/Tables/OwnersTable'
 
   export default {
     components: {
       PageVisitsTable,
       SocialTrafficTable,
+      CarsTable,
+      OwnersTable,
     },
     methods: {
     },
