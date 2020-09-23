@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import DashboardLayout from '@/layout/DashboardLayout'
 import AuthLayout from '@/layout/AuthLayout'
 import ExternalLayout from '@/layout/ExternalLayout'
+import OwnerDashboardLayout from '@/layout/OwnerDashboardLayout'
 Vue.use(Router)
 
 export default new Router({
@@ -102,6 +103,33 @@ export default new Router({
           path: '/driver/details/:id',
           name: 'toulouse',
           component: () => import('./views/Externals/ExternalDriverProfile.vue')
+        },
+      ]
+    },
+
+    {
+      path: '/',
+      component: OwnerDashboardLayout,
+      children: [
+        {
+          path: '/owner/dashboard',
+          name: 'owner-dashboard',
+          component: () => import('./views/Externals/OwnerDashboard.vue')
+        },
+        {
+          path: '/owner/dashboard/cars',
+          name: 'owner-cars',
+          component: () => import('./views/Externals/OwnerCarList.vue')
+        },
+        {
+          path: '/owner/dashboard/profile',
+          name: 'owner-profile',
+          component: () => import('./views/Externals/OwnerProfile.vue')
+        },
+        {
+          path: '/owner/dashboard/drivers',
+          name: 'owner-drivers',
+          component: () => import('./views/Externals/OwnerDriverList.vue')
         },
       ]
     },
