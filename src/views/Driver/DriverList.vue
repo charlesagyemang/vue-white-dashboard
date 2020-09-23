@@ -9,7 +9,7 @@
     <div class="container-fluid mt--7">
         <div class="row">
             <div class="col">
-                <owners-table title="All Drivers List"></owners-table>
+                <drivers-table title="All Drivers List"></drivers-table>
             </div>
         </div>
     </div>
@@ -17,11 +17,11 @@
 </template>
 
 <script>
-import OwnersTable from '@/views/Tables/OwnersTable'
+import DriversTable from '@/views/Tables/DriversTable'
 
 export default {
   components: {
-    OwnersTable,
+    DriversTable,
   },
 }
 </script>
