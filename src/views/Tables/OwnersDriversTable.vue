@@ -70,7 +70,6 @@
 
           <td class="car">
             {{row.car.modelName}}<br>
-            <button class="btn btn-info" type="sm" name="button">Car Details</button>
           </td>
 
         </template>

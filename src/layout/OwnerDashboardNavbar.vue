@@ -18,16 +18,12 @@
                     </div>
 
                     <template>
-                        <router-link to="/dashboard/profile" class="dropdown-item">
+                        <router-link to="/owner/dashboard/profile" class="dropdown-item">
                             <i class="ni ni-single-02"></i>
                             <span>My profile</span>
                         </router-link>
-                        <router-link to="/dashboard/profile" class="dropdown-item">
-                            <i class="ni ni-settings-gear-65"></i>
-                            <span>Settings</span>
-                        </router-link>
                         <div class="dropdown-divider"></div>
-                        <router-link to="/dashboard/profile" class="dropdown-item">
+                        <router-link to="/" class="dropdown-item">
                             <i class="ni ni-user-run"></i>
                             <span>Logout</span>
                         </router-link>

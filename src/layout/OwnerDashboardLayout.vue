@@ -13,9 +13,9 @@
             path: '/owner/dashboard'
           }"
         />
-        <sidebar-item :link="{name: 'Cars', icon: 'ni ni-delivery-fast', path: '/owner/dashboard/cars'}"/>
-        <sidebar-item :link="{name: 'Drivers', icon: 'ni ni-bus-front-12', path: '/owner/dashboard/drivers'}"/>
-        <sidebar-item :link="{name: 'User Profile', icon: 'ni ni-single-02', path: '/owner/dashboard/profile'}"/>
+        <sidebar-item :link="{name: 'Your Cars', icon: 'ni ni-delivery-fast', path: '/owner/dashboard/cars'}"/>
+        <sidebar-item :link="{name: 'Your Drivers', icon: 'ni ni-bus-front-12', path: '/owner/dashboard/drivers'}"/>
+        <sidebar-item :link="{name: 'Your Profile', icon: 'ni ni-single-02', path: '/owner/dashboard/profile'}"/>
       </template>
     </side-bar>
     <div class="main-content" :data="sidebarBackground">

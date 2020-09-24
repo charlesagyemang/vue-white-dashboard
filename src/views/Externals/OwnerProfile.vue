@@ -116,7 +116,7 @@
                                     </div>
                                 </div>
                                 <div class="pl-lg-4">
-                                  <a href="#" class="btn btn-primary">Edit Personal Details</a>
+                                  <a href="#" class="btn btn-dark">Edit Personal Details</a>
                                 </div>
                                 <hr class="my-4" />
                                 <!-- Address -->
@@ -160,7 +160,7 @@
                                     </div>
                                 </div>
                                 <div class="pl-lg-4">
-                                  <a href="#" class="btn btn-primary">Edit Personal Details</a>
+                                  <a href="#" class="btn btn-dark">Edit Address Details</a>
                                 </div>
                             </form>
                         </template>

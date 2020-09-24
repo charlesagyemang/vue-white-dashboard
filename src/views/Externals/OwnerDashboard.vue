@@ -52,7 +52,7 @@
                     <cars-table></cars-table>
                 </div>
                 <div class="col-xl-4">
-                    <owners-table></owners-table>
+                    <drivers-table></drivers-table>
                 </div>
             </div>
             <!--End tables-->
@@ -63,13 +63,13 @@
 <script>
   // Tables
 
-  import CarsTable from '@/views/Tables/CarsTable'
-  import OwnersTable from '@/views/Tables/OwnersTable'
+  import CarsTable from '@/views/Tables/OwnersCarsTable'
+  import DriversTable from '@/views/Tables/OwnersDriversTable'
 
   export default {
     components: {
       CarsTable,
-      OwnersTable,
+      DriversTable,
     },
     methods: {
     },
