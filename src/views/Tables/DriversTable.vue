@@ -37,11 +37,10 @@
                 <i class="fas fa-ellipsis-v"></i>
               </a>
               <template>
-                <a class="dropdown-item" href="#">Activate Driver</a>
-                <a class="dropdown-item" href="#">View Full Details</a>
-                <a class="dropdown-item" href="#">Edit Driver</a>
-                <a class="dropdown-item" href="#">Assign A Car</a>
-                <a class="dropdown-item" href="#">Transfer Ownership</a>
+                <router-link class="dropdown-item" to="/dashboard/view-single-driver">View Full Details</router-link>
+                <router-link class="dropdown-item" to="/dashboard/edit-single-driver">Edit Single Driver</router-link>
+                <button @click="modals.attachACarModal = true" class="dropdown-item">Assign A Car</button>
+                <button @click="modals.updateDriverStatusModal = true" class="dropdown-item">Change Driver Status</button>
               </template>
             </base-dropdown>
           </td>
@@ -72,8 +71,7 @@
 
 
           <td class="car">
-            {{row.car.modelName}}<br>
-            <button class="btn btn-info" type="sm" name="button">Car Details</button>
+            {{row.car.modelName}}
           </td>
 
         </template>
@@ -84,6 +82,57 @@
     <div class="card-footer d-flex justify-content-end"
          :class="type === 'dark' ? 'bg-transparent': ''">
       <base-pagination :total="total" ></base-pagination>
+    </div>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4">
+            <modal :show.sync="modals.attachACarModal"
+                   body-classes="p-0"
+                   modal-classes="modal-dialog-centered modal-sm">
+                <card type="secondary" shadow
+                      header-classes="bg-white pb-5"
+                      body-classes="px-lg-5 py-lg-5"
+                      class="border-0">
+                    <template>
+                        <div class="text-center text-muted mb-4">
+                            <h4>Assign A Car To (Driver Name)</h4>
+                        </div>
+                        <form role="form">
+                           <multiselect v-model="carForm.currentDriver" :options="allDriversList"></multiselect>
+                            <div class="text-center">
+                                <base-button type="success" class="my-4">Submit</base-button>
+                            </div>
+                        </form>
+                    </template>
+                </card>
+            </modal>
+        </div>
+
+        <div class="col-md-4">
+            <modal :show.sync="modals.updateDriverStatusModal"
+                   body-classes="p-0"
+                   modal-classes="modal-dialog-centered modal-sm">
+                <card type="secondary" shadow
+                      header-classes="bg-white pb-5"
+                      body-classes="px-lg-5 py-lg-5"
+                      class="border-0">
+                    <template>
+                        <div class="text-center text-muted mb-4">
+                            <h4>Update (Driver Name) Status</h4>
+                        </div>
+                        <form role="form">
+                           <multiselect v-model="carForm.currentDriver" :options="allDriversList"></multiselect>
+                            <div class="text-center">
+                                <base-button type="success" class="my-4">Submit</base-button>
+                            </div>
+                        </form>
+                    </template>
+                </card>
+            </modal>
+        </div>
+
+      </div>
     </div>
 
   </div>
@@ -99,6 +148,18 @@
     },
     data() {
       return {
+        carForm: {
+          currentDriver: '',
+        },
+        allDriversList: [
+          'Car 1',
+          'Car 2',
+          'Car 3',
+        ],
+        modals: {
+          attachACarModal: false,
+          updateDriverStatusModal: false,
+        },
         total: 30,
         tableData: [
           {

@@ -11,7 +11,7 @@
                     <div slot="header" class="bg-white border-0">
                         <div class="row align-items-center">
                             <div class="col-8">
-                              <h3 class="mb-0">Fill The Form below To Add A New Owner
+                              <h3 class="mb-0">Fill The Form below To Add A New Driver
                                 <router-link class="btn btn-primary" to="/dashboard/driver-list">VIEW ALL DRIVERS</router-link>
                               </h3>
                             </div>

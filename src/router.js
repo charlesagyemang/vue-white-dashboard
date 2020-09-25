@@ -89,7 +89,17 @@ export default new Router({
           path: '/dashboard/add-a-driver',
           name: 'Add A Driver',
           component: () => import('./views/Driver/AddNewDriver.vue')
-        }
+        },
+        {
+          path: '/dashboard/view-single-driver',
+          name: 'Single Driver Details',
+          component: () => import('./views/Driver/SingleDriverView.vue')
+        },
+        {
+          path: '/dashboard/edit-single-driver',
+          name: 'Edit Single Driver',
+          component: () => import('./views/Driver/EditSingleDriver.vue')
+        },
       ]
     },
     {
