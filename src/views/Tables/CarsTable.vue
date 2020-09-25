@@ -41,10 +41,10 @@
               <template>
                 <router-link class="dropdown-item" to="/dashboard/view-single-car">View Full Details</router-link>
                 <router-link class="dropdown-item" to="/dashboard/edit-single-car">Edit Car</router-link>
-                <a class="dropdown-item" href="#">Add Insurance</a>
-                <a class="dropdown-item" href="#">Add Road Worthy</a>
-                <a class="dropdown-item" href="#">Add Income Tax</a>
-                <a class="dropdown-item" href="#">Add Monthly Expense</a>
+                <button @click="modals.addInsurance = true" class="dropdown-item">Add Insurance</button>
+                <button @click="modals.addRoadWorthy = true" class="dropdown-item">Add Road Worthy</button>
+                <button @click="modals.addIncomeTax = true" class="dropdown-item">Add Income Tax</button>
+                <button @click="modals.addMonthlyExpense = true" class="dropdown-item">Add Monthly Expense</button>
                 <button @click="modals.addDocumentLink = true" class="dropdown-item">Add Document Links</button>
                 <button @click="modals.updateCarStatusModal = true" class="dropdown-item">Change Car Status</button>
               </template>
@@ -101,8 +101,225 @@
       <base-pagination :total="total" ></base-pagination>
     </div>
 
-
     <div class="row">
+
+      <div class="col-md-4">
+          <modal :show.sync="modals.addInsurance"
+                 body-classes="p-0"
+                 modal-classes="modal-dialog-centered modal-sm">
+              <card type="secondary" shadow
+                    header-classes="bg-white pb-5"
+                    body-classes="px-lg-5 py-lg-5"
+                    class="border-0">
+                  <template>
+                      <div class="text-center text-muted mb-4">
+                          <h3>Add Insurance</h3>
+                      </div>
+                      <form role="form">
+                        <h5 class="text-uppercase text-muted">Provider</h5>
+                         <base-input
+                            v-model="carForm.currentDriver"
+                            addon-left-icon="ni ni-key-25"
+                            placeholder="E.g SIC Insurance"
+                            >
+                          </base-input>
+                          <h5 class="text-uppercase text-muted">Start Date</h5>
+                          <base-input addon-left-icon="ni ni-calendar-grid-58">
+                                <flat-pickr slot-scope="{focus, blur}"
+                                             @on-open="focus"
+                                             @on-close="blur"
+                                             :config="{allowInput: true}"
+                                             class="form-control datepicker"
+                                             v-model="carForm.currentDriver"
+                                             >
+                                </flat-pickr>
+                            </base-input>
+
+                            <h5 class="text-uppercase text-muted">End Date</h5>
+                            <base-input addon-left-icon="ni ni-calendar-grid-58">
+                                  <flat-pickr slot-scope="{focus, blur}"
+                                               @on-open="focus"
+                                               @on-close="blur"
+                                               :config="{allowInput: true}"
+                                               class="form-control datepicker"
+                                               v-model="carForm.currentDriver"
+                                               >
+                                  </flat-pickr>
+                              </base-input>
+
+                            <h5 class="text-uppercase text-muted">Amount</h5>
+                            <base-input
+                               v-model="carForm.currentDriver"
+                               addon-left-icon="ni ni-money-coins"
+                               placeholder="Eg. GHC 450"
+                               >
+                             </base-input>
+                          <div class="text-center">
+                              <base-button type="primary" class="my-4">Submit</base-button>
+                          </div>
+                      </form>
+                  </template>
+              </card>
+          </modal>
+      </div>
+
+      <div class="col-md-4">
+          <modal :show.sync="modals.addRoadWorthy"
+                 body-classes="p-0"
+                 modal-classes="modal-dialog-centered modal-sm">
+              <card type="secondary" shadow
+                    header-classes="bg-white pb-5"
+                    body-classes="px-lg-5 py-lg-5"
+                    class="border-0">
+                  <template>
+                      <div class="text-center text-muted mb-4">
+                          <h3>Add Road Worthy</h3>
+                      </div>
+                      <form role="form">
+                          <h5 class="text-uppercase text-muted">Start Date</h5>
+                          <base-input addon-left-icon="ni ni-calendar-grid-58">
+                                <flat-pickr slot-scope="{focus, blur}"
+                                             @on-open="focus"
+                                             @on-close="blur"
+                                             :config="{allowInput: true}"
+                                             class="form-control datepicker"
+                                             v-model="carForm.currentDriver"
+                                             >
+                                </flat-pickr>
+                            </base-input>
+
+                            <h5 class="text-uppercase text-muted">End Date</h5>
+                            <base-input addon-left-icon="ni ni-calendar-grid-58">
+                                  <flat-pickr slot-scope="{focus, blur}"
+                                               @on-open="focus"
+                                               @on-close="blur"
+                                               :config="{allowInput: true}"
+                                               class="form-control datepicker"
+                                               v-model="carForm.currentDriver"
+                                               >
+                                  </flat-pickr>
+                              </base-input>
+
+                            <h5 class="text-uppercase text-muted">Amount</h5>
+                            <base-input
+                               v-model="carForm.currentDriver"
+                               addon-left-icon="ni ni-money-coins"
+                               placeholder="Eg. GHC 450"
+                               >
+                             </base-input>
+                          <div class="text-center">
+                              <base-button type="primary" class="my-4">Submit</base-button>
+                          </div>
+                      </form>
+                  </template>
+              </card>
+          </modal>
+      </div>
+
+
+      <div class="col-md-4">
+          <modal :show.sync="modals.addIncomeTax"
+                 body-classes="p-0"
+                 modal-classes="modal-dialog-centered modal-sm">
+              <card type="secondary" shadow
+                    header-classes="bg-white pb-5"
+                    body-classes="px-lg-5 py-lg-5"
+                    class="border-0">
+                  <template>
+                      <div class="text-center text-muted mb-4">
+                          <h3>Add Income Tax</h3>
+                      </div>
+                      <form role="form">
+                        <h5 class="text-uppercase text-muted">Quater</h5>
+                         <base-input
+                            v-model="carForm.currentDriver"
+                            addon-left-icon="ni ni-key-25"
+                            placeholder="E.g First Quarter"
+                            >
+                          </base-input>
+                          <h5 class="text-uppercase text-muted">Start Date</h5>
+                          <base-input addon-left-icon="ni ni-calendar-grid-58">
+                                <flat-pickr slot-scope="{focus, blur}"
+                                             @on-open="focus"
+                                             @on-close="blur"
+                                             :config="{allowInput: true}"
+                                             class="form-control datepicker"
+                                             v-model="carForm.currentDriver"
+                                             >
+                                </flat-pickr>
+                            </base-input>
+
+                            <h5 class="text-uppercase text-muted">End Date</h5>
+                            <base-input addon-left-icon="ni ni-calendar-grid-58">
+                                  <flat-pickr slot-scope="{focus, blur}"
+                                               @on-open="focus"
+                                               @on-close="blur"
+                                               :config="{allowInput: true}"
+                                               class="form-control datepicker"
+                                               v-model="carForm.currentDriver"
+                                               >
+                                  </flat-pickr>
+                              </base-input>
+
+                            <h5 class="text-uppercase text-muted">Amount</h5>
+                            <base-input
+                               v-model="carForm.currentDriver"
+                               addon-left-icon="ni ni-money-coins"
+                               placeholder="Eg. GHC 450"
+                               >
+                             </base-input>
+                          <div class="text-center">
+                              <base-button type="primary" class="my-4">Submit</base-button>
+                          </div>
+                      </form>
+                  </template>
+              </card>
+          </modal>
+      </div>
+
+      <div class="col-md-4">
+          <modal :show.sync="modals.addMonthlyExpense"
+                 body-classes="p-0"
+                 modal-classes="modal-dialog-centered modal-sm">
+              <card type="secondary" shadow
+                    header-classes="bg-white pb-5"
+                    body-classes="px-lg-5 py-lg-5"
+                    class="border-0">
+                  <template>
+                      <div class="text-center text-muted mb-4">
+                          <h3>Add Monthly Expense</h3>
+                      </div>
+                      <form role="form">
+                        <h5 class="text-uppercase text-muted">Year</h5>
+                         <base-input
+                            v-model="carForm.currentDriver"
+                            addon-left-icon="ni ni-calendar-grid-58"
+                            placeholder="E.g 2020"
+                            >
+                          </base-input>
+                          <h5 class="text-uppercase text-muted">Month</h5>
+                           <base-input
+                              v-model="carForm.currentDriver"
+                              addon-left-icon="ni ni-calendar-grid-58"
+                              placeholder="Eg. May"
+                              >
+                            </base-input>
+                            <h5 class="text-uppercase text-muted">Amount</h5>
+                            <base-input
+                               v-model="carForm.currentDriver"
+                               addon-left-icon="ni ni-money-coins"
+                               placeholder="Eg. GHC 450"
+                               >
+                             </base-input>
+                          <div class="text-center">
+                              <base-button type="primary" class="my-4">Submit</base-button>
+                          </div>
+                      </form>
+                  </template>
+              </card>
+          </modal>
+      </div>
+
         <div class="col-md-4">
             <modal :show.sync="modals.addDocumentLink"
                    body-classes="p-0"
@@ -189,6 +406,10 @@ import Modal from '@/components/Modal'
         modals:{
           updateCarStatusModal: false,
           addDocumentLink: false,
+          addMonthlyExpense: false,
+          addIncomeTax: false,
+          addRoadWorthy: false,
+          addInsurance: false,
           modal1: false,
           modal2: false,
           modal3: false,
