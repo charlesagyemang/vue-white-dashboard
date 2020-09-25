@@ -16,9 +16,9 @@ node_modules
 chrome-profiler-events*.json
 speed-measure-plugin*.json
 
-yarn.lock
+
 package-lock.json
-/yarn.lock
+
 /package-lock.json
 .eslintrc
 .eslintrc.js
