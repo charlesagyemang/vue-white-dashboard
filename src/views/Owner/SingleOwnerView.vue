@@ -12,7 +12,7 @@
                         <div class="card-header text-center border-0 pt-8 pt-md-4 pb-0 pb-md-4">
                           <div class="d-flex justify-content-between">
                               <router-link to="/dashboard/add-an-owner" class="btn btn-success">Add A New Owner</router-link><br>
-                              <router-link to="/dashboard/owner-list" class="btn btn-danger float-right">View All Owner</router-link >
+                              <router-link to="/dashboard/owner-list" class="btn btn-danger float-right">View All Owners</router-link >
                           </div>
                         </div>
                     </div>

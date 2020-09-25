@@ -16,6 +16,7 @@
                             </div>
                         </div>
                     </div>
+
                     <div class="card-header text-center border-0 pt-8 pt-md-4 pb-0 pb-md-4">
                         <div class="d-flex justify-content-between">
                         </div>
@@ -57,13 +58,13 @@
                     <div slot="header" class="bg-white border-0">
                         <div class="row align-items-center">
                             <div class="col-8">
-                                <h3 class="mb-0">Edit Single Owner</h3>
+                                <h3 class="mb-0">Edit Single Owner  <router-link to="/dashboard/owner-list" class="btn btn-primary">Back To All Owners</router-link></h3>
                             </div>
                         </div>
                     </div>
                     <template>
                         <form>
-                            <h6 class="heading-small text-muted mb-4">User information</h6>
+                            <h3 class="text-muted mb-4">User Information</h3>
                             <div class="pl-lg-4">
                                 <div class="row">
                                     <div class="col-lg-6">
@@ -107,7 +108,7 @@
                             </div>
                             <hr class="my-4" />
                             <!-- Address -->
-                            <h6 class="heading-small text-muted mb-4">Address information</h6>
+                            <h3 class="text-muted mb-4">Address Information</h3>
                             <div class="pl-lg-4">
                                 <div class="row">
                                     <div class="col-md-12">

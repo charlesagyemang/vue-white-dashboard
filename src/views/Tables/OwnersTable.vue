@@ -41,9 +41,8 @@
               <template>
                 <router-link class="dropdown-item" to="/dashboard/view-owner-details">View Full Details</router-link>
                 <router-link class="dropdown-item" to="/dashboard/edit-single-owner">Edit Owner</router-link>
-                <!-- <multiselect v-model="carForm.currentDriver" :options="allDriversList"></multiselect> -->
-                <a class="dropdown-item" href="#">Attach A Car</a>
-                <a class="dropdown-item" href="#">Activate Owner</a>
+                <button @click="modals.modal3 = true" class="dropdown-item" href="#">Attach A Car</button>
+                <button @click="modals.modal2 = true" class="dropdown-item" href="#">Update Owner Status</button>
               </template>
             </base-dropdown>
           </td>
@@ -84,17 +83,66 @@
 
       </base-table>
     </div>
-
     <div class="card-footer d-flex justify-content-end"
          :class="type === 'dark' ? 'bg-transparent': ''">
       <base-pagination :total="total" ></base-pagination>
     </div>
 
+
+    <div class="row">
+        <div class="col-md-4">
+            <modal :show.sync="modals.modal3"
+                   body-classes="p-0"
+                   modal-classes="modal-dialog-centered modal-sm">
+                <card type="secondary" shadow
+                      header-classes="bg-white pb-5"
+                      body-classes="px-lg-5 py-lg-5"
+                      class="border-0">
+                    <template>
+                        <div class="text-center text-muted mb-4">
+                            <small>Select A Car To Attach To Name Here</small>
+                        </div>
+                        <form role="form">
+                           <multiselect v-model="carForm.currentDriver" :options="allDriversList"></multiselect>
+                            <div class="text-center">
+                                <base-button type="primary" class="my-4">Attach Car To Name Here</base-button>
+                            </div>
+                        </form>
+                    </template>
+                </card>
+            </modal>
+        </div>
+        <div class="col-md-4">
+            <modal :show.sync="modals.modal2"
+                   body-classes="p-0"
+                   modal-classes="modal-dialog-centered modal-sm">
+                <card type="secondary" shadow
+                      header-classes="bg-white pb-5"
+                      body-classes="px-lg-5 py-lg-5"
+                      class="border-0">
+                    <template>
+                        <div class="text-center text-muted mb-4">
+                            <small>Update Owner Status</small>
+                        </div>
+                        <form role="form">
+                           <multiselect v-model="carForm.currentDriver" :options="allDriversList"></multiselect>
+                            <div class="text-center">
+                                <base-button type="success" class="my-4">Update Status</base-button>
+                            </div>
+                        </form>
+                    </template>
+                </card>
+            </modal>
+        </div>
+    </div>
   </div>
 </template>
 <script>
+import Modal from '@/components/Modal'
   export default {
-    name: 'projects-table',
+    components: {
+        Modal,
+    },
     props: {
       type: {
         type: String
@@ -103,6 +151,11 @@
     },
     data() {
       return {
+        modals:{
+          modal1: false,
+          modal2: false,
+          modal3: false,
+        },
         carForm: {
           currentDriver: ''
         },
