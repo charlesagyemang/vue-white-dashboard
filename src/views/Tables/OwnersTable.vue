@@ -6,22 +6,13 @@
       <div class="row align-items-center">
         <div class="col">
           <h3 class="mb-0" :class="type === 'dark' ? 'text-white': ''">
-            {{title}}
+            {{title}}   <router-link to="/dashboard/add-an-owner" class="btn btn-primary">ADD A NEW OWNER</router-link>
           </h3>
         </div>
 
       </div>
     </div>
-    <!--
-    createOwner: {
-      username: '',
-      email: '',
-      phoneNumber: '',
-      address: '',
-      country: '',
-      other: {},
-    },
-    -->
+
     <div class="table-responsive">
       <base-table class="table align-items-center table-flush"
                   :class="type === 'dark' ? 'table-dark': ''"

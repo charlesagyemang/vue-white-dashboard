@@ -116,7 +116,7 @@
                                 </div>
                             </div>
                             <div class="pl-lg-4">
-                              <button @click.prevent="handleCreateOwner" class="btn btn-dark">Add Owner</button>
+                              <button @click.prevent="handleCreateOwner" class="btn btn-primary">Add Owner</button>
                             </div>
                         </form>
                     </template>
