@@ -39,12 +39,14 @@
               </a>
 
               <template>
-                <a class="dropdown-item" href="#">View Full Details</a>
-                <a class="dropdown-item" href="#">Edit Car</a>
+                <router-link class="dropdown-item" to="/dashboard/view-single-car">View Full Details</router-link>
+                <router-link class="dropdown-item" to="/dashboard/edit-single-car">Edit Car</router-link>
                 <a class="dropdown-item" href="#">Add Insurance</a>
                 <a class="dropdown-item" href="#">Add Road Worthy</a>
-                <a class="dropdown-item" href="#">Activate Car</a>
-                <a class="dropdown-item" href="#">Change Car Status</a>
+                <a class="dropdown-item" href="#">Add Income Tax</a>
+                <a class="dropdown-item" href="#">Add Monthly Expense</a>
+                <button @click="modals.addDocumentLink = true" class="dropdown-item">Add Document Links</button>
+                <button @click="modals.updateCarStatusModal = true" class="dropdown-item">Change Car Status</button>
               </template>
             </base-dropdown>
           </td>
@@ -99,11 +101,75 @@
       <base-pagination :total="total" ></base-pagination>
     </div>
 
+
+    <div class="row">
+        <div class="col-md-4">
+            <modal :show.sync="modals.addDocumentLink"
+                   body-classes="p-0"
+                   modal-classes="modal-dialog-centered modal-sm">
+                <card type="secondary" shadow
+                      header-classes="bg-white pb-5"
+                      body-classes="px-lg-5 py-lg-5"
+                      class="border-0">
+                    <template>
+                        <div class="text-center text-muted mb-4">
+                            <h3>Add Document Link</h3>
+                        </div>
+                        <form role="form">
+                          <h5 class="text-uppercase text-muted">Item Name</h5>
+                           <base-input
+                              v-model="carForm.currentDriver"
+                              addon-left-icon="ni ni-single-copy-04"
+                              placeholder="E.g Form A"
+                              >
+                            </base-input>
+                            <h5 class="text-uppercase text-muted">Paste Document Link Here</h5>
+                             <base-input
+                                v-model="carForm.currentDriver"
+                                addon-left-icon="ni ni-briefcase-24"
+                                placeholder="Eg. https://drive.google.com/738"
+                                >
+                              </base-input>
+                            <div class="text-center">
+                                <base-button type="primary" class="my-4">Submit</base-button>
+                            </div>
+                        </form>
+                    </template>
+                </card>
+            </modal>
+        </div>
+        <div class="col-md-4">
+            <modal :show.sync="modals.updateCarStatusModal"
+                   body-classes="p-0"
+                   modal-classes="modal-dialog-centered modal-sm">
+                <card type="secondary" shadow
+                      header-classes="bg-white pb-5"
+                      body-classes="px-lg-5 py-lg-5"
+                      class="border-0">
+                    <template>
+                        <div class="text-center text-muted mb-4">
+                            <h3>Update (Car Name) Status</h3>
+                        </div>
+                        <form role="form">
+                           <multiselect v-model="carForm.currentDriver" :options="allCarStatusList"></multiselect>
+                            <div class="text-center">
+                                <base-button type="success" class="my-4">Update Status</base-button>
+                            </div>
+                        </form>
+                    </template>
+                </card>
+            </modal>
+        </div>
+    </div>
+
   </div>
 </template>
 <script>
+import Modal from '@/components/Modal'
   export default {
-    name: 'projects-table',
+    components: {
+        Modal,
+    },
     props: {
       type: {
         type: String
@@ -112,6 +178,21 @@
     },
     data() {
       return {
+        carForm: {
+          currentDriver: ''
+        },
+        allCarStatusList: [
+          'Driver 1',
+          'Driver 2',
+          'Driver 3',
+        ],
+        modals:{
+          updateCarStatusModal: false,
+          addDocumentLink: false,
+          modal1: false,
+          modal2: false,
+          modal3: false,
+        },
         total: 30,
         tableData: [
           {
