@@ -61,6 +61,16 @@ export default new Router({
           component: () => import('./views/Owner/AddNewOwner.vue')
         },
         {
+          path: '/dashboard/view-owner-details',
+          name: 'Owner Details',
+          component: () => import('./views/Owner/SingleOwnerView.vue')
+        },
+        {
+          path: '/dashboard/edit-single-owner',
+          name: 'Edit Owner Details',
+          component: () => import('./views/Owner/EditSingleOwner.vue')
+        },
+        {
           path: '/dashboard/driver-list',
           name: 'Driver List',
           component: () => import('./views/Driver/DriverList.vue')

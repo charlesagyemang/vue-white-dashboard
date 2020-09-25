@@ -39,8 +39,8 @@
               </a>
 
               <template>
-                <a class="dropdown-item" href="#">View Full Details</a>
-                <a class="dropdown-item" href="#">Edit Owner</a>
+                <router-link class="dropdown-item" to="/dashboard/view-owner-details">View Full Details</router-link>
+                <router-link class="dropdown-item" to="/dashboard/edit-single-owner">Edit Owner</router-link>
                 <a class="dropdown-item" href="#">Add Car</a>
                 <a class="dropdown-item" href="#">Activate Owner</a>
               </template>
