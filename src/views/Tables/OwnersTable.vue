@@ -41,7 +41,8 @@
               <template>
                 <router-link class="dropdown-item" to="/dashboard/view-owner-details">View Full Details</router-link>
                 <router-link class="dropdown-item" to="/dashboard/edit-single-owner">Edit Owner</router-link>
-                <a class="dropdown-item" href="#">Add Car</a>
+                <!-- <multiselect v-model="carForm.currentDriver" :options="allDriversList"></multiselect> -->
+                <a class="dropdown-item" href="#">Attach A Car</a>
                 <a class="dropdown-item" href="#">Activate Owner</a>
               </template>
             </base-dropdown>
@@ -102,6 +103,14 @@
     },
     data() {
       return {
+        carForm: {
+          currentDriver: ''
+        },
+        allDriversList: [
+          'Driver 1',
+          'Driver 2',
+          'Driver 3',
+        ],
         total: 30,
         tableData: [
           {
