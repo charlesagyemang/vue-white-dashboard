@@ -2,285 +2,127 @@
   <div class="">
     <base-header type="gradient-default" class="pb-6 pb-8 pt-5 pt-md-8">
       <!-- <span class="mask bg-info opacity-8"></span> -->
-           <form class="">
-             <h1 class="text-white text-uppercase">Fill Form Below To Add New A Car Or <router-link to="/dashboard/car-list" class="btn btn-primary">CLICK HERE TO VIEW ALL CARS</router-link></h1><br>
-              <div class="row">
-                <div class="col-md-3">
-                    <h5 class="text-white text-uppercase">Model Name</h5>
-                    <base-input v-model="carForm.modelName" addon-left-icon="ni ni-delivery-fast" placeholder="E.g Kia Morning Lx"></base-input>
-                </div>
-                <div class="col-md-3">
-                  <h5 class="text-white text-uppercase">Model Year</h5>
-                  <base-input v-model="carForm.modelYear" addon-left-icon="ni ni-calendar-grid-58" placeholder="Eg. 2009" ></base-input>
-                </div>
-                <div class="col-md-3">
-                    <h5 class="text-white text-uppercase">Color</h5>
-                    <base-input v-model="carForm.color" addon-left-icon="ni ni-palette" placeholder="E.g Blue"></base-input>
-                </div>
-                <div class="col-md-3">
-                  <h5 class="text-white text-uppercase">Car Status</h5>
-                  <multiselect v-model="carForm.carStatus" :options="carStatusList"></multiselect>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-md-3">
-                    <h5 class="text-white text-uppercase">Car Working City</h5>
-                    <base-input addon-left-icon="ni ni-square-pin" placeholder="E.g Accra"></base-input>
-                </div>
-                <div class="col-md-3">
-                  <h5 class="text-white text-uppercase">Car Owner</h5>
-                  <multiselect v-model="carForm.carOwner" :options="carOwnersList"></multiselect>
-                </div>
-                <div class="col-md-3">
-                    <h5 class="text-white text-uppercase">Current Driver</h5>
-                    <multiselect v-model="carForm.currentDriver" :options="allDriversList"></multiselect>
-                </div>
-                <div class="col-md-3">
-                  <h5 class="text-white text-uppercase">Car Type</h5>
-                  <multiselect v-model="carForm.carType" :options="carTypeList"></multiselect>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-md-3">
-                    <h5 class="text-white text-uppercase">Service Type</h5>
-                    <multiselect v-model="carForm.serviceType" :options="carServiceTypeList"></multiselect>
-                </div>
-                <div class="col-md-3">
-                  <h5 class="text-white text-uppercase">Date Registed</h5>
-                    <base-input addon-left-icon="ni ni-calendar-grid-58">
-                        <flat-pickr slot-scope="{focus, blur}"
-                                     @on-open="focus"
-                                     @on-close="blur"
-                                     :config="{allowInput: true}"
-                                     class="form-control datepicker"
-                                     v-model="carForm.dateResigtered"
-                                     >
-                        </flat-pickr>
-                    </base-input>
-                </div>
-                <div class="col-md-3">
-                    <h5 class="text-white text-uppercase">Car Number</h5>
-                    <base-input addon-left-icon="ni ni-delivery-fast" placeholder="E.g GS 4098 - 20"></base-input>
-                </div>
-                <div class="col-md-3">
-                  <h5 class="text-white text-uppercase">Cost Of Purchase In USD</h5>
-                  <base-input placeholder="Eg. $10,000" ></base-input>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-md-3">
-                    <h5 class="text-white text-uppercase">Cost Of Shipping In Usd</h5>
-                    <base-input addon-left-icon="ni ni-cart" placeholder="E.g $2,000"></base-input>
-                </div>
-                <div class="col-md-3">
-                  <h5 class="text-white text-uppercase">Cost Of Clearing In Ghc</h5>
-                  <base-input placeholder="Eg. GHC 15,000" ></base-input>
-                </div>
-                <div class="col-md-3">
-                    <h5 class="text-white text-uppercase">Cost Of Setting Up In ghc</h5>
-                    <base-input addon-left-icon="ni ni-settings-gear-65" placeholder="Eg. GHC 8,000"></base-input>
-                </div>
-                <div class="col-md-3">
-                  <h5 class="text-white text-uppercase">Car Image Link</h5>
-                  <base-input placeholder="Put An Image Link Here" ></base-input>
-                </div>
-              </div>
-              <div class="text-center">
-                  <base-button block type="warning" size="lg" class="my-4">Add New Car</base-button>
-              </div>
-             </form>
     </base-header>
 
-    <div class="container-fluid">
-        <br>
-      <div class="row">
-        <div class="col-md-4">
-            <base-button block type="default" class=" mb-3" @click="modals.modal1 = true">
-                Add A Car
-            </base-button>
-            <modal :show.sync="modals.modal1"
-                   body-classes="p-0"
-                   modal-classes="modal-dialog-centered modal-sm">
-                   <div v-show="validationError">
-                     <base-alert type="danger" dismissible>
-                         <span class="alert-inner--icon"><i class="ni ni-like-2"></i></span>
-                         <span class="alert-inner--text"><strong>Error!</strong> Please Fill Out All Required Fields</span>
-                         <button type="button" class="close">
-                             <span aria-hidden="true">&times;</span>
-                         </button>
-                     </base-alert>
-                   </div>
-
-                <card type="secondary" shadow
-                      header-classes="bg-white pb-5"
-                      body-classes="px-lg-5 py-lg-5"
-                      class="border-0">
-                    <template>
-                        <div class="text-center text-muted mb-4">
-                            <small>Perform Action</small>
-                        </div>
-                        <form role="form">
-                            <base-input
-                                        v-model="createOwner.username"
-                                        type="text"
-                                        placeholder="Full Name"
-                                        addon-left-icon="ni ni-single-02">
-                            </base-input>
-                            <base-input alternative
-                                        v-model="createOwner.email"
-                                        class="mb-3"
-                                        type="email"
-                                        placeholder="Email"
-                                        addon-left-icon="ni ni-email-83">
-                            </base-input>
-                            <base-input alternative
-                                        v-model="createOwner.phoneNumber"
-                                        type="text"
-                                        placeholder="Phone Number"
-                                        addon-left-icon="ni ni-mobile-button">
-                            </base-input>
-                            <base-input alternative
-                                        v-model="createOwner.address"
-                                        type="text"
-                                        placeholder="Address"
-                                        addon-left-icon="ni ni-square-pin">
-                            </base-input>
-                            <base-input alternative
-                                        v-model="createOwner.country"
-                                        type="text"
-                                        placeholder="Country Of Origin"
-                                        addon-left-icon="ni ni-world-2">
-                            </base-input>
-                            <div class="text-center">
-                                <base-button @click="handleCreateOwner" type="default" class="my-4">Submit</base-button>
+    <div class="container-fluid mt--7">
+        <div class="row">
+            <div class="col-xl-12 order-xl-1">
+                <card shadow type="secondary">
+                    <div slot="header" class="bg-white border-0">
+                        <div class="row align-items-center">
+                            <div class="col-8">
+                                <h3 class="mb-0">Fill The Form below To Add A New Car    <router-link to="/dashboard/car-list" class="btn btn-primary">VIEW ALL CARS</router-link></h3>
                             </div>
+                        </div>
+                    </div>
+                    <template>
+                      <form class="">
+                         <div class="row">
+                           <div class="col-md-3">
+                              <h5 class="text-uppercase text-muted">Model Name</h5>
+                               <base-input v-model="carForm.modelName" addon-left-icon="ni ni-delivery-fast" placeholder="E.g Kia Morning Lx"></base-input>
+                           </div>
+                           <div class="col-md-3">
+                             <h5 class="text-uppercase text-muted">Model Year</h5>
+                             <base-input v-model="carForm.modelYear" addon-left-icon="ni ni-calendar-grid-58" placeholder="Eg. 2009" ></base-input>
+                           </div>
+                           <div class="col-md-3">
+                               <h5 class="text-uppercase text-muted">Color</h5>
+                               <base-input v-model="carForm.color" addon-left-icon="ni ni-palette" placeholder="E.g Blue"></base-input>
+                           </div>
+                           <div class="col-md-3">
+                             <h5 class="text-uppercase text-muted">Car Status</h5>
+                             <multiselect v-model="carForm.carStatus" :options="carStatusList"></multiselect>
+                           </div>
+                         </div>
+                         <div class="row">
+                           <div class="col-md-3">
+                               <h5 class="text-uppercase text-muted">Car Working City</h5>
+                               <base-input addon-left-icon="ni ni-square-pin" placeholder="E.g Accra"></base-input>
+                           </div>
+                           <div class="col-md-3">
+                             <h5 class="text-uppercase text-muted">Car Owner</h5>
+                             <multiselect v-model="carForm.carOwner" :options="carOwnersList"></multiselect>
+                           </div>
+                           <div class="col-md-3">
+                               <h5 class="text-uppercase text-muted">Current Driver</h5>
+                               <multiselect v-model="carForm.currentDriver" :options="allDriversList"></multiselect>
+                           </div>
+                           <div class="col-md-3">
+                             <h5 class="text-uppercase text-muted">Car Type</h5>
+                             <multiselect v-model="carForm.carType" :options="carTypeList"></multiselect>
+                           </div>
+                         </div>
+                         <div class="row">
+                           <div class="col-md-3">
+                               <h5 class="text-uppercase text-muted">Service Type</h5>
+                               <multiselect v-model="carForm.serviceType" :options="carServiceTypeList"></multiselect>
+                           </div>
+                           <div class="col-md-3">
+                             <h5 class="text-uppercase text-muted">Date Registed</h5>
+                               <base-input addon-left-icon="ni ni-calendar-grid-58">
+                                   <flat-pickr slot-scope="{focus, blur}"
+                                                @on-open="focus"
+                                                @on-close="blur"
+                                                :config="{allowInput: true}"
+                                                class="form-control datepicker"
+                                                v-model="carForm.dateResigtered"
+                                                >
+                                   </flat-pickr>
+                               </base-input>
+                           </div>
+                           <div class="col-md-3">
+                               <h5 class="text-uppercase text-muted">Car Number</h5>
+                               <base-input addon-left-icon="ni ni-delivery-fast" placeholder="E.g GS 4098 - 20"></base-input>
+                           </div>
+                           <div class="col-md-3">
+                             <h5 class="text-uppercase text-muted">Cost Of Purchase In USD</h5>
+                             <base-input placeholder="Eg. $10,000" ></base-input>
+                           </div>
+                         </div>
+                         <div class="row">
+                           <div class="col-md-3">
+                               <h5 class="text-uppercase text-muted">Cost Of Shipping In Usd</h5>
+                               <base-input addon-left-icon="ni ni-cart" placeholder="E.g $2,000"></base-input>
+                           </div>
+                           <div class="col-md-3">
+                             <h5 class="text-uppercase text-muted">Cost Of Clearing In Ghc</h5>
+                             <base-input placeholder="Eg. GHC 15,000" ></base-input>
+                           </div>
+                           <div class="col-md-3">
+                               <h5 class="text-uppercase text-muted">Cost Of Setting Up In ghc</h5>
+                               <base-input addon-left-icon="ni ni-settings-gear-65" placeholder="Eg. GHC 8,000"></base-input>
+                           </div>
+                           <div class="col-md-3">
+                             <h5 class="text-uppercase text-muted">Car Image Link</h5>
+                             <base-input placeholder="Put An Image Link Here" ></base-input>
+                           </div>
+                         </div>
+                         <div class="row">
+                           <div class="col">
+                             <div class="text-center">
+                                 <base-button @click.prevent="handleCreateCar" block  type="primary" size="lg" class="my-4">Add New Car</base-button>
+                             </div>
+                           </div>
+                           <div class="col">
+                           </div>
+                           <div class="col">
+                           </div>
+                         </div>
+
                         </form>
                     </template>
                 </card>
-            </modal>
+            </div>
         </div>
-        <div class="col-md-4">
-            <base-button block type="warning" class=" mb-3" @click="modals.modal2 = true">
-                Notification
-            </base-button>
-
-            <modal :show.sync="modals.modal2"
-                   gradient="danger"
-                   modal-classes="modal-danger modal-dialog-centered">
-                <h6 slot="header" class="modal-title" id="modal-title-notification">Your attention is required</h6>
-
-                <div class="py-3 text-center">
-                    <i class="ni ni-bell-55 ni-3x"></i>
-                    <h4 class="heading mt-4">You should read this!</h4>
-                    <p>A small river named Duden flows by their place and supplies it with the
-                        necessary regelialia.</p>
-                </div>
-
-                <template slot="footer">
-                    <base-button type="white">Ok, Got it</base-button>
-                    <base-button type="link"
-                                 text-color="white"
-                                 class="ml-auto"
-                                 @click="modals.modal2 = false">
-                        Close
-                    </base-button>
-                </template>
-            </modal>
-        </div>
-        <div class="col-md-4">
-            <base-button block type="default" class=" mb-3" @click="modals.modal3 = true">
-                Add Owner
-            </base-button>
-
-            <modal :show.sync="modals.modal3"
-                   body-classes="p-0"
-                   modal-classes="modal-dialog-centered modal-sm">
-                   <div v-show="validationError">
-                     <base-alert type="danger" dismissible>
-                         <span class="alert-inner--icon"><i class="ni ni-like-2"></i></span>
-                         <span class="alert-inner--text"><strong>Error!</strong> Please Fill Out All Required Fields</span>
-                         <button type="button" class="close">
-                             <span aria-hidden="true">&times;</span>
-                         </button>
-                     </base-alert>
-                   </div>
-
-                <card type="secondary" shadow
-                      header-classes="bg-white pb-5"
-                      body-classes="px-lg-5 py-lg-5"
-                      class="border-0">
-                    <template>
-                        <div class="text-center text-muted mb-4">
-                            <small>Perform Action</small>
-                        </div>
-                        <form role="form">
-                            <base-input
-                                        v-model="createOwner.username"
-                                        type="text"
-                                        placeholder="Full Name"
-                                        addon-left-icon="ni ni-single-02">
-                            </base-input>
-                            <base-input alternative
-                                        v-model="createOwner.email"
-                                        class="mb-3"
-                                        type="email"
-                                        placeholder="Email"
-                                        addon-left-icon="ni ni-email-83">
-                            </base-input>
-                            <base-input alternative
-                                        v-model="createOwner.phoneNumber"
-                                        type="text"
-                                        placeholder="Phone Number"
-                                        addon-left-icon="ni ni-mobile-button">
-                            </base-input>
-                            <base-input alternative
-                                        v-model="createOwner.address"
-                                        type="text"
-                                        placeholder="Address"
-                                        addon-left-icon="ni ni-square-pin">
-                            </base-input>
-                            <base-input alternative
-                                        v-model="createOwner.country"
-                                        type="text"
-                                        placeholder="Country Of Origin"
-                                        addon-left-icon="ni ni-world-2">
-                            </base-input>
-                            <div class="text-center">
-                                <base-button @click="handleCreateOwner" type="default" class="my-4">Submit</base-button>
-                            </div>
-                        </form>
-                    </template>
-                </card>
-            </modal>
-        </div>
-      </div>
-      <br>
     </div>
   </div>
 </template>
 
 <script>
-import Modal from '@/components/Modal'
-
 export default {
-  components: {
-    Modal,
-  },
   data(){
     return {
-      modals: {
-        modal1: false,
-        modal2: false,
-        modal3: false,
-      },
-      createOwner: {
-        username: '',
-        email: '',
-        phoneNumber: '',
-        address: '',
-        country: '',
-        other: {},
-      },
       carForm: {
         modelName: '', //KIA PICANTO
         modelYear: '', //2008
@@ -338,17 +180,6 @@ export default {
     }// end of data
   },
   methods: {
-    handleCreateOwner() {
-      const noneIsEmpty = this.validateBody(this.createOwner);
-      if (noneIsEmpty) {
-        console.log("noneIsEmpty", "Go Agead Create Owner");
-        // CREATE OWNER
-        console.log(JSON.stringify(this.createOwner));
-      } else {
-        alert("Error!! Please Fill All Required Fields")
-        this.validationError = true;
-      }
-    },
     handleCreateCar() {
       // required:
       const requiredBody = {

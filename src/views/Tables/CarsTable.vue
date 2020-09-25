@@ -6,11 +6,8 @@
       <div class="row align-items-center">
         <div class="col">
           <h3 class="mb-0" :class="type === 'dark' ? 'text-white': ''">
-            {{title}}
+          {{title}}  <router-link to="/dashboard/add-a-car" class="btn btn-primary">ADD A NEW CAR</router-link>
           </h3>
-        </div>
-        <div class="col text-right">
-          <base-button type="primary" size="sm">See all cars</base-button>
         </div>
       </div>
     </div>
