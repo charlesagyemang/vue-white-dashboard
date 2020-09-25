@@ -136,14 +136,6 @@ export default {
 
   data(){
     return {
-      createOwner: {
-        username: '',
-        email: '',
-        phoneNumber: '',
-        address: '',
-        country: '',
-        other: {},
-      },
       model: {
         fullName: '',
         email: '',
@@ -155,7 +147,6 @@ export default {
         zipCode: '',
         other: {},
       },
-
     }// end of data
   },
   methods: {
@@ -164,7 +155,7 @@ export default {
       if (noneIsEmpty) {
         console.log("noneIsEmpty", "Go Agead Create Owner");
         // CREATE OWNER
-        console.log(JSON.stringify(this.model));
+        alert(JSON.stringify(this.model));
       } else {
         alert("Error!! Please Fill All Required Fields")
       }
