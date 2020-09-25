@@ -100,12 +100,19 @@
                       class="border-0">
                     <template>
                         <div class="text-center text-muted mb-4">
-                            <small>Select A Car To Attach To Name Here</small>
+                            <h5>Select A Car To Attach To Name Here</h5>
                         </div>
                         <form role="form">
-                           <multiselect v-model="carForm.currentDriver" :options="allDriversList"></multiselect>
+                           <multiselect
+                                 v-model="selectedCarToAttach"
+                                 deselect-label="Currently Selected"
+                                 track-by="modelName"
+                                 label="modelName"
+                                 placeholder="Select One"
+                                 :options="allCars">
+                            </multiselect>
                             <div class="text-center">
-                                <base-button type="primary" class="my-4">Attach Car To Name Here</base-button>
+                                <base-button @click="handleAttachCarToOwner" type="primary" class="my-4">Submit</base-button>
                             </div>
                         </form>
                     </template>
@@ -125,9 +132,9 @@
                             <small>Update Owner Status</small>
                         </div>
                         <form role="form">
-                           <multiselect v-model="carForm.currentDriver" :options="allDriversList"></multiselect>
+                           <multiselect v-model="selectedOwnerStatus" :options="updateOwnerStatusList"></multiselect>
                             <div class="text-center">
-                                <base-button type="success" class="my-4">Update Status</base-button>
+                                <base-button @click="handleUpdateOwnerStatus" type="success" class="my-4">Submit</base-button>
                             </div>
                         </form>
                     </template>
@@ -149,8 +156,47 @@ import Modal from '@/components/Modal'
       },
       title: String
     },
+    methods: {
+      handleAttachCarToOwner() {
+        // UpdateOwnerInfo By Adding A New Car
+        alert(JSON.stringify(this.selectedCarToAttach));
+      },
+      handleUpdateOwnerStatus() {
+        // Update Owner Status
+        alert(this.selectedOwnerStatus);
+      }
+    },
     data() {
       return {
+        selectedCarToAttach: {},
+        selectedOwnerStatus: '',
+        allCars: [
+          {
+            id: 'carIdOne',
+            modelName: 'KIA Morning Lx 2008',
+            modelYearL: '2008',
+            carNumber: 'GS 1234-20',
+          },
+          {
+            id: 'carIdTwo',
+            modelName: 'KIA Morning Lx 2009',
+            modelYearL: '2008',
+            carNumber: 'GS 1234-20',
+          },
+          {
+            id: 'carIdThree',
+            modelName: 'KIA Morning Lx 2010',
+            modelYearL: '2008',
+            carNumber: 'GS 1234-20',
+          },
+          {
+            id: 'carIdFour',
+            modelName: 'KIA Morning Lx 2011',
+            modelYearL: '2008',
+            carNumber: 'GS 1234-20',
+          },
+
+        ],
         modals:{
           modal1: false,
           modal2: false,
@@ -163,6 +209,10 @@ import Modal from '@/components/Modal'
           'Driver 1',
           'Driver 2',
           'Driver 3',
+        ],
+        updateOwnerStatusList: [
+          'Active',
+          'Inactive',
         ],
         total: 30,
         tableData: [
