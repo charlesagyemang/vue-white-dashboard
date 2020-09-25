@@ -57,8 +57,8 @@ export default new Router({
         },
         {
           path: '/dashboard/add-an-owner',
-          name: 'Add An Owner',
-          component: () => import('./views/Owner/Owner.vue')
+          name: 'Add New Owner',
+          component: () => import('./views/Owner/AddNewOwner.vue')
         },
         {
           path: '/dashboard/driver-list',
@@ -68,7 +68,7 @@ export default new Router({
         {
           path: '/dashboard/add-a-driver',
           name: 'Add A Driver',
-          component: () => import('./views/Driver/Driver.vue')
+          component: () => import('./views/Driver/AddNewDriver.vue')
         }
       ]
     },
