@@ -43,7 +43,7 @@ export default new Router({
         {
           path: '/dashboard/add-a-car',
           name: 'Add A Car',
-          component: () => import('./views/Car/Car.vue')
+          component: () => import('./views/Car/AddANewCar.vue')
         },
         {
           path: '/dashboard/car-list',
