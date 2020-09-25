@@ -40,7 +40,7 @@
 
               <template>
                 <router-link class="dropdown-item" to="/dashboard/view-owner-details">View Full Details</router-link>
-                <router-link class="dropdown-item" to="/dashboard/edit-single-owner">Edit Owner</router-link>
+                <router-link class="dropdown-item" :to="'/dashboard/edit-single-owner/' + row.id">Edit Owner</router-link>
                 <button @click="modals.modal3 = true" class="dropdown-item" href="#">Attach A Car</button>
                 <button @click="modals.modal2 = true" class="dropdown-item" href="#">Update Owner Status</button>
               </template>
@@ -217,6 +217,7 @@ import Modal from '@/components/Modal'
         total: 30,
         tableData: [
           {
+            id: 'ownerIdOne',
             imageUrl: '/img/cars/picanto2.jpg',
             username: 'username',
             email: 'username@user.com',
@@ -230,6 +231,7 @@ import Modal from '@/components/Modal'
             //currentDriver
           },
           {
+            id: 'ownerIdTwo',
             imageUrl: '/img/cars/picanto2.jpg',
             username: 'username',
             email: 'username@user.com',
@@ -242,6 +244,7 @@ import Modal from '@/components/Modal'
             ]
           },
           {
+            id: 'ownerIdThree',
             imageUrl: '/img/cars/picanto2.jpg',
             username: 'username',
             email: 'username@user.com',
@@ -254,6 +257,7 @@ import Modal from '@/components/Modal'
             ]
           },
           {
+            id: 'ownerIdFour',
             imageUrl: '/img/cars/picanto2.jpg',
             username: 'username',
             email: 'username@user.com',
@@ -266,6 +270,7 @@ import Modal from '@/components/Modal'
             ]
           },
           {
+            id: 'ownerIdFive',
             imageUrl: '/img/cars/picanto2.jpg',
             username: 'username',
             email: 'username@user.com',
@@ -278,6 +283,7 @@ import Modal from '@/components/Modal'
             ]
           },
           {
+            id: 'ownerIdSix',
             imageUrl: '/img/cars/picanto2.jpg',
             username: 'username',
             email: 'username@user.com',
@@ -290,6 +296,7 @@ import Modal from '@/components/Modal'
             ]
           },
           {
+            id: 'ownerIdSeven',
             imageUrl: '/img/cars/picanto2.jpg',
             username: 'username',
             email: 'username@user.com',

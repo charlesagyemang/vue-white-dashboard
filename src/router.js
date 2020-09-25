@@ -76,7 +76,7 @@ export default new Router({
           component: () => import('./views/Owner/SingleOwnerView.vue')
         },
         {
-          path: '/dashboard/edit-single-owner',
+          path: '/dashboard/edit-single-owner/:id',
           name: 'Edit Owner Details',
           component: () => import('./views/Owner/EditSingleOwner.vue')
         },
