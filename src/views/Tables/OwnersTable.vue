@@ -6,8 +6,9 @@
          :class="type === 'dark' ? 'bg-transparent': ''">
       <div class="row align-items-center">
         <div class="col">
+
           <h3 class="mb-0" :class="type === 'dark' ? 'text-white': ''">
-            {{title}}   <router-link to="/dashboard/add-an-owner" class="btn btn-primary">ADD A NEW OWNER</router-link>
+             {{title}}   <router-link to="/dashboard/add-an-owner" class="btn btn-primary">ADD A NEW OWNER</router-link>
           </h3>
         </div>
 
@@ -39,7 +40,6 @@
               </a>
 
               <template>
-                <!-- <router-link class="dropdown-item" :to="'/dashboard/view-owner-details/' + row.id">View Full Details</router-link> -->
                 <button @click.prevent="handleOwnerActions(row.id, `/dashboard/view-owner-details/${row.id}`)" class="dropdown-item">View Full Details</button>
                 <button @click.prevent="handleOwnerActions(row.id, `/dashboard/edit-single-owner/${row.id}`)" class="dropdown-item">Edit Owner</button>
                 <button @click="modals.modal3 = true" class="dropdown-item" href="#">Attach A Car</button>
@@ -145,13 +145,12 @@ import store from '@/store/store'
     created() {
       if (store.state.owner.owners.length < 1) {
         store.dispatch('owner/fetchOwners').then(() =>{
-            console.log("==== fetched ====");
-            console.log(this.owner.owners);
+            console.log(this.owner.owner );
           });
       }
     },
     computed: {
-      ...mapState(['owner']),
+      ...mapState(['owner', 'notification']),
       tableData(){
         return this.owner.owners
       },
@@ -177,17 +176,13 @@ import store from '@/store/store'
         // Update Owner Status
         alert(this.selectedOwnerStatus);
       },
-      handleEditOwner(id){
-        store.dispatch('owner/fetchOwnerById', id).then(() =>{
-          console.log("==== fetched ====");
-          this.$router.push({
-            path: `/dashboard/edit-single-owner/${id}`
-          });
-        });
-      },
       handleOwnerActions(id, route){
-        store.dispatch('owner/fetchOwnerById', id).then(() =>{
-          console.log("==== fetched ====");
+        store.dispatch('owner/fetchOwnerById', id).then((owner) =>{
+          console.log("==== fetched ====", route);
+          this.$notify({
+            type: 'success',
+            title: `Full Details For ${owner.fullName}`,
+          })
           this.$router.push({
             path: route,
           });

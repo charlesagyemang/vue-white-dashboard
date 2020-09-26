@@ -88,9 +88,15 @@ export const actions = {
     })
   },
 
-  fetchOwnerById ({ commit, getters }, id) {
+  fetchOwnerById ({ commit, getters, dispatch }, id) {
     const owner = getters.getOwnerById(id)
     commit('SET_OWNER', owner)
+    const notification = {
+      type: 'error',
+      page: 'owner-list-page',
+      message: `Details About ${owner.fullName} Gotten Successfully`
+    };
+    dispatch('notification/add', notification, { root: true })
     return owner
   },
 
