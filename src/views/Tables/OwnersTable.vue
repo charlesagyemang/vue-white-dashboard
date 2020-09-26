@@ -1,4 +1,5 @@
 <template>
+
   <div class="card shadow"
        :class="type === 'dark' ? 'bg-default': ''">
     <div class="card-header border-0"
@@ -83,11 +84,6 @@
 
       </base-table>
     </div>
-    <div class="card-footer d-flex justify-content-end"
-         :class="type === 'dark' ? 'bg-transparent': ''">
-      <base-pagination :total="total" ></base-pagination>
-    </div>
-
 
     <div class="row">
         <div class="col-md-4">
@@ -142,11 +138,32 @@
             </modal>
         </div>
     </div>
+
   </div>
 </template>
 <script>
 import Modal from '@/components/Modal'
+import { mapState } from 'vuex'
+import store from '@/store/store'
+
   export default {
+    created() {
+      if (store.state.owner.owners.length < 1) {
+        store.dispatch('owner/fetchOwners').then(() =>{
+            console.log("==== fetched ====");
+            console.log(this.owner.owners);
+          });
+      }
+    },
+    computed: {
+      ...mapState(['owner']),
+      tableData(){
+        return this.owner.owners
+      },
+      tableDataIsEmpty(){
+        return this.tableData.lenght < 1
+      },
+    },
     components: {
         Modal,
     },
@@ -215,100 +232,6 @@ import Modal from '@/components/Modal'
           'Inactive',
         ],
         total: 30,
-        tableData: [
-          {
-            id: 'ownerIdOne',
-            imageUrl: '/img/cars/picanto2.jpg',
-            username: 'username',
-            email: 'username@user.com',
-            phoneNumber: '0987446633',
-            address: 'Accra Ghana',
-            country: 'Togo',
-            cars: [
-              'car one',
-              'car two'
-            ]
-            //currentDriver
-          },
-          {
-            id: 'ownerIdTwo',
-            imageUrl: '/img/cars/picanto2.jpg',
-            username: 'username',
-            email: 'username@user.com',
-            phoneNumber: '0987446633',
-            address: 'Accra Ghana',
-            country: 'Togo',
-            cars: [
-              'car one',
-              'car two'
-            ]
-          },
-          {
-            id: 'ownerIdThree',
-            imageUrl: '/img/cars/picanto2.jpg',
-            username: 'username',
-            email: 'username@user.com',
-            phoneNumber: '0987446633',
-            address: 'Accra Ghana',
-            country: 'Togo',
-            cars: [
-              'car one',
-              'car two'
-            ]
-          },
-          {
-            id: 'ownerIdFour',
-            imageUrl: '/img/cars/picanto2.jpg',
-            username: 'username',
-            email: 'username@user.com',
-            phoneNumber: '0987446633',
-            address: 'Accra Ghana',
-            country: 'Togo',
-            cars: [
-              'car one',
-              'car two'
-            ]
-          },
-          {
-            id: 'ownerIdFive',
-            imageUrl: '/img/cars/picanto2.jpg',
-            username: 'username',
-            email: 'username@user.com',
-            phoneNumber: '0987446633',
-            address: 'Accra Ghana',
-            country: 'Togo',
-            cars: [
-              'car one',
-              'car two'
-            ]
-          },
-          {
-            id: 'ownerIdSix',
-            imageUrl: '/img/cars/picanto2.jpg',
-            username: 'username',
-            email: 'username@user.com',
-            phoneNumber: '0987446633',
-            address: 'Accra Ghana',
-            country: 'Togo',
-            cars: [
-              'car one',
-              'car two'
-            ]
-          },
-          {
-            id: 'ownerIdSeven',
-            imageUrl: '/img/cars/picanto2.jpg',
-            username: 'username',
-            email: 'username@user.com',
-            phoneNumber: '0987446633',
-            address: 'Accra Ghana',
-            country: 'Togo',
-            cars: [
-              'car one',
-              'car two'
-            ]
-          },
-        ],
       }
     },
   }

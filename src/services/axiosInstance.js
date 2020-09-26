@@ -2,7 +2,7 @@ import axios from 'axios'
 import NProgress from 'nprogress'
 
 const apiClient = axios.create({
-  baseURL: 'https://possitech-menu-api.herokuapp.com/api',
+  baseURL: 'http://localhost:3000/api',
   timeout: 60000
 })
 
