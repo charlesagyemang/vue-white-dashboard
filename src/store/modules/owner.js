@@ -36,85 +36,50 @@ export const mutations = {
 
 export const actions = {
 
-  createOwner ({ commit, dispatch }, owner) {
+  createOwner ({ commit }, owner) {
     console.log('===owner', owner)
     // eslint-disable-next-line
     OwnerService.postOwner(localStorage.uberToken, owner).then((response) => {
       console.log('===owner', response)
       commit('ADD_OWNER', response.data)
-      const notification = {
-        type: 'success',
-        message: 'Your owner Item has Been Created!'
-      }
-      dispatch('notification/add', notification, { root: true })
     }).catch((error) => {
-      const notification = {
-        type: 'error',
-        message: 'There was a problem creating your owner item: ' + error.message
-      }
-      dispatch('notification/add', notification, { root: true })
+      throw error
     })
   },
 
-  fetchOwners ({ commit, dispatch }) {
+  fetchOwners ({ commit }) {
     // eslint-disable-next-line
     return OwnerService.getOwners(localStorage.uberToken)
       .then((response) => {
         commit('SET_OWNERS', response.data)
       }).catch((error) => {
-        const notification = {
-          type: 'error',
-          message: 'There was a problem fetching events: ' + error.message
-        }
-        dispatch('notification/add', notification, { root: true })
+        throw error
       })
   },
 
-  editOwner ({ commit, dispatch }, { ownerId, ownerDataToUpdate }) {
+  editOwner ({ commit }, { ownerId, ownerDataToUpdate }) {
     // eslint-disable-next-line
-    OwnerService.editOwner(localStorage.uberToken, ownerId, ownerDataToUpdate).then((response) => {
+    return OwnerService.editOwner(localStorage.uberToken, ownerId, ownerDataToUpdate)
+    .then((response) => {
       commit('UPDATE_OWNER', response.data)
-      const notification = {
-        type: 'success',
-        message: 'Your Event has Been Updated!'
-      }
-      dispatch('notification/add', notification, { root: true })
+      return response.data
     }).catch((error) => {
-      const notification = {
-        type: 'error',
-        message: 'There was a problem updating your event: ' + error.message
-      }
-      dispatch('notification/add', notification, { root: true })
+      throw error
     })
   },
 
-  fetchOwnerById ({ commit, getters, dispatch }, id) {
+  fetchOwnerById ({ commit, getters }, id) {
     const owner = getters.getOwnerById(id)
     commit('SET_OWNER', owner)
-    const notification = {
-      type: 'error',
-      page: 'owner-list-page',
-      message: `Details About ${owner.fullName} Gotten Successfully`
-    };
-    dispatch('notification/add', notification, { root: true })
     return owner
   },
 
-  deleteOwner ({ commit, dispatch }, ownerIdToDelete) {
+  deleteOwner ({ commit }, ownerIdToDelete) {
     // eslint-disable-next-line
-    OwnerService.deleteOwner(localStorage.uberToken, ownerIdToDelete).then((response) => {
-      commit('DELETE_OWNER', ownerIdToDelete)
-      const notification = {
-        type: 'success',
-        message: 'Your Event has Been Deleted!'
-      }
-      dispatch('notification/add', notification, { root: true })
+    return OwnerService.deleteOwner(localStorage.uberToken, ownerIdToDelete).then((response) => {
+      commit('DELETE_OWNER', ownerIdToDelete);
     }).catch((error) => {
-      const notification = {
-        type: 'error',
-        message: 'There was a problem updating your event: ' + error.message
-      }
-      dispatch('notification/add', notification, { root: true })
+      throw error;
     })
   }
 

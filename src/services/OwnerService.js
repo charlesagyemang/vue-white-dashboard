@@ -13,15 +13,15 @@ export default {
     return apiClient.get('/mock/owners', headers(token));
   },
   getOwner (token, id) {
-    return apiClient.get(`/owners/${id}`, headers(token))
+    return apiClient.get(`/mock/owners/${id}`, headers(token))
   },
   postOwner (token, owner) {
-    return apiClient.post('/owners/create.new', owner, headers(token))
+    return apiClient.post('/mock/create.new', owner, headers(token))
   },
   editOwner (token, ownerId, ownerDataToUpdate) {
-    return apiClient.patch(`/owners/${ownerId}`, ownerDataToUpdate, headers(token))
+    return apiClient.patch(`/mock/owners/edit/${ownerId}`, ownerDataToUpdate, headers(token))
   },
   deleteOwner (token, ownerIdToDelete) {
-    return apiClient.delete(`/owners/${ownerIdToDelete}`, headers(token))
+    return apiClient.delete(`/mock/owners/delete/${ownerIdToDelete}`, headers(token))
   }
 }

@@ -27,6 +27,7 @@
           <th>email</th>
           <th>phoneNumber</th>
           <th>address</th>
+          <th>status</th>
           <th>Cars</th>
         </template>
 
@@ -43,7 +44,7 @@
                 <button @click.prevent="handleOwnerActions(row.id, `/dashboard/view-owner-details/${row.id}`)" class="dropdown-item">View Full Details</button>
                 <button @click.prevent="handleOwnerActions(row.id, `/dashboard/edit-single-owner/${row.id}`)" class="dropdown-item">Edit Owner</button>
                 <button @click="modals.modal3 = true" class="dropdown-item" href="#">Attach A Car</button>
-                <button @click="modals.modal2 = true" class="dropdown-item" href="#">Update Owner Status</button>
+                <button @click="handleOpenChangeOwnerStatusModal(row.id)" class="dropdown-item" href="#">Update Owner Status</button>
               </template>
             </base-dropdown>
           </td>
@@ -69,6 +70,10 @@
 
           <td class="address">
             {{row.address}}
+          </td>
+
+          <td class="status">
+            <badge :type="row.statusColor">{{row.status}}</badge>
           </td>
 
           <td class="cars">
@@ -120,7 +125,7 @@
                       class="border-0">
                     <template>
                         <div class="text-center text-muted mb-4">
-                            <small>Update Owner Status</small>
+                            <h2>Update Owner Status</h2>
                         </div>
                         <form role="form">
                            <multiselect v-model="selectedOwnerStatus" :options="updateOwnerStatusList"></multiselect>
@@ -150,12 +155,12 @@ import store from '@/store/store'
       }
     },
     computed: {
-      ...mapState(['owner', 'notification']),
+      ...mapState(['owner']),
       tableData(){
         return this.owner.owners
       },
       tableDataIsEmpty(){
-        return this.tableData.lenght < 1
+        return this.tableData.length < 1
       },
     },
     components: {
@@ -173,20 +178,55 @@ import store from '@/store/store'
         alert(JSON.stringify(this.selectedCarToAttach));
       },
       handleUpdateOwnerStatus() {
-        // Update Owner Status
-        alert(this.selectedOwnerStatus);
+        let currentOwner = this.owner.owner;
+        delete currentOwner.status;
+        delete currentOwner.statusColor;
+        let statusColor = "danger";
+        if (this.selectedOwnerStatus === "active") {
+          statusColor = "success"
+        }
+        currentOwner = {
+          ...currentOwner,
+          status: this.selectedOwnerStatus,
+          statusColor
+        };
+        store.dispatch('owner/editOwner', {
+          ownerId: currentOwner.id,
+          ownerDataToUpdate: currentOwner
+        })
+        .then((owner) =>{
+          // notify
+          this.modals.modal2 = false;
+          this.$notify({
+            type: 'success',
+            title: `Status Updated Successfully. Changed To ${owner.status}`,
+          });
+        }).catch((error) => {
+          this.$notify({
+            type: 'success',
+            title: `Status Failed To Update: Error => ${error.message}`,
+          });
+        });
       },
       handleOwnerActions(id, route){
         store.dispatch('owner/fetchOwnerById', id).then((owner) =>{
-          console.log("==== fetched ====", route);
+          console.log("==== fetched ====", owner);
           this.$notify({
             type: 'success',
             title: `Full Details For ${owner.fullName}`,
-          })
+          });
           this.$router.push({
             path: route,
           });
         });
+      },
+      handleOpenChangeOwnerStatusModal(id){
+        this.modals.modal2 = true
+        store.dispatch('owner/fetchOwnerById', id)
+        .then((owner) =>{
+          console.log("==== fetched ====", owner);
+          this.selectedOwnerStatus = this.owner.owner.status;
+        })
       },
     },
     data() {
@@ -234,8 +274,8 @@ import store from '@/store/store'
           'Driver 3',
         ],
         updateOwnerStatusList: [
-          'Active',
-          'Inactive',
+          'active',
+          'inactive',
         ],
         total: 30,
       }
