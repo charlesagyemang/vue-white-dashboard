@@ -202,8 +202,10 @@ import store from '@/store/store'
             title: `Status Updated Successfully. Changed To ${owner.status}`,
           });
         }).catch((error) => {
+          // this.owner.status = currentOwner.status;
+          this.modals.modal2 = false;
           this.$notify({
-            type: 'success',
+            type: 'danger',
             title: `Status Failed To Update: Error => ${error.message}`,
           });
         });
