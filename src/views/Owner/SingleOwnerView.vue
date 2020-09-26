@@ -35,74 +35,51 @@
                                     <div class="row">
                                         <div class="col-lg-6">
                                           <h4>Full Name</h4>
-                                          <p>Kwabena Boateng Amoah Joseph</p>
+                                          <p>{{model.fullName}}</p>
                                         </div>
                                         <div class="col-lg-6">
                                           <h4>Email</h4>
-                                          <p>beastlkyquist@mm.com</p>
+                                          <p>{{model.email}}</p>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-lg-6">
-                                          <h4>Address</h4>
-                                          <p>19 Banana Street East Legon, Accra</p>
+                                          <h4>Phone Number</h4>
+                                          <p>{{model.phoneNumber}}</p>
                                         </div>
                                         <div class="col-lg-6">
-                                          <h4>Phone Number</h4>
-                                          <p>+233 288 77 22 77</p>
+                                          <h4>Alternate Phone Number</h4>
+                                          <p>{{model.alternatePhoneNumber}}</p>
                                         </div>
                                     </div>
                                 </div>
                                 <hr class="my-4" />
                                 <!-- Address -->
-                                <h2 class=" text-muted mb-4">Guarantor Details </h2>
+                                <h2 class=" text-muted mb-4">Address Details </h2>
                                 <div class="pl-lg-4">
                                   <div class="row">
                                       <div class="col-lg-6">
-                                        <h4>Full Name</h4>
-                                        <p>Kwabena Boateng Amoah Joseph</p>
+                                        <h4>Address</h4>
+                                        <p>{{model.address}}</p>
                                       </div>
                                       <div class="col-lg-6">
-                                        <h4>Email</h4>
-                                        <p>beastlkyquist@mm.com</p>
+                                        <h4>City</h4>
+                                        <p>{{model.city}}</p>
                                       </div>
                                   </div>
                                   <div class="row">
                                       <div class="col-lg-6">
-                                        <h4>Address</h4>
-                                        <p>19 Banana Street East Legon, Accra</p>
+                                        <h4>Country</h4>
+                                        <p>{{model.country}}</p>
                                       </div>
                                       <div class="col-lg-6">
-                                        <h4>Phone Number</h4>
-                                        <p>+233 288 77 22 77</p>
+                                        <h4>Zip Code</h4>
+                                        <p>{{model.zipCode}}</p>
                                       </div>
                                   </div>
                                 </div>
                                 <hr class="my-4" />
-                                <!-- Description -->
-                                <h2 class=" text-muted mb-4">Former Employer Details </h2>
-                                <div class="pl-lg-4">
-                                  <div class="row">
-                                      <div class="col-lg-6">
-                                        <h4>Full Name</h4>
-                                        <p>Kwabena Boateng Amoah Joseph</p>
-                                      </div>
-                                      <div class="col-lg-6">
-                                        <h4>Email</h4>
-                                        <p>beastlkyquist@mm.com</p>
-                                      </div>
-                                  </div>
-                                  <div class="row">
-                                      <div class="col-lg-6">
-                                        <h4>Address</h4>
-                                        <p>19 Banana Street East Legon, Accra</p>
-                                      </div>
-                                      <div class="col-lg-6">
-                                        <h4>Phone Number</h4>
-                                        <p>+233 288 77 22 77</p>
-                                      </div>
-                                  </div>
-                                </div>
+                                
                             </form>
                         </template>
                     </card>
@@ -113,7 +90,7 @@
 </template>
 <script>
   export default {
-    name: 'user-profile',
+    name: 'single-owner-view',
     beforeCreate () {
       //get id and make api call to single driver service
       console.log(this.$route.params.id);
@@ -122,22 +99,24 @@
     data() {
       return {
         model: {
-          username: '',
-          email: '',
-          firstName: '',
-          lastName: '',
-          address: '',
-          city: '',
-          country: '',
-          zipCode: '',
-          about: '',
-        }
+          fullName: 'Kwame Michael',
+          email: 'music@gmail.com',
+          phoneNumber: '+233 722 11 99 90',
+          alternatePhoneNumber: '+233 541 34 81 80',
+          address: '19 Banana Street',
+          city: 'Accra',
+          country: 'Ghana',
+          zipCode: '+233',
+        },
       }
     },
     computed: {
       namer() {
         return localStorage.uberName
-      }
+      },
+      currentOwnerId(){
+        return this.$route.params.id
+      },
     },
   };
 </script>
