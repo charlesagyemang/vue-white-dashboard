@@ -90,17 +90,8 @@ export const actions = {
 
   fetchOwnerById ({ commit, getters }, id) {
     const owner = getters.getOwnerById(id)
-    if (owner) {
-      commit('SET_OWNER', owner)
-      return owner
-    } else {
-      // eslint-disable-next-line
-      return OwnerService.getOwner(localStorage.uberToken, id)
-        .then((response) => {
-          commit('SET_OWNER', response.data)
-          return response.data
-        })
-    }
+    commit('SET_OWNER', owner)
+    return owner
   },
 
   deleteOwner ({ commit, dispatch }, ownerIdToDelete) {
@@ -125,7 +116,7 @@ export const actions = {
 
 export const getters = {
 
-  getownerById: state => id => {
+  getOwnerById: state => id => {
     return state.owners.find(owner => owner.id === id)
   }
 

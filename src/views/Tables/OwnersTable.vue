@@ -22,11 +22,10 @@
                   :data="tableData">
         <template slot="columns">
           <th>Actions</th>
-          <th>username</th>
+          <th>Full Name</th>
           <th>email</th>
           <th>phoneNumber</th>
           <th>address</th>
-          <th>country</th>
           <th>Cars</th>
         </template>
 
@@ -40,8 +39,9 @@
               </a>
 
               <template>
-                <router-link class="dropdown-item" to="/dashboard/view-owner-details">View Full Details</router-link>
-                <router-link class="dropdown-item" :to="'/dashboard/edit-single-owner/' + row.id">Edit Owner</router-link>
+                <!-- <router-link class="dropdown-item" :to="'/dashboard/view-owner-details/' + row.id">View Full Details</router-link> -->
+                <button @click.prevent="handleOwnerActions(row.id, `/dashboard/view-owner-details/${row.id}`)" class="dropdown-item">View Full Details</button>
+                <button @click.prevent="handleOwnerActions(row.id, `/dashboard/edit-single-owner/${row.id}`)" class="dropdown-item">Edit Owner</button>
                 <button @click="modals.modal3 = true" class="dropdown-item" href="#">Attach A Car</button>
                 <button @click="modals.modal2 = true" class="dropdown-item" href="#">Update Owner Status</button>
               </template>
@@ -54,15 +54,10 @@
                 <img alt="Car Image" :src="row.imageUrl">
               </a>
               <div class="media-body">
-                <span class="name mb-0 text-sm">{{row.username}}</span>
+                <span class="name mb-0 text-sm">{{row.fullName}}</span>
               </div>
             </div>
           </th>
-
-          <td class="address">
-            {{row.address}}
-          </td>
-
 
           <td class="email">
             {{row.email}}
@@ -72,8 +67,8 @@
             {{row.phoneNumber}}
           </td>
 
-          <td class="country">
-            {{row.country}}
+          <td class="address">
+            {{row.address}}
           </td>
 
           <td class="cars">
@@ -181,7 +176,23 @@ import store from '@/store/store'
       handleUpdateOwnerStatus() {
         // Update Owner Status
         alert(this.selectedOwnerStatus);
-      }
+      },
+      handleEditOwner(id){
+        store.dispatch('owner/fetchOwnerById', id).then(() =>{
+          console.log("==== fetched ====");
+          this.$router.push({
+            path: `/dashboard/edit-single-owner/${id}`
+          });
+        });
+      },
+      handleOwnerActions(id, route){
+        store.dispatch('owner/fetchOwnerById', id).then(() =>{
+          console.log("==== fetched ====");
+          this.$router.push({
+            path: route,
+          });
+        });
+      },
     },
     data() {
       return {

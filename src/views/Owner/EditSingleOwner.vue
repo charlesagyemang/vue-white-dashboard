@@ -1,5 +1,5 @@
 <template lang="html">
-  <div class="">
+  <div v-if="model" class="">
     <base-header type="gradient-default" class="pb-6 pb-8 pt-5 pt-md-8">
         <span class="mask bg-info opacity-8"></span>
     </base-header>
@@ -11,7 +11,7 @@
                     <div slot="header" class="bg-white border-0">
                         <div class="row align-items-center">
                             <div class="col-8">
-                                <h3 class="mb-0">Edit Single Owner  <router-link to="/dashboard/owner-list" class="btn btn-primary">Back To All Owners</router-link></h3>
+                                <h3 class="mb-0">Edit Details Of {{model.fullName}}  <router-link to="/dashboard/owner-list" class="btn btn-primary">Back To All Owners</router-link></h3>
                             </div>
                         </div>
                     </div>
@@ -111,23 +111,9 @@
 
 <script>
 
+import { mapState } from 'vuex'
 
 export default {
-
-  data(){
-    return {
-      model: {
-        fullName: 'Kwame Michael',
-        email: 'music@gmail.com',
-        phoneNumber: '+233 722 11 99 90',
-        alternatePhoneNumber: '+233 541 34 81 80',
-        address: '19 Banana Street',
-        city: 'Accra',
-        country: 'Ghana',
-        zipCode: '+233',
-      },
-    }// end of data
-  },
   methods: {
     handleEditOwner() {
       alert(JSON.stringify(this.model))
@@ -144,6 +130,12 @@ export default {
     },
     isNotEmpty(value){
       return value !== '' && value !== undefined && value !== null
+    },
+  },
+  computed: {
+    ...mapState(['owner']),
+    model(){
+      return this.owner.owner
     },
   },
 }

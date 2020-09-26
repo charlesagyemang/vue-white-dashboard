@@ -24,7 +24,7 @@
                         <div slot="header" class="bg-white border-0">
                             <div class="row align-items-center">
                                 <div class="col-8">
-                                    <h3 class="mb-0">Single Owner Information</h3>
+                                    <h3 class="mb-0">{{model.fullName}} Information</h3>
                                 </div>
                             </div>
                         </div>
@@ -79,7 +79,6 @@
                                   </div>
                                 </div>
                                 <hr class="my-4" />
-                                
                             </form>
                         </template>
                     </card>
@@ -89,6 +88,9 @@
     </div>
 </template>
 <script>
+
+  import { mapState } from 'vuex'
+
   export default {
     name: 'single-owner-view',
     beforeCreate () {
@@ -96,26 +98,21 @@
       console.log(this.$route.params.id);
       console.log("Before Create");
     },
-    data() {
-      return {
-        model: {
-          fullName: 'Kwame Michael',
-          email: 'music@gmail.com',
-          phoneNumber: '+233 722 11 99 90',
-          alternatePhoneNumber: '+233 541 34 81 80',
-          address: '19 Banana Street',
-          city: 'Accra',
-          country: 'Ghana',
-          zipCode: '+233',
-        },
-      }
-    },
     computed: {
+      ...mapState(['owner']),
+      model() {
+        return this.owner.owner
+      },
       namer() {
         return localStorage.uberName
       },
       currentOwnerId(){
         return this.$route.params.id
+      },
+    },
+    methods: {
+      handleEditOwner() {
+
       },
     },
   };
