@@ -2,7 +2,7 @@ import axios from 'axios'
 import NProgress from 'nprogress'
 
 const apiClient = axios.create({
-  baseURL: 'http://localhost:3000/api',
+  baseURL: 'https://kehillah-fleet-api.herokuapp.com/api',
   timeout: 60000
 })
 
