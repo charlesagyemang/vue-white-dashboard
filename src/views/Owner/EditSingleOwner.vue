@@ -117,6 +117,30 @@ export default {
   methods: {
     handleEditOwner() {
       alert(JSON.stringify(this.model))
+      let ownerDataToUpdate = this.model;
+      delete ownerDataToUpdate.id;
+
+      this.$store.dispatch('owner/editOwner', {
+        ownerId: this.model.id,
+        ownerDataToUpdate,
+      })
+      .then((owner) =>{
+        // notify
+
+        this.$notify({
+          type: 'success',
+          title: `Status Updated Successfully. Changed To ${owner.status}`,
+        });
+        this.$router.push({path: '/dashboard/owner-list'})
+      }).catch((error) => {
+        // this.owner.status = currentOwner.status;
+    
+        this.$notify({
+          type: 'danger',
+          title: `Status Failed To Update: Error => ${error.message}`,
+        });
+      });
+
     },
     validateBody(payload){
       delete payload.other

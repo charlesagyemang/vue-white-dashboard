@@ -43,7 +43,7 @@
               <template>
                 <button @click.prevent="handleOwnerActions(row.id, `/dashboard/view-owner-details/${row.id}`)" class="dropdown-item">View Full Details</button>
                 <button @click.prevent="handleOwnerActions(row.id, `/dashboard/edit-single-owner/${row.id}`)" class="dropdown-item">Edit Owner</button>
-                <button @click="modals.modal3 = true" class="dropdown-item" href="#">Attach A Car</button>
+                <!-- <button @click="modals.modal3 = true" class="dropdown-item" href="#">Attach A Car</button> -->
                 <button @click="handleOpenChangeOwnerStatusModal(row.id)" class="dropdown-item" href="#">Update Owner Status</button>
               </template>
             </base-dropdown>
@@ -179,8 +179,10 @@ import store from '@/store/store'
       },
       handleUpdateOwnerStatus() {
         let currentOwner = this.owner.owner;
+        let ownerId = currentOwner.id;
         delete currentOwner.status;
         delete currentOwner.statusColor;
+        delete currentOwner.id;
         let statusColor = "danger";
         if (this.selectedOwnerStatus === "active") {
           statusColor = "success"
@@ -191,7 +193,7 @@ import store from '@/store/store'
           statusColor
         };
         store.dispatch('owner/editOwner', {
-          ownerId: currentOwner.id,
+          ownerId,
           ownerDataToUpdate: currentOwner
         })
         .then((owner) =>{
