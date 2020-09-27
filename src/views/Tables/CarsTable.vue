@@ -218,7 +218,6 @@
           </modal>
       </div>
 
-
       <div class="col-md-4">
           <modal :show.sync="modals.addIncomeTax"
                  body-classes="p-0"
@@ -322,66 +321,67 @@
           </modal>
       </div>
 
-        <div class="col-md-4">
-            <modal :show.sync="modals.addDocumentLink"
-                   body-classes="p-0"
-                   modal-classes="modal-dialog-centered modal-sm">
-                <card type="secondary" shadow
-                      header-classes="bg-white pb-5"
-                      body-classes="px-lg-5 py-lg-5"
-                      class="border-0">
-                    <template>
-                        <div class="text-center text-muted mb-4">
-                            <h3>Add Document Link</h3>
-                        </div>
-                        <form role="form">
-                          <h5 class="text-uppercase text-muted">Item Name</h5>
+      <div class="col-md-4">
+          <modal :show.sync="modals.addDocumentLink"
+                 body-classes="p-0"
+                 modal-classes="modal-dialog-centered modal-sm">
+              <card type="secondary" shadow
+                    header-classes="bg-white pb-5"
+                    body-classes="px-lg-5 py-lg-5"
+                    class="border-0">
+                  <template>
+                      <div class="text-center text-muted mb-4">
+                          <h3>Add Document Link</h3>
+                      </div>
+                      <form role="form">
+                        <h5 class="text-uppercase text-muted">Item Name</h5>
+                         <base-input
+                            v-model="carForm.currentDriver"
+                            addon-left-icon="ni ni-single-copy-04"
+                            placeholder="E.g Form A"
+                            >
+                          </base-input>
+                          <h5 class="text-uppercase text-muted">Paste Document Link Here</h5>
                            <base-input
                               v-model="carForm.currentDriver"
-                              addon-left-icon="ni ni-single-copy-04"
-                              placeholder="E.g Form A"
+                              addon-left-icon="ni ni-briefcase-24"
+                              placeholder="Eg. https://drive.google.com/738"
                               >
                             </base-input>
-                            <h5 class="text-uppercase text-muted">Paste Document Link Here</h5>
-                             <base-input
-                                v-model="carForm.currentDriver"
-                                addon-left-icon="ni ni-briefcase-24"
-                                placeholder="Eg. https://drive.google.com/738"
-                                >
-                              </base-input>
-                            <div class="text-center">
-                                <base-button type="primary" class="my-4">Submit</base-button>
-                            </div>
-                        </form>
-                    </template>
-                </card>
-            </modal>
-        </div>
-        <div class="col-md-4">
-            <modal :show.sync="modals.updateCarStatusModal"
-                   body-classes="p-0"
-                   modal-classes="modal-dialog-centered modal-sm">
-                <card type="secondary" shadow
-                      header-classes="bg-white pb-5"
-                      body-classes="px-lg-5 py-lg-5"
-                      class="border-0">
-                    <template>
-                        <div class="text-center text-muted mb-4">
-                            <h3>Update {{selectedCar.modelName}}'s Status</h3>
-                        </div>
-                        <form role="form">
-                           <multiselect
-                             v-model="selectedCarStatus"
-                             :options="allCarStatusList">
-                           </multiselect>
-                            <div class="text-center">
-                                <base-button @click.prevent="handleUpdateCarStatus" type="success" class="my-4">Update Status</base-button>
-                            </div>
-                        </form>
-                    </template>
-                </card>
-            </modal>
-        </div>
+                          <div class="text-center">
+                              <base-button type="primary" class="my-4">Submit</base-button>
+                          </div>
+                      </form>
+                  </template>
+              </card>
+          </modal>
+      </div>
+
+      <div class="col-md-4">
+          <modal :show.sync="modals.updateCarStatusModal"
+                 body-classes="p-0"
+                 modal-classes="modal-dialog-centered modal-sm">
+              <card type="secondary" shadow
+                    header-classes="bg-white pb-5"
+                    body-classes="px-lg-5 py-lg-5"
+                    class="border-0">
+                  <template>
+                      <div class="text-center text-muted mb-4">
+                          <h3>Update {{selectedCar.modelName}}'s Status</h3>
+                      </div>
+                      <form role="form">
+                         <multiselect
+                           v-model="selectedCarStatus"
+                           :options="allCarStatusList">
+                         </multiselect>
+                          <div class="text-center">
+                              <base-button @click.prevent="handleUpdateCarStatus" type="success" class="my-4">Update Status</base-button>
+                          </div>
+                      </form>
+                  </template>
+              </card>
+          </modal>
+      </div>
     </div>
 
   </div>
@@ -444,7 +444,39 @@ import store from '@/store/store'
           modal3: false,
         },
         total: 30,
-      }
+
+        insuranceForm: {
+          provider: '',
+          startDate: '',
+          endDate: '',
+          amount: '',
+        },// end of insurance form
+
+        roadWorthyForm: {
+          startDate: '',
+          endDate: '',
+          amount: '',
+        }, // roadWorhtyEnd
+
+        incomeTaxForm: {
+          quarter: '',
+          startDate: '',
+          endDate: '',
+          amount: '',
+        },//incomeTax
+
+        monthlyExpenseForm: {
+          year: '',
+          month: '',
+          amount: '',
+        },// monthly expenses
+
+        documentLinksForm: {
+          itemName: '',
+          link: '',
+        },// documentLinks Form
+
+      }// end of return
     },
     methods: {
       getStatusColor(status) {
@@ -458,7 +490,8 @@ import store from '@/store/store'
           'GIVEN_OUT': 'success'
         }
         return statusColors[`${status}`]
-      },
+      },//getStatusColor
+
       handleOwnerActions(id, route){
         store.dispatch('car/fetchCarById', id).then((car) =>{
           console.log("==== fetched ====", car);
@@ -470,7 +503,8 @@ import store from '@/store/store'
             path: route,
           });
         });
-      },
+      },//handleOwnerActions
+
       handleOpenChangeCarStatusModal(id){
         this.modals.updateCarStatusModal = true
         store.dispatch('car/fetchCarById', id)
@@ -479,7 +513,8 @@ import store from '@/store/store'
           this.selectedCar = this.car.car;
           this.selectedCarStatus = this.car.car.status;
         })
-      },
+      },// handleOpenChangeCarStatusModal
+
       handleUpdateCarStatus() {
         let currentCar = this.car.car;
         let carId = currentCar.id;
@@ -508,7 +543,8 @@ import store from '@/store/store'
             title: `Status Failed To Update: Error => ${error.message}`,
           });
         });
-      },
+      },//handleUpdateCarStatus
+
     },
   }
 </script>
