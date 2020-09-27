@@ -491,27 +491,23 @@ import store from '@/store/store'
           status: this.selectedCarStatus,
         };
 
-        // store.dispatch('car/editCar', {
-        //   carId,
-        //   carDataToUpdate: currentCar
-        // })
-        // .then((car) =>{
-        //   this.modals.modal2 = false;
-        //   this.$notify({
-        //     type: 'success',
-        //     title: `Status Updated Successfully. Changed To ${car.status}`,
-        //   });
-        // }).catch((error) => {
-        //   this.modals.modal2 = false;
-        //   this.$notify({
-        //     type: 'danger',
-        //     title: `Status Failed To Update: Error => ${error.message}`,
-        //   });
-        // });
-
-        console.log(currentCar);
-
-
+        store.dispatch('car/editCar', {
+          carId,
+          carDataToUpdate: currentCar
+        })
+        .then((car) =>{
+          this.modals.updateCarStatusModal = false;
+          this.$notify({
+            type: 'success',
+            title: `Status Updated Successfully. Changed To ${car.status}`,
+          });
+        }).catch((error) => {
+          this.modals.updateCarStatusModal = false;
+          this.$notify({
+            type: 'danger',
+            title: `Status Failed To Update: Error => ${error.message}`,
+          });
+        });
       },
     },
   }
