@@ -51,12 +51,12 @@ export default new Router({
           component: () => import('./views/Car/CarList.vue')
         },
         {
-          path: '/dashboard/edit-single-car',
+          path: '/dashboard/edit-single-car/:id',
           name: 'Edit Single Car',
           component: () => import('./views/Car/EditSingleCar.vue')
         },
         {
-          path: '/dashboard/view-single-car',
+          path: '/dashboard/view-single-car/:id',
           name: 'View Single Car',
           component: () => import('./views/Car/SingleCarView.vue')
         },

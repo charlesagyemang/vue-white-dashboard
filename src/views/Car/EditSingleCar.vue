@@ -31,25 +31,42 @@
                            </div>
                            <div class="col-md-3">
                              <h5 class="text-uppercase text-muted">Car Status</h5>
-                             <multiselect v-model="carForm.carStatus" :options="carStatusList"></multiselect>
+                             <multiselect v-model="carForm.status" :options="carStatusList"></multiselect>
                            </div>
                          </div>
                          <div class="row">
                            <div class="col-md-3">
                                <h5 class="text-uppercase text-muted">Car Working City</h5>
-                               <base-input addon-left-icon="ni ni-square-pin" placeholder="E.g Accra"></base-input>
+                               <base-input v-model="carForm.carWorkingCity" addon-left-icon="ni ni-square-pin" placeholder="E.g Accra"></base-input>
                            </div>
                            <div class="col-md-3">
                              <h5 class="text-uppercase text-muted">Car Owner</h5>
-                             <multiselect v-model="carForm.carOwner" :options="carOwnersList"></multiselect>
+                             <multiselect
+                                  v-model="carForm.carOwner"
+                                  deselect-label="Can't remove this value"
+                                  track-by="name"
+                                  label="name"
+                                  placeholder="Select one"
+                                  :searchable="true"
+                                  :options="carOwnersList">
+                              </multiselect>
                            </div>
                            <div class="col-md-3">
                                <h5 class="text-uppercase text-muted">Current Driver</h5>
-                               <multiselect v-model="carForm.currentDriver" :options="allDriversList"></multiselect>
+                               <multiselect
+                                  v-model="carForm.currentDriver"
+                                  deselect-label="Can't remove this value"
+                                  track-by="name"
+                                  label="name"
+                                  placeholder="Select one"
+                                  :searchable="true"
+                                  :options="allDriversList">
+                               </multiselect>
                            </div>
                            <div class="col-md-3">
                              <h5 class="text-uppercase text-muted">Car Type</h5>
-                             <multiselect v-model="carForm.carType" :options="carTypeList"></multiselect>
+                             <multiselect v-model="carForm.carType"
+                             :options="carTypeList"></multiselect>
                            </div>
                          </div>
                          <div class="row">
@@ -65,36 +82,36 @@
                                                 @on-close="blur"
                                                 :config="{allowInput: true}"
                                                 class="form-control datepicker"
-                                                v-model="carForm.dateResigtered"
+                                                v-model="carForm.dateRegistered"
                                                 >
                                    </flat-pickr>
                                </base-input>
                            </div>
                            <div class="col-md-3">
                                <h5 class="text-uppercase text-muted">Car Number</h5>
-                               <base-input addon-left-icon="ni ni-delivery-fast" placeholder="E.g GS 4098 - 20"></base-input>
+                               <base-input v-model="carForm.carNumber" addon-left-icon="ni ni-delivery-fast" placeholder="E.g GS 4098 - 20"></base-input>
                            </div>
                            <div class="col-md-3">
                              <h5 class="text-uppercase text-muted">Cost Of Purchase In USD</h5>
-                             <base-input placeholder="Eg. $10,000" ></base-input>
+                             <base-input v-model="carForm.costOfAquiring" placeholder="Eg. $10,000" ></base-input>
                            </div>
                          </div>
                          <div class="row">
                            <div class="col-md-3">
                                <h5 class="text-uppercase text-muted">Cost Of Shipping In Usd</h5>
-                               <base-input addon-left-icon="ni ni-cart" placeholder="E.g $2,000"></base-input>
+                               <base-input v-model="carForm.costOfShipping" addon-left-icon="ni ni-cart" placeholder="E.g $2,000"></base-input>
                            </div>
                            <div class="col-md-3">
                              <h5 class="text-uppercase text-muted">Cost Of Clearing In Ghc</h5>
-                             <base-input placeholder="Eg. GHC 15,000" ></base-input>
+                             <base-input v-model="carForm.costOfClearing" placeholder="Eg. GHC 15,000" ></base-input>
                            </div>
                            <div class="col-md-3">
                                <h5 class="text-uppercase text-muted">Cost Of Setting Up In ghc</h5>
-                               <base-input addon-left-icon="ni ni-settings-gear-65" placeholder="Eg. GHC 8,000"></base-input>
+                               <base-input v-model="carForm.costOfSettingUp" addon-left-icon="ni ni-settings-gear-65" placeholder="Eg. GHC 8,000"></base-input>
                            </div>
                            <div class="col-md-3">
                              <h5 class="text-uppercase text-muted">Car Image Link</h5>
-                             <base-input placeholder="Put An Image Link Here" ></base-input>
+                             <base-input v-model="carForm.imageUrl" placeholder="Put An Image Link Here" ></base-input>
                            </div>
                          </div>
                          <div class="row">
@@ -120,6 +137,7 @@
 
 <script>
 
+import { mapState } from 'vuex'
 
 export default {
 
@@ -133,41 +151,6 @@ export default {
         country: '',
         other: {},
       },
-      model: {
-        fullName: '',
-        email: '',
-        phoneNumber: '',
-        alternatePhoneNumber: '',
-        address: '',
-        city: '',
-        country: '',
-        zipCode: '',
-        other: {},
-      },
-      carForm: {
-        modelName: '', //KIA PICANTO
-        modelYear: '', //2008
-        color: '', // RED || RED & YELLOW
-        carStatus: '', // BOUGHT, SHIPPED, SETTING_UP, PROBATION, WORKING, SOLD, GIVEN_OUT
-        carWorkingCity: '', //ACCRA GHANA
-        carOwner: '', // OWNERID
-        carOwners: [], // LIST OF OWNERS NOT JUST IDS
-        currentDriver: '', // FULL DRIVER DETAILS
-        allDrivers: [], // LIST OF DRIVERS NOT JUST IDS
-        carType: '', // UT-TYPE, TRUCK-SIZE
-        serviceType: '', // UBER-SERVICES, TAXI-SERVICES, DUMP-TRACK-SEVICES
-        dateResigtered: '', // 22ND MARCH 2021
-        carNumber: '', // GS 4567 - 20
-        insuranceDetails: [], // [{year: '', type: '', status: '', amount: ''}],
-        roadWorthyDetails: [], // [{year: '', period: '', amount: '', renewalDate: ''}]
-        incomeTaxDetails: [], // [{year: '', period: '', amount: '', renewalDate: ''}]
-        costOfAquiring: '', // $10,000
-        costOfShipping: '', // $890
-        costOfClearing: '', // GHC 39493
-        costOfSettingUp: '', // GHC 7,000
-        imageUrl: '',
-        other: {},
-      },
       validationError: false,
       carStatusList: [
         'BOUGHT',
@@ -179,14 +162,38 @@ export default {
         'GIVEN_OUT'
       ],
       carOwnersList: [
-        'Owner 1',
-        'Owner 2',
-        'Owner 3',
+        {
+          "name": "Owner - 1",
+          "email": "email - owner1@email.com",
+          "address": "Western Cape21"
+        },
+        {
+          "name": "Owner - 2",
+          "email": "email - owner2@email.com",
+          "address": "Western Cape21"
+        },
+        {
+          "name": "Owner - 21",
+          "email": "email - owner3@email.com",
+          "address": "Western Cape21"
+        },
       ],
       allDriversList: [
-        'Driver 1',
-        'Driver 2',
-        'Driver 3',
+        {
+          "name": "Driver - 1",
+          "email": "email - driver1@email.com",
+          "address": "Western Cape21"
+        },
+        {
+          "name": "Driver - 2",
+          "email": "email - driver2@email.com",
+          "address": "Western Cape21"
+        },
+        {
+          "name": "Driver - 21",
+          "email": "email - driver21@email.com",
+          "address": "Western Cape21"
+        },
       ],
       carServiceTypeList: [
         'UBER-SERVICES',
@@ -224,6 +231,12 @@ export default {
     },
     isNotEmpty(value){
       return value !== '' && value !== undefined && value !== null
+    },
+  },
+  computed: {
+    ...mapState(['car']),
+    carForm(){
+      return this.car.car;
     },
   },
 }

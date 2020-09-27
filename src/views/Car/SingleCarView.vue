@@ -28,37 +28,37 @@
                                     <div class="row">
                                         <div class="col-lg-3">
                                           <h4>Model Name</h4>
-                                          <p>KIA Morning Lx</p>
+                                          <p>{{model.modelName}}</p>
                                         </div>
                                         <div class="col-lg-3">
                                           <h4>Model Year</h4>
-                                          <p>2009</p>
+                                          <p>{{model.modelYear}}</p>
                                         </div>
                                         <div class="col-lg-3">
                                           <h4>Color</h4>
-                                          <p>Red And Yellow</p>
+                                          <p>{{model.color}}</p>
                                         </div>
                                         <div class="col-lg-3">
                                           <h4>Car Status</h4>
-                                          <p>SHIPPED</p>
+                                          <p>{{model.status}}</p>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-lg-3">
                                           <h4>Car Working City</h4>
-                                          <p>Accra Ghana</p>
+                                          <p>{{model.carWorkingCity}}</p>
                                         </div>
                                         <div class="col-lg-3">
                                           <h4>Car Owner</h4>
-                                          <p>Micheal Afari Yeboah</p>
+                                          <p>{{model.carOwner.name}}</p>
                                         </div>
                                         <div class="col-lg-3">
                                           <h4>Current Driver</h4>
-                                          <p>Kwabena Boateng</p>
+                                          <p>{{model.currentDriver.name}}</p>
                                         </div>
                                         <div class="col-lg-3">
                                           <h4>Car Type</h4>
-                                          <p>Saloon</p>
+                                          <p>{{model.carType}}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -69,33 +69,33 @@
                                   <div class="row">
                                       <div class="col-lg-3">
                                         <h4>Service Type</h4>
-                                        <p>UBER-SERVICES</p>
+                                        <p>{{model.serviceType}}</p>
                                       </div>
                                       <div class="col-lg-3">
                                         <h4>Date Registered</h4>
-                                        <p>Aug 19 2020</p>
+                                        <p>{{model.dateRegistered}}</p>
                                       </div>
                                       <div class="col-lg-3">
                                         <h4>Car Number</h4>
-                                        <p>GS 1982 - 20</p>
+                                        <p>{{model.carNumber}}</p>
                                       </div>
                                       <div class="col-lg-3">
                                         <h4>Cost Of Purchase In USD</h4>
-                                        <p>$10,000</p>
+                                        <p>{{model.costOfAquiring}}</p>
                                       </div>
                                   </div>
                                   <div class="row">
                                       <div class="col-lg-3">
                                         <h4>Cost Of Shipping In USD</h4>
-                                        <p>$2,000</p>
+                                        <p>{{model.costOfShipping}}</p>
                                       </div>
                                       <div class="col-lg-3">
                                         <h4>Cost Of Clearing In GHC</h4>
-                                        <p>GHC 15,000</p>
+                                        <p>{{model.costOfClearing}}</p>
                                       </div>
                                       <div class="col-lg-3">
                                         <h4>Cost Of Setting Up</h4>
-                                        <p>GHC 8,000</p>
+                                        <p>{{model.costOfSettingUp}}</p>
                                       </div>
 
                                   </div>
@@ -110,6 +110,7 @@
     </div>
 </template>
 <script>
+import { mapState } from 'vuex'
   export default {
     name: 'user-profile',
     beforeCreate () {
@@ -117,25 +118,14 @@
       console.log(this.$route.params.id);
       console.log("Before Create");
     },
-    data() {
-      return {
-        model: {
-          username: '',
-          email: '',
-          firstName: '',
-          lastName: '',
-          address: '',
-          city: '',
-          country: '',
-          zipCode: '',
-          about: '',
-        }
-      }
-    },
     computed: {
+      ...mapState(['car']),
       namer() {
         return localStorage.uberName
-      }
+      },
+      model(){
+        return this.car.car
+      },
     },
   };
 </script>

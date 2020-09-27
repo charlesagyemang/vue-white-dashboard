@@ -135,7 +135,7 @@ export default {
         allDrivers: [], // LIST OF DRIVERS NOT JUST IDS
         carType: '', // UT-TYPE, TRUCK-SIZE
         serviceType: '', // UBER-SERVICES, TAXI-SERVICES, DUMP-TRACK-SEVICES
-        dateResigtered: '', // 22ND MARCH 2021
+        dateRegistered: '', // 22ND MARCH 2021
         carNumber: '', // GS 4567 - 20
         insuranceDetails: [], // [{year: '', type: '', status: '', amount: ''}],
         roadWorthyDetails: [], // [{year: '', period: '', amount: '', renewalDate: ''}]

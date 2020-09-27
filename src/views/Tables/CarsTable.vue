@@ -39,15 +39,17 @@
               </a>
 
               <template>
-                <router-link class="dropdown-item" to="/dashboard/view-single-car">View Full Details</router-link>
-                <router-link class="dropdown-item" to="/dashboard/edit-single-car">Edit Car</router-link>
+                <button @click.prevent="handleOwnerActions(row.id, `/dashboard/view-single-car/${row.id}`)" class="dropdown-item">View Full Details</button>
+                <button @click.prevent="handleOwnerActions(row.id, `/dashboard/edit-single-car/${row.id}`)" class="dropdown-item">Edit Car</button>
                 <button @click="modals.addInsurance = true" class="dropdown-item">Add Insurance</button>
                 <button @click="modals.addRoadWorthy = true" class="dropdown-item">Add Road Worthy</button>
                 <button @click="modals.addIncomeTax = true" class="dropdown-item">Add Income Tax</button>
                 <button @click="modals.addMonthlyExpense = true" class="dropdown-item">Add Monthly Expense</button>
                 <button @click="modals.addDocumentLink = true" class="dropdown-item">Add Document Links</button>
-                <button @click="modals.updateCarStatusModal = true" class="dropdown-item">Change Car Status</button>
+                <!-- <button @click="modals.updateCarStatusModal = true" class="dropdown-item">Change Car Status</button> -->
+                <button @click="handleOpenChangeCarStatusModal(row.id)" class="dropdown-item">Update Owner Status</button>
               </template>
+
             </base-dropdown>
           </td>
 
@@ -77,7 +79,7 @@
             {{row.carWorkingCity}}
           </td>
 
-          <td class="owner">
+          <td class="car">
             Name: {{row.carOwner.name}}<br>
             Email: {{row.carOwner.email}}<br>
             City: {{row.carOwner.city}}<br>
@@ -130,7 +132,7 @@
                                              @on-close="blur"
                                              :config="{allowInput: true}"
                                              class="form-control datepicker"
-                                             v-model="carForm.currentDriver"
+                                             v-model="carForm.dateRegistered"
                                              >
                                 </flat-pickr>
                             </base-input>
@@ -142,7 +144,7 @@
                                                @on-close="blur"
                                                :config="{allowInput: true}"
                                                class="form-control datepicker"
-                                               v-model="carForm.currentDriver"
+                                               v-model="carForm.dateRegistered"
                                                >
                                   </flat-pickr>
                               </base-input>
@@ -183,7 +185,7 @@
                                              @on-close="blur"
                                              :config="{allowInput: true}"
                                              class="form-control datepicker"
-                                             v-model="carForm.currentDriver"
+                                             v-model="carForm.dateRegistered"
                                              >
                                 </flat-pickr>
                             </base-input>
@@ -195,7 +197,7 @@
                                                @on-close="blur"
                                                :config="{allowInput: true}"
                                                class="form-control datepicker"
-                                               v-model="carForm.currentDriver"
+                                               v-model="carForm.dateRegistered"
                                                >
                                   </flat-pickr>
                               </base-input>
@@ -244,7 +246,7 @@
                                              @on-close="blur"
                                              :config="{allowInput: true}"
                                              class="form-control datepicker"
-                                             v-model="carForm.currentDriver"
+                                             v-model="carForm.dateRegistered"
                                              >
                                 </flat-pickr>
                             </base-input>
@@ -256,7 +258,7 @@
                                                @on-close="blur"
                                                :config="{allowInput: true}"
                                                class="form-control datepicker"
-                                               v-model="carForm.currentDriver"
+                                               v-model="carForm.dateRegistered"
                                                >
                                   </flat-pickr>
                               </base-input>
@@ -365,12 +367,15 @@
                       class="border-0">
                     <template>
                         <div class="text-center text-muted mb-4">
-                            <h3>Update (Car Name) Status</h3>
+                            <h3>Update {{selectedCar.modelName}}'s Status</h3>
                         </div>
                         <form role="form">
-                           <multiselect v-model="carForm.currentDriver" :options="allCarStatusList"></multiselect>
+                           <multiselect
+                             v-model="selectedCarStatus"
+                             :options="allCarStatusList">
+                           </multiselect>
                             <div class="text-center">
-                                <base-button type="success" class="my-4">Update Status</base-button>
+                                <base-button @click.prevent="handleUpdateCarStatus" type="success" class="my-4">Update Status</base-button>
                             </div>
                         </form>
                     </template>
@@ -382,8 +387,25 @@
   </div>
 </template>
 <script>
+
 import Modal from '@/components/Modal'
+import { mapState } from 'vuex'
+import store from '@/store/store'
+
   export default {
+    created() {
+      if (store.state.car.cars.length < 1) {
+        store.dispatch('car/fetchCars').then(() =>{
+            console.log(this.car.cars );
+          });
+      }
+    },
+    computed: {
+      ...mapState(['car']),
+      tableData(){
+        return this.car.cars
+      },
+    },
     components: {
         Modal,
     },
@@ -395,13 +417,20 @@ import Modal from '@/components/Modal'
     },
     data() {
       return {
+        selectedCarStatus: '',
+        selectedCar: {},
         carForm: {
-          currentDriver: ''
+          currentDriver: '',
+          dateRegistered: '',
         },
         allCarStatusList: [
-          'Driver 1',
-          'Driver 2',
-          'Driver 3',
+          'BOUGHT',
+          'SHIPPED',
+          'SETTING_UP',
+          'PROBATION',
+          'WORKING',
+          'SOLD',
+          'GIVEN_OUT'
         ],
         modals:{
           updateCarStatusModal: false,
@@ -415,135 +444,6 @@ import Modal from '@/components/Modal'
           modal3: false,
         },
         total: 30,
-        tableData: [
-          {
-            imageUrl: '/img/cars/picanto2.jpg',
-            modelName: 'KIA Morning',
-            status: 'BOUGHT',
-            modelYear: '2009',
-            costOfAquiring: '$3,000',
-            carWorkingCity: 'Accra',
-            carOwner: {
-              name: 'name',
-              email: 'email@email.com',
-              city: 'Goergia',
-            },
-            currentDriver: {
-              name: 'name',
-              email: 'email@email.com',
-              city: 'Goergia',
-            },
-            //currentDriver
-          },
-          {
-            imageUrl: '/img/cars/dump-truck.jpg',
-            modelName: 'Dump Track',
-            status: 'SHIPPED',
-            modelYear: '2020',
-            costOfAquiring: '$3,000',
-            carWorkingCity: 'Accra',
-            carOwner: {
-              name: 'name',
-              email: 'email@email.com',
-              city: 'Goergia',
-            },
-            currentDriver: {
-              name: 'name',
-              email: 'email@email.com',
-              city: 'Goergia',
-            },
-          },
-          {
-            imageUrl: '/img/cars/picanto2.jpg',
-            modelName: 'KIA Morning Lx',
-            status: 'SETTING_UP',
-            modelYear: '2009',
-            costOfAquiring: '$3,000',
-            carWorkingCity: 'Accra',
-            carOwner: {
-              name: 'name',
-              email: 'email@email.com',
-              city: 'Goergia',
-            },
-            currentDriver: {
-              name: 'name',
-              email: 'email@email.com',
-              city: 'Goergia',
-            },
-          },
-          {
-            imageUrl: '/img/cars/dump-truck.jpg',
-            modelName: 'Dump Track',
-            status: 'PROBATION',
-            modelYear: '2020',
-            costOfAquiring: '$3,000',
-            carWorkingCity: 'Accra',
-            carOwner: {
-              name: 'name',
-              email: 'email@email.com',
-              city: 'Goergia',
-            },
-            currentDriver: {
-              name: 'name',
-              email: 'email@email.com',
-              city: 'Goergia',
-            },
-          },
-          {
-            imageUrl: '/img/cars/picanto2.jpg',
-            modelName: 'KIA Morning Lx',
-            status: 'WORKING',
-            modelYear: '2010',
-            costOfAquiring: '$3,000',
-            carWorkingCity: 'Accra',
-            carOwner: {
-              name: 'name',
-              email: 'email@email.com',
-              city: 'Goergia',
-            },
-            currentDriver: {
-              name: 'name',
-              email: 'email@email.com',
-              city: 'Goergia',
-            },
-          },
-          {
-            imageUrl: '/img/cars/dump-truck.jpg',
-            modelName: 'Dump Track',
-            status: 'SOLD',
-            modelYear: '2020',
-            costOfAquiring: '$3,000',
-            carWorkingCity: 'Accra',
-            carOwner: {
-              name: 'name',
-              email: 'email@email.com',
-              city: 'Goergia',
-            },
-            currentDriver: {
-              name: 'name',
-              email: 'email@email.com',
-              city: 'Goergia',
-            },
-          },
-          {
-            imageUrl: '/img/cars/picanto2.jpg',
-            modelName: 'KIA Morning Lx',
-            status: 'GIVEN_OUT',
-            modelYear: '2010',
-            costOfAquiring: '$3,000',
-            carWorkingCity: 'Accra',
-            carOwner: {
-              name: 'name',
-              email: 'email@email.com',
-              city: 'Goergia',
-            },
-            currentDriver: {
-              name: 'name',
-              email: 'email@email.com',
-              city: 'Goergiaaaaa',
-            },
-          },
-        ],
       }
     },
     methods: {
@@ -558,6 +458,60 @@ import Modal from '@/components/Modal'
           'GIVEN_OUT': 'success'
         }
         return statusColors[`${status}`]
+      },
+      handleOwnerActions(id, route){
+        store.dispatch('car/fetchCarById', id).then((car) =>{
+          console.log("==== fetched ====", car);
+          this.$notify({
+            type: 'success',
+            title: `Full Details For ${car.modelName}`,
+          });
+          this.$router.push({
+            path: route,
+          });
+        });
+      },
+      handleOpenChangeCarStatusModal(id){
+        this.modals.updateCarStatusModal = true
+        store.dispatch('car/fetchCarById', id)
+        .then((car) =>{
+          console.log("==== fetched ====", car);
+          this.selectedCar = this.car.car;
+          this.selectedCarStatus = this.car.car.status;
+        })
+      },
+      handleUpdateCarStatus() {
+        let currentCar = this.car.car;
+        let carId = currentCar.id;
+        console.log(carId);
+        delete currentCar.status;
+        delete currentCar.id;
+        currentCar = {
+          ...currentCar,
+          status: this.selectedCarStatus,
+        };
+
+        // store.dispatch('car/editCar', {
+        //   carId,
+        //   carDataToUpdate: currentCar
+        // })
+        // .then((car) =>{
+        //   this.modals.modal2 = false;
+        //   this.$notify({
+        //     type: 'success',
+        //     title: `Status Updated Successfully. Changed To ${car.status}`,
+        //   });
+        // }).catch((error) => {
+        //   this.modals.modal2 = false;
+        //   this.$notify({
+        //     type: 'danger',
+        //     title: `Status Failed To Update: Error => ${error.message}`,
+        //   });
+        // });
+
+        console.log(currentCar);
+
+
       },
     },
   }
