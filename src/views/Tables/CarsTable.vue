@@ -46,7 +46,6 @@
                 <button @click="modals.addIncomeTax = true" class="dropdown-item">Add Income Tax</button>
                 <button @click="modals.addMonthlyExpense = true" class="dropdown-item">Add Monthly Expense</button>
                 <button @click="modals.addDocumentLink = true" class="dropdown-item">Add Document Links</button>
-                <!-- <button @click="modals.updateCarStatusModal = true" class="dropdown-item">Change Car Status</button> -->
                 <button @click="handleOpenChangeCarStatusModal(row.id)" class="dropdown-item">Update Owner Status</button>
               </template>
 
@@ -120,7 +119,7 @@
                       <form role="form">
                         <h5 class="text-uppercase text-muted">Provider</h5>
                          <base-input
-                            v-model="carForm.currentDriver"
+                            v-model="insuranceForm.provider"
                             addon-left-icon="ni ni-key-25"
                             placeholder="E.g SIC Insurance"
                             >
@@ -132,7 +131,7 @@
                                              @on-close="blur"
                                              :config="{allowInput: true}"
                                              class="form-control datepicker"
-                                             v-model="carForm.dateRegistered"
+                                             v-model="insuranceForm.startDate"
                                              >
                                 </flat-pickr>
                             </base-input>
@@ -144,20 +143,20 @@
                                                @on-close="blur"
                                                :config="{allowInput: true}"
                                                class="form-control datepicker"
-                                               v-model="carForm.dateRegistered"
+                                               v-model="insuranceForm.endDate"
                                                >
                                   </flat-pickr>
                               </base-input>
 
                             <h5 class="text-uppercase text-muted">Amount</h5>
                             <base-input
-                               v-model="carForm.currentDriver"
+                               v-model="insuranceForm.amount"
                                addon-left-icon="ni ni-money-coins"
                                placeholder="Eg. GHC 450"
                                >
                              </base-input>
                           <div class="text-center">
-                              <base-button type="primary" class="my-4">Submit</base-button>
+                              <base-button @click.prevent="handleAddInsuranceToCar" type="primary" class="my-4">Submit</base-button>
                           </div>
                       </form>
                   </template>
@@ -185,7 +184,7 @@
                                              @on-close="blur"
                                              :config="{allowInput: true}"
                                              class="form-control datepicker"
-                                             v-model="carForm.dateRegistered"
+                                             v-model="roadWorthyForm.startDate"
                                              >
                                 </flat-pickr>
                             </base-input>
@@ -197,20 +196,20 @@
                                                @on-close="blur"
                                                :config="{allowInput: true}"
                                                class="form-control datepicker"
-                                               v-model="carForm.dateRegistered"
+                                               v-model="roadWorthyForm.endDate"
                                                >
                                   </flat-pickr>
                               </base-input>
 
                             <h5 class="text-uppercase text-muted">Amount</h5>
                             <base-input
-                               v-model="carForm.currentDriver"
+                               v-model="roadWorthyForm.amount"
                                addon-left-icon="ni ni-money-coins"
                                placeholder="Eg. GHC 450"
                                >
                              </base-input>
                           <div class="text-center">
-                              <base-button type="primary" class="my-4">Submit</base-button>
+                              <base-button @click.prevent="handleAddRoadWorthyToCar" type="primary" class= "my-4">Submit</base-button>
                           </div>
                       </form>
                   </template>
@@ -233,7 +232,7 @@
                       <form role="form">
                         <h5 class="text-uppercase text-muted">Quater</h5>
                          <base-input
-                            v-model="carForm.currentDriver"
+                            v-model="incomeTaxForm.quarter"
                             addon-left-icon="ni ni-key-25"
                             placeholder="E.g First Quarter"
                             >
@@ -245,7 +244,7 @@
                                              @on-close="blur"
                                              :config="{allowInput: true}"
                                              class="form-control datepicker"
-                                             v-model="carForm.dateRegistered"
+                                             v-model="incomeTaxForm.startDate"
                                              >
                                 </flat-pickr>
                             </base-input>
@@ -257,20 +256,20 @@
                                                @on-close="blur"
                                                :config="{allowInput: true}"
                                                class="form-control datepicker"
-                                               v-model="carForm.dateRegistered"
+                                               v-model="incomeTaxForm.endDate"
                                                >
                                   </flat-pickr>
                               </base-input>
 
                             <h5 class="text-uppercase text-muted">Amount</h5>
                             <base-input
-                               v-model="carForm.currentDriver"
+                               v-model="incomeTaxForm.amount"
                                addon-left-icon="ni ni-money-coins"
                                placeholder="Eg. GHC 450"
                                >
                              </base-input>
                           <div class="text-center">
-                              <base-button type="primary" class="my-4">Submit</base-button>
+                              <base-button @click.prevent="handleAddIncomeTaxToCar" type="primary" class="my-4">Submit</base-button>
                           </div>
                       </form>
                   </template>
@@ -293,27 +292,27 @@
                       <form role="form">
                         <h5 class="text-uppercase text-muted">Year</h5>
                          <base-input
-                            v-model="carForm.currentDriver"
+                            v-model="monthlyExpenseForm.year"
                             addon-left-icon="ni ni-calendar-grid-58"
                             placeholder="E.g 2020"
                             >
                           </base-input>
                           <h5 class="text-uppercase text-muted">Month</h5>
                            <base-input
-                              v-model="carForm.currentDriver"
+                              v-model="monthlyExpenseForm.month"
                               addon-left-icon="ni ni-calendar-grid-58"
                               placeholder="Eg. May"
                               >
                             </base-input>
                             <h5 class="text-uppercase text-muted">Amount</h5>
                             <base-input
-                               v-model="carForm.currentDriver"
+                               v-model="monthlyExpenseForm.amount"
                                addon-left-icon="ni ni-money-coins"
                                placeholder="Eg. GHC 450"
                                >
                              </base-input>
                           <div class="text-center">
-                              <base-button type="primary" class="my-4">Submit</base-button>
+                              <base-button @click.prevent="handleAddMonthlyExpenseToCar" type="primary" class="my-4">Submit</base-button>
                           </div>
                       </form>
                   </template>
@@ -336,20 +335,20 @@
                       <form role="form">
                         <h5 class="text-uppercase text-muted">Item Name</h5>
                          <base-input
-                            v-model="carForm.currentDriver"
+                            v-model="documentLinksForm.itemName"
                             addon-left-icon="ni ni-single-copy-04"
                             placeholder="E.g Form A"
                             >
                           </base-input>
                           <h5 class="text-uppercase text-muted">Paste Document Link Here</h5>
                            <base-input
-                              v-model="carForm.currentDriver"
+                              v-model="documentLinksForm.link"
                               addon-left-icon="ni ni-briefcase-24"
                               placeholder="Eg. https://drive.google.com/738"
                               >
                             </base-input>
                           <div class="text-center">
-                              <base-button type="primary" class="my-4">Submit</base-button>
+                              <base-button @click.prevent="handleAddDocumentToCar" type="primary" class="my-4">Submit</base-button>
                           </div>
                       </form>
                   </template>
@@ -382,6 +381,7 @@
               </card>
           </modal>
       </div>
+
     </div>
 
   </div>
@@ -544,6 +544,92 @@ import store from '@/store/store'
           });
         });
       },//handleUpdateCarStatus
+
+      handleAddInsuranceToCar(){
+        const isNotEmpty = this.validateBody(this.insuranceForm)
+        if (isNotEmpty) {
+          alert(JSON.stringify(this.insuranceForm));
+          // Create insurance
+        } else {
+          console.log(isNotEmpty);
+          this.$notify({
+            type: 'danger',
+            title: `Error => Please Fill All Fields`,
+          });
+        }
+      },//handleAddInsuranceToCar
+
+      handleAddRoadWorthyToCar(){
+        const isNotEmpty = this.validateBody(this.roadWorthyForm)
+        if (isNotEmpty) {
+          alert(JSON.stringify(this.roadWorthyForm));
+          // Create roadWorthy
+        } else {
+          console.log(isNotEmpty);
+          this.$notify({
+            type: 'danger',
+            title: `Error => Please Fill All Fields`,
+          });
+        }
+      },//handleAddRoadWorthyToCar
+
+      handleAddIncomeTaxToCar(){
+        const isNotEmpty = this.validateBody(this.incomeTaxForm)
+        if (isNotEmpty) {
+          alert(JSON.stringify(this.incomeTaxForm));
+          // Create incomeTax
+        } else {
+          console.log(isNotEmpty);
+          this.$notify({
+            type: 'danger',
+            title: `Error => Please Fill All Fields`,
+          });
+        }
+      },//handleAddIncomeTaxToCar
+
+      handleAddMonthlyExpenseToCar(){
+        const isNotEmpty = this.validateBody(this.monthlyExpenseForm)
+        if (isNotEmpty) {
+          alert(JSON.stringify(this.monthlyExpenseForm));
+          // Create incomeTax
+        } else {
+          console.log(isNotEmpty);
+          this.$notify({
+            type: 'danger',
+            title: `Error => Please Fill All Fields`,
+          });
+        }
+      },//handleAddMonthlyExpenseToCar
+
+      handleAddDocumentToCar(){
+        const isNotEmpty = this.validateBody(this.documentLinksForm)
+        if (isNotEmpty) {
+          alert(JSON.stringify(this.documentLinksForm));
+          // Create incomeTax
+        } else {
+          console.log(isNotEmpty);
+          this.$notify({
+            type: 'danger',
+            title: `Error => Please Fill All Fields`,
+          });
+        }
+      },//handleAddDocumentToCar
+
+
+      validateBody(payload){
+        delete payload.other
+        let meto = true
+        for (var item in payload){
+          if (!this.isNotEmpty(payload[`${item}`])) {
+            meto = false
+          }
+        }
+        return meto
+      },//validateBody
+
+      isNotEmpty(value){
+        return value !== '' && value !== undefined && value !== null
+      },//isNotEmpty
 
     },
   }
