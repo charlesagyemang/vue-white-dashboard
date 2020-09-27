@@ -8,6 +8,7 @@ import ArgonDashboard from './plugins/argon-dashboard'
 import Multiselect from 'vue-multiselect'
 import FlatPickr from 'vue-flatpickr-component';
 import 'flatpickr/dist/flatpickr.css';
+import 'nprogress/nprogress.css';
 
 Vue.config.productionTip = false
 
