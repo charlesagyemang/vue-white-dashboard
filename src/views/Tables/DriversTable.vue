@@ -40,8 +40,9 @@
               <template>
                 <button @click.prevent="handleOwnerActions(row.id, `/dashboard/view-single-driver/${row.id}`)" class="dropdown-item">View Full Details</button>
                 <button @click.prevent="handleOwnerActions(row.id, `/dashboard/edit-single-driver/${row.id}`)" class="dropdown-item">Edit Driver</button>
-                <button @click="modals.attachACarModal = true" class="dropdown-item">Assign A Car</button>
-                <button @click="modals.updateDriverStatusModal = true" class="dropdown-item">Change Driver Status</button>
+                <button @click="handleModalOpenings(row, 'attachACarModal')" class="dropdown-item">Assign A Car To Driver</button>
+                <button @click="handleModalOpenings(row, 'changeCarAssignmentModal')" class="dropdown-item">Change Car Assignment Status</button>
+                <button @click="handleModalOpenings(row, 'updateDriverStatusModal')" class="dropdown-item">Change Driver Status</button>
               </template>
             </base-dropdown>
           </td>
@@ -91,6 +92,32 @@
       <div class="row">
 
         <div class="col-md-4">
+            <modal :show.sync="modals.changeCarAssignmentModal"
+                   body-classes="p-0"
+                   modal-classes="modal-dialog-centered modal-sm">
+                <card type="secondary" shadow
+                      header-classes="bg-white pb-5"
+                      body-classes="px-lg-5 py-lg-5"
+                      class="border-0">
+                    <template>
+                        <div class="text-center text-muted mb-4">
+                            <h4>Update Car Assignment Status</h4>
+                        </div>
+                        <form role="form">
+                           <multiselect
+                             v-model="selectedCarAssignmentStatus"
+                             :options="allCarAssignmentStatus">
+                           </multiselect>
+                            <div class="text-center">
+                                <base-button @click.prevent="handleDriverCarAssignmentStatus" type="success" class="my-4">Submit</base-button>
+                            </div>
+                        </form>
+                    </template>
+                </card>
+            </modal>
+        </div>
+
+        <div class="col-md-4">
             <modal :show.sync="modals.attachACarModal"
                    body-classes="p-0"
                    modal-classes="modal-dialog-centered modal-sm">
@@ -100,12 +127,17 @@
                       class="border-0">
                     <template>
                         <div class="text-center text-muted mb-4">
-                            <h4>Assign A Car To (Driver Name)</h4>
+                            <h4>Assign Car To Driver</h4>
                         </div>
                         <form role="form">
-                           <multiselect v-model="carForm.currentDriver" :options="allDriversList"></multiselect>
+                           <multiselect
+                             track-by="modelName"
+                             label="modelName"
+                             v-model="selectedCarToAddToDriver"
+                             :options="allDriversList">
+                           </multiselect>
                             <div class="text-center">
-                                <base-button type="success" class="my-4">Submit</base-button>
+                                <base-button @click.prevent="handleAttachCarToDriver" type="success" class="my-4">Submit</base-button>
                             </div>
                         </form>
                     </template>
@@ -126,10 +158,13 @@
                             <h4>Update (Driver Name) Status</h4>
                         </div>
                         <form role="form">
-                           <multiselect v-model="carForm.currentDriver" :options="allDriversList"></multiselect>
-                            <div class="text-center">
-                                <base-button type="success" class="my-4">Submit</base-button>
-                            </div>
+                           <multiselect
+                             v-model="selectedDriverStatus"
+                             :options="allCarStatus">
+                          </multiselect>
+                          <div class="text-center">
+                              <base-button @click.prevent="handleUpdateDriverStatus" type="success" class="my-4">Submit</base-button>
+                          </div>
                         </form>
                     </template>
                 </card>
@@ -175,6 +210,124 @@ import store from '@/store/store'
         });
       },//handleOwnerActions
 
+      handleModalOpenings(row, modalReference){
+        this.modals[modalReference] = true;
+        this.currentlySelectedDriver = row;
+        this.selectedDriverStatus = row;
+        this.selectedDriverStatus = row.driverStatus;
+        this.selectedCarAssignmentStatus = row.carAssignmentStatus;
+        console.log(JSON.stringify(this.currentlySelectedDriver));
+      },//handleModalOpenings
+
+      handleDriverCarAssignmentStatus() {
+
+        let currentDriver = this.currentlySelectedDriver;
+        let driverId = currentDriver.id;
+
+        console.log(driverId);
+
+        delete currentDriver.carAssignmentStatus;
+        delete currentDriver.id;
+        currentDriver = {
+          ...currentDriver,
+          carAssignmentStatus: this.selectedCarAssignmentStatus,
+        };
+
+        console.log(JSON.stringify(currentDriver));
+
+        store.dispatch('driver/editDriver', {
+          driverId,
+          driverDataToUpdate: currentDriver
+        })
+        .then((driver) =>{
+          this.modals.changeCarAssignmentModal = false;
+          this.$notify({
+            type: 'success',
+            title: `Status Updated Successfully. Changed To ${driver.carAssignmentStatus}`,
+          });
+        }).catch((error) => {
+          this.modals.changeCarAssignmentModal = false;
+          this.$notify({
+            type: 'danger',
+            title: `Status Failed To Update: Error => ${error.message}`,
+          });
+        });
+
+      },//handleDriverCarAssignmentStatus
+
+      handleUpdateDriverStatus() {
+        let currentDriver = this.currentlySelectedDriver;
+        let driverId = currentDriver.id;
+        console.log(driverId);
+        delete currentDriver.driverStatus;
+        delete currentDriver.id;
+        currentDriver = {
+          ...currentDriver,
+          driverStatus: this.selectedDriverStatus,
+        };
+
+        console.log(JSON.stringify(currentDriver));
+
+        store.dispatch('driver/editDriver', {
+          driverId,
+          driverDataToUpdate: currentDriver
+        })
+        .then((driver) =>{
+          this.modals.updateDriverStatusModal = false;
+          this.$notify({
+            type: 'success',
+            title: `Status Updated Successfully. Changed To ${driver.driverStatus}`,
+          });
+        }).catch((error) => {
+          this.modals.updateDriverStatusModal = false;
+          this.$notify({
+            type: 'danger',
+            title: `Status Failed To Update: Error => ${error.message}`,
+          });
+        });
+
+      },//handleUpdateDriverStatus
+
+
+      handleAttachCarToDriver() {
+        let currentDriver = this.currentlySelectedDriver;
+        let driverId = currentDriver.id;
+        console.log(driverId);
+        delete currentDriver.id;
+        delete currentDriver.carId;
+        currentDriver = {
+          ...currentDriver,
+          carId: this.selectedCarToAddToDriver.id,
+          carAssignmentStatus: "ASSIGNED",
+          driverStatus: "ASSIGNED_CAR",
+        };
+
+        console.log(JSON.stringify(currentDriver));
+
+        store.dispatch('driver/editDriver', {
+          driverId,
+          driverDataToUpdate: currentDriver
+        })
+        .then((driver) =>{
+          this.modals.attachACarModal = false;
+          this.$notify({
+            type: 'success',
+            title: `Status Updated Successfully. Changed To ${driver.carId}`,
+          });
+        }).catch((error) => {
+          this.modals.attachACarModal = false;
+          this.$notify({
+            type: 'danger',
+            title: `Status Failed To Update: Error => ${error.message}`,
+          });
+        });
+
+      },//handleAttachCarToDriver
+
+
+
+
+
     },
     props: {
       type: {
@@ -184,14 +337,37 @@ import store from '@/store/store'
     },
     data() {
       return {
+        selectedCarToAddToDriver: {},
+        currentlySelectedDriver: {},
+        selectedDriverStatus: '',
+        selectedCarAssignmentStatus: '',
         carForm: {
           currentDriver: '',
         },
         modals: {
           attachACarModal: false,
           updateDriverStatusModal: false,
+          changeCarAssignmentModal: false,
         },
         total: 30,
+        allCarStatus: [
+          'APPLIED',
+          'AWAITING_CAR',
+          'ASSIGNED_CAR',
+          'PROBATION',
+          'PASSED_PROBATION',
+          'FAILED_PROBATION',
+          'SIGNED_CONTRACT',
+          'WORKING',
+          'COMPLETED_WORK',
+          'CAR_BEING_TRANSFERED',
+          'CAR_TRANSFERED_TO_DRIVER'
+        ],
+        allCarAssignmentStatus: [
+          "NOT_ASSIGNED",
+          "ASSIGNED",
+          "TAKEN_AWAY",
+        ],
       }
     },
     computed: {
@@ -202,7 +378,7 @@ import store from '@/store/store'
       allDriversList(){
         return this.car.cars
       },
-    }
+    },
   }
 </script>
 <style>
