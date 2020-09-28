@@ -41,7 +41,7 @@
               <template>
                 <button @click.prevent="handleOwnerActions(row.id, `/dashboard/view-single-car/${row.id}`)" class="dropdown-item">View Full Details</button>
                 <button @click.prevent="handleOwnerActions(row.id, `/dashboard/edit-single-car/${row.id}`)" class="dropdown-item">Edit Car</button>
-                <button @click="handleOpenChangeCarStatusModal(row.id)" class="dropdown-item">Update Owner Status</button>
+                <button @click="handleModalOpenings(row, 'updateCarStatusModal')" class="dropdown-item">Update Owner Status</button>
                 <button @click="handleModalOpenings(row, 'addInsurance')" class="dropdown-item">Add Insurance</button>
                 <button @click="handleModalOpenings(row, 'addRoadWorthy')" class="dropdown-item">Add Road Worthy</button>
                 <button @click="handleModalOpenings(row, 'addIncomeTax')" class="dropdown-item">Add Income Tax</button>
@@ -114,7 +114,7 @@
                     class="border-0">
                   <template>
                       <div class="text-center text-muted mb-4">
-                          <h3>Add Insurance</h3>
+                          <h3>Add Insurance For {{currentlySelectedCAr.modelName}}</h3>
                       </div>
                       <form role="form">
                         <h5 class="text-uppercase text-muted">Provider</h5>
@@ -174,7 +174,7 @@
                     class="border-0">
                   <template>
                       <div class="text-center text-muted mb-4">
-                          <h3>Add Road Worthy</h3>
+                          <h3>Add Road Worthy For {{currentlySelectedCAr.modelName}}</h3>
                       </div>
                       <form role="form">
                           <h5 class="text-uppercase text-muted">Start Date</h5>
@@ -227,7 +227,7 @@
                     class="border-0">
                   <template>
                       <div class="text-center text-muted mb-4">
-                          <h3>Add Income Tax</h3>
+                          <h3>Add Income Tax For {{currentlySelectedCAr.modelName}}</h3>
                       </div>
                       <form role="form">
                         <h5 class="text-uppercase text-muted">Quater</h5>
@@ -287,7 +287,7 @@
                     class="border-0">
                   <template>
                       <div class="text-center text-muted mb-4">
-                          <h3>Add Monthly Expense</h3>
+                          <h3>Add Monthly Expense For {{currentlySelectedCAr.modelName}}</h3>
                       </div>
                       <form role="form">
                         <h5 class="text-uppercase text-muted">Year</h5>
@@ -330,7 +330,7 @@
                     class="border-0">
                   <template>
                       <div class="text-center text-muted mb-4">
-                          <h3>Add Document Link</h3>
+                          <h3>Add Document Link For {{currentlySelectedCAr.modelName}}</h3>
                       </div>
                       <form role="form">
                         <h5 class="text-uppercase text-muted">Item Name</h5>
@@ -366,7 +366,7 @@
                     class="border-0">
                   <template>
                       <div class="text-center text-muted mb-4">
-                          <h3>Update {{selectedCar.modelName}}'s Status</h3>
+                          <h3>Update {{currentlySelectedCAr.modelName}}'s Status</h3>
                       </div>
                       <form role="form">
                          <multiselect
@@ -496,7 +496,9 @@ import store from '@/store/store'
 
       handleModalOpenings(row, modalReference){
         this.modals[modalReference] = true;
-        this.currentlySelectedCAr = row
+        this.currentlySelectedCAr = row;
+        this.selectedCarStatus = row;
+        this.selectedCarStatus = row.status;
         console.log(JSON.stringify(this.currentlySelectedCAr));
       },//handleModalOpenings
 
@@ -512,16 +514,6 @@ import store from '@/store/store'
           });
         });
       },//handleOwnerActions
-
-      handleOpenChangeCarStatusModal(id){
-        this.modals.updateCarStatusModal = true
-        store.dispatch('car/fetchCarById', id)
-        .then((car) =>{
-          console.log("==== fetched ====", car);
-          this.selectedCar = this.car.car;
-          this.selectedCarStatus = this.car.car.status;
-        })
-      },// handleOpenChangeCarStatusModal
 
       handleUpdateCarStatus() {
         let currentCar = this.car.car;
