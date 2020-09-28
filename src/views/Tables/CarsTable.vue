@@ -41,12 +41,12 @@
               <template>
                 <button @click.prevent="handleOwnerActions(row.id, `/dashboard/view-single-car/${row.id}`)" class="dropdown-item">View Full Details</button>
                 <button @click.prevent="handleOwnerActions(row.id, `/dashboard/edit-single-car/${row.id}`)" class="dropdown-item">Edit Car</button>
-                <button @click="modals.addInsurance = true" class="dropdown-item">Add Insurance</button>
-                <button @click="modals.addRoadWorthy = true" class="dropdown-item">Add Road Worthy</button>
-                <button @click="modals.addIncomeTax = true" class="dropdown-item">Add Income Tax</button>
-                <button @click="modals.addMonthlyExpense = true" class="dropdown-item">Add Monthly Expense</button>
-                <button @click="modals.addDocumentLink = true" class="dropdown-item">Add Document Links</button>
                 <button @click="handleOpenChangeCarStatusModal(row.id)" class="dropdown-item">Update Owner Status</button>
+                <button @click="handleModalOpenings(row, 'addInsurance')" class="dropdown-item">Add Insurance</button>
+                <button @click="handleModalOpenings(row, 'addRoadWorthy')" class="dropdown-item">Add Road Worthy</button>
+                <button @click="handleModalOpenings(row, 'addIncomeTax')" class="dropdown-item">Add Income Tax</button>
+                <button @click="handleModalOpenings(row, 'addMonthlyExpense')" class="dropdown-item">Add Monthly Expense</button>
+                <button @click="handleModalOpenings(row, 'addDocumentLink')" class="dropdown-item">Add Document Links</button>
               </template>
 
             </base-dropdown>
@@ -419,6 +419,7 @@ import store from '@/store/store'
       return {
         selectedCarStatus: '',
         selectedCar: {},
+        currentlySelectedCAr: {},
         carForm: {
           currentDriver: '',
           dateRegistered: '',
@@ -491,6 +492,13 @@ import store from '@/store/store'
         }
         return statusColors[`${status}`]
       },//getStatusColor
+
+
+      handleModalOpenings(row, modalReference){
+        this.modals[modalReference] = true;
+        this.currentlySelectedCAr = row
+        console.log(JSON.stringify(this.currentlySelectedCAr));
+      },//handleModalOpenings
 
       handleOwnerActions(id, route){
         store.dispatch('car/fetchCarById', id).then((car) =>{
