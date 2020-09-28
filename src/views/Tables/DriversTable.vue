@@ -25,7 +25,8 @@
           <th>email</th>
           <th>phoneNumber</th>
           <th>address</th>
-          <th>car</th>
+          <th>driverStatus</th>
+          <th>car status</th>
         </template>
 
         <template slot-scope="{row}">
@@ -37,8 +38,8 @@
                 <i class="fas fa-ellipsis-v"></i>
               </a>
               <template>
-                <router-link class="dropdown-item" to="/dashboard/view-single-driver">View Full Details</router-link>
-                <router-link class="dropdown-item" to="/dashboard/edit-single-driver">Edit Single Driver</router-link>
+                <button @click.prevent="handleOwnerActions(row.id, `/dashboard/view-single-driver/${row.id}`)" class="dropdown-item">View Full Details</button>
+                <button @click.prevent="handleOwnerActions(row.id, `/dashboard/edit-single-driver/${row.id}`)" class="dropdown-item">Edit Driver</button>
                 <button @click="modals.attachACarModal = true" class="dropdown-item">Assign A Car</button>
                 <button @click="modals.updateDriverStatusModal = true" class="dropdown-item">Change Driver Status</button>
               </template>
@@ -64,14 +65,16 @@
             {{row.phoneNumber}}
           </td>
 
-
           <td class="address">
             {{row.address}}
           </td>
 
+          <td class="driverStatus">
+            {{row.driverStatus}}
+          </td>
 
           <td class="car">
-            {{row.car.modelName}}
+            {{row.carAssignmentStatus}}
           </td>
 
         </template>
@@ -86,6 +89,7 @@
 
     <div class="container">
       <div class="row">
+
         <div class="col-md-4">
             <modal :show.sync="modals.attachACarModal"
                    body-classes="p-0"
@@ -138,8 +142,40 @@
   </div>
 </template>
 <script>
+
+import { mapState } from 'vuex'
+import store from '@/store/store'
+
   export default {
     name: 'projects-table',
+    created() {
+      if (store.state.driver.drivers.length < 1) {
+        store.dispatch('driver/fetchDrivers').then(() =>{
+            console.log(this.driver.drivers );
+          });
+      }
+      if (store.state.car.cars.length < 1) {
+        store.dispatch('car/fetchCars').then(() =>{
+            console.log(this.car.cars );
+          });
+      }
+    },
+    methods: {
+
+      handleOwnerActions(id, route){
+        store.dispatch('driver/fetchDriverById', id).then((driver) =>{
+          console.log("==== fetched ====", driver);
+          this.$notify({
+            type: 'success',
+            title: `Full Details For ${driver.fullName}`,
+          });
+          this.$router.push({
+            path: route,
+          });
+        });
+      },//handleOwnerActions
+
+    },
     props: {
       type: {
         type: String
@@ -151,98 +187,22 @@
         carForm: {
           currentDriver: '',
         },
-        allDriversList: [
-          'Car 1',
-          'Car 2',
-          'Car 3',
-        ],
         modals: {
           attachACarModal: false,
           updateDriverStatusModal: false,
         },
         total: 30,
-        tableData: [
-          {
-            imageUrl: '/img/cars/picanto2.jpg',
-            fullName:'fullname',
-            email: 'fullname@user.com',
-            phoneNumber: '0987446633',
-            address: 'Accra Ghana',
-            country: 'Togo',
-            car: {
-              modelName: 'Tundra',
-            }
-            //currentDriver
-          },
-          {
-            imageUrl: '/img/cars/picanto2.jpg',
-            fullName:'fullname',
-            email: 'fullname@user.com',
-            phoneNumber: '0987446633',
-            address: 'Accra Ghana',
-            country: 'Togo',
-            car: {
-              modelName: 'Tundra',
-            }
-          },
-          {
-            imageUrl: '/img/cars/picanto2.jpg',
-            fullName:'fullname',
-            email: 'fullname@user.com',
-            phoneNumber: '0987446633',
-            address: 'Accra Ghana',
-            country: 'Togo',
-            car: {
-              modelName: 'Tundra',
-            }
-          },
-          {
-            imageUrl: '/img/cars/picanto2.jpg',
-            fullName:'fullname',
-            email: 'fullname@user.com',
-            phoneNumber: '0987446633',
-            address: 'Accra Ghana',
-            country: 'Togo',
-            car: {
-              modelName: 'Tundra',
-            }
-          },
-          {
-            imageUrl: '/img/cars/picanto2.jpg',
-            fullName:'fullname',
-            email: 'fullname@user.com',
-            phoneNumber: '0987446633',
-            address: 'Accra Ghana',
-            country: 'Togo',
-            car: {
-              modelName: 'Tundra',
-            }
-          },
-          {
-            imageUrl: '/img/cars/picanto2.jpg',
-            fullName:'fullname',
-            email: 'fullname@user.com',
-            phoneNumber: '0987446633',
-            address: 'Accra Ghana',
-            country: 'Togo',
-            car: {
-              modelName: 'Tundra',
-            }
-          },
-          {
-            imageUrl: '/img/cars/picanto2.jpg',
-            fullName:'fullname',
-            email: 'fullname@user.com',
-            phoneNumber: '0987446633',
-            address: 'Accra Ghana',
-            country: 'Togo',
-            car: {
-              modelName: 'Tundra',
-            }
-          },
-        ],
       }
     },
+    computed: {
+      ...mapState(['driver', 'car']),
+      tableData(){
+        return this.driver.drivers;
+      },
+      allDriversList(){
+        return this.car.cars
+      },
+    }
   }
 </script>
 <style>

@@ -91,12 +91,12 @@ export default new Router({
           component: () => import('./views/Driver/AddNewDriver.vue')
         },
         {
-          path: '/dashboard/view-single-driver',
+          path: '/dashboard/view-single-driver/:id',
           name: 'Single Driver Details',
           component: () => import('./views/Driver/SingleDriverView.vue')
         },
         {
-          path: '/dashboard/edit-single-driver',
+          path: '/dashboard/edit-single-driver/:id',
           name: 'Edit Single Driver',
           component: () => import('./views/Driver/EditSingleDriver.vue')
         },

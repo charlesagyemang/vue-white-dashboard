@@ -98,7 +98,7 @@
                                                     label="Address"
                                                     placeholder="18 Banana Street"
                                                     input-classes="form-control-alternative"
-                                                    v-model="model.alternatePhoneNumber"
+                                                    v-model="model.address"
                                         />
                                     </div>
                                 </div>
@@ -113,7 +113,7 @@
                                                     label="Full Name"
                                                     placeholder="Full Name"
                                                     input-classes="form-control-alternative"
-                                                    v-model="model.fullName"
+                                                    v-model="model.guarantorFullName"
                                         />
                                     </div>
                                     <div class="col-lg-6">
@@ -121,7 +121,7 @@
                                                     label="Email address"
                                                     placeholder="jesse@example.com"
                                                     input-classes="form-control-alternative"
-                                                    v-model="model.email"
+                                                    v-model="model.guarantorEmail"
                                         />
                                     </div>
                                 </div>
@@ -131,7 +131,7 @@
                                                     label="Phone Number"
                                                     placeholder="+1 354 88 77 22"
                                                     input-classes="form-control-alternative"
-                                                    v-model="model.phoneNumber"
+                                                    v-model="model.guarantorPhoneNumber"
                                         />
                                     </div>
                                     <div class="col-lg-6">
@@ -139,7 +139,7 @@
                                                     label="Address"
                                                     placeholder="19 Banana Street"
                                                     input-classes="form-control-alternative"
-                                                    v-model="model.alternatePhoneNumber"
+                                                    v-model="model.guarantorAddress"
                                         />
                                     </div>
                                 </div>
@@ -153,7 +153,7 @@
                                                     label="Full Name"
                                                     placeholder="Full Name"
                                                     input-classes="form-control-alternative"
-                                                    v-model="model.fullName"
+                                                    v-model="model.formerEmployerFullName"
                                         />
                                     </div>
                                     <div class="col-lg-6">
@@ -161,7 +161,7 @@
                                                     label="Email address"
                                                     placeholder="jesse@example.com"
                                                     input-classes="form-control-alternative"
-                                                    v-model="model.email"
+                                                    v-model="model.formerEmployerEmail"
                                         />
                                     </div>
                                 </div>
@@ -171,7 +171,7 @@
                                                     label="Phone Number"
                                                     placeholder="+1 354 88 77 22"
                                                     input-classes="form-control-alternative"
-                                                    v-model="model.phoneNumber"
+                                                    v-model="model.formerEmployerPhoneNumber"
                                         />
                                     </div>
                                     <div class="col-lg-6">
@@ -179,7 +179,7 @@
                                                     label="Address"
                                                     placeholder="20 Banana Street"
                                                     input-classes="form-control-alternative"
-                                                    v-model="model.alternatePhoneNumber"
+                                                    v-model="model.formerEmployerAddress"
                                         />
                                     </div>
                                 </div>
@@ -192,39 +192,22 @@
                 </card>
             </div>
         </div>
-    </div>  
+    </div>
 
   </div>
 </template>
 
 <script>
 
+import { mapState } from 'vuex'
+
 
 export default {
-
-  data(){
-    return {
-      createOwner: {
-        username: '',
-        email: '',
-        phoneNumber: '',
-        address: '',
-        country: '',
-        other: {},
-      },
-      model: {
-        fullName: '',
-        email: '',
-        phoneNumber: '',
-        alternatePhoneNumber: '',
-        address: '',
-        city: '',
-        country: '',
-        zipCode: '',
-        other: {},
-      },
-
-    }// end of data
+  computed: {
+    ...mapState(['driver']),
+    model(){
+      return this.driver.driver;
+    },
   },
   methods: {
     handleCreateOwner() {

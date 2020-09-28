@@ -71,7 +71,7 @@
                              <div class="col">
                                <h5 class="text-muted text-uppercase">Guaranter Full Name</h5>
                                <base-input
-                                           v-model="createDriver.guaranterFullName"
+                                           v-model="createDriver.guarantorFullName"
                                            type="text"
                                            placeholder="Guaranter Full Name"
                                            addon-left-icon="ni ni-single-02">
@@ -80,7 +80,7 @@
                              <div class="col">
                                <h5 class="text-muted text-uppercase">Guaranter Email</h5>
                                <base-input alternative
-                                           v-model="createDriver.guaranterEmail"
+                                           v-model="createDriver.guarantorEmail"
                                            class="mb-3"
                                            type="email"
                                            placeholder="Guaranter Email"
@@ -92,7 +92,7 @@
                              <div class="col">
                                <h5 class="text-muted text-uppercase">Guaranter Phone Number</h5>
                                <base-input alternative
-                                           v-model="createDriver.guaranterPhoneNumber"
+                                           v-model="createDriver.guarantorPhoneNumber"
                                            type="text"
                                            placeholder="Guaranter Phone Number"
                                            addon-left-icon="ni ni-mobile-button">
@@ -101,7 +101,7 @@
                              <div class="col">
                                <h5 class="text-muted text-uppercase">Guaranter Address</h5>
                                <base-input alternative
-                                           v-model="createDriver.guaranterAddress"
+                                           v-model="createDriver.guarantorAddress"
                                            type="text"
                                            placeholder="Guaranter Address"
                                            addon-left-icon="ni ni-square-pin">
@@ -193,10 +193,10 @@ export default {
         email: '',
         phoneNumber: '',
         address: '',
-        guaranterFullName: '',
-        guaranterEmail: '',
-        guaranterPhoneNumber: '',
-        guaranterAddress: '',
+        guarantorFullName: '',
+        guarantorEmail: '',
+        guarantorPhoneNumber: '',
+        guarantorAddress: '',
         formerEmployerFullName: '',
         formerEmployerEmail: '',
         formerEmployerPhoneNumber: '',

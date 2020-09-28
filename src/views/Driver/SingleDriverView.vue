@@ -35,21 +35,21 @@
                                     <div class="row">
                                         <div class="col-lg-6">
                                           <h4>Full Name</h4>
-                                          <p>Kwabena Boateng Amoah Joseph</p>
+                                          <p>{{model.fullName}}</p>
                                         </div>
                                         <div class="col-lg-6">
                                           <h4>Email</h4>
-                                          <p>beastlkyquist@mm.com</p>
+                                          <p>{{model.email}}</p>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-lg-6">
                                           <h4>Address</h4>
-                                          <p>19 Banana Street East Legon, Accra</p>
+                                          <p>{{model.address}}</p>
                                         </div>
                                         <div class="col-lg-6">
                                           <h4>Phone Number</h4>
-                                          <p>+233 288 77 22 77</p>
+                                          <p>{{model.phoneNumber}}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -60,21 +60,21 @@
                                   <div class="row">
                                       <div class="col-lg-6">
                                         <h4>Full Name</h4>
-                                        <p>Kwabena Boateng Amoah Joseph</p>
+                                        <p>{{model.guarantorFullName}}</p>
                                       </div>
                                       <div class="col-lg-6">
                                         <h4>Email</h4>
-                                        <p>beastlkyquist@mm.com</p>
+                                        <p>{{model.guarantorEmail}}</p>
                                       </div>
                                   </div>
                                   <div class="row">
                                       <div class="col-lg-6">
                                         <h4>Address</h4>
-                                        <p>19 Banana Street East Legon, Accra</p>
+                                        <p>{{model.guarantorAddress}}</p>
                                       </div>
                                       <div class="col-lg-6">
                                         <h4>Phone Number</h4>
-                                        <p>+233 288 77 22 77</p>
+                                        <p>{{model.guarantorPhoneNumber}}</p>
                                       </div>
                                   </div>
                                 </div>
@@ -85,21 +85,21 @@
                                   <div class="row">
                                       <div class="col-lg-6">
                                         <h4>Full Name</h4>
-                                        <p>Kwabena Boateng Amoah Joseph</p>
+                                        <p>{{model.formerEmployerFullName}}</p>
                                       </div>
                                       <div class="col-lg-6">
                                         <h4>Email</h4>
-                                        <p>beastlkyquist@mm.com</p>
+                                        <p>{{model.formerEmployerEmail}}</p>
                                       </div>
                                   </div>
                                   <div class="row">
                                       <div class="col-lg-6">
                                         <h4>Address</h4>
-                                        <p>19 Banana Street East Legon, Accra</p>
+                                        <p>{{model.formerEmployerAddress}}</p>
                                       </div>
                                       <div class="col-lg-6">
                                         <h4>Phone Number</h4>
-                                        <p>+233 288 77 22 77</p>
+                                        <p>{{model.formerEmployerPhoneNumber}}</p>
                                       </div>
                                   </div>
                                 </div>
@@ -112,32 +112,22 @@
     </div>
 </template>
 <script>
+import { mapState } from 'vuex'
+
   export default {
     name: 'user-profile',
     beforeCreate () {
       //get id and make api call to single driver service
       console.log(this.$route.params.id);
-      console.log("Before Create");
-    },
-    data() {
-      return {
-        model: {
-          username: '',
-          email: '',
-          firstName: '',
-          lastName: '',
-          address: '',
-          city: '',
-          country: '',
-          zipCode: '',
-          about: '',
-        }
-      }
     },
     computed: {
+      ...mapState(['driver']),
       namer() {
         return localStorage.uberName
-      }
+      },
+      model(){
+        return this.driver.driver
+      },
     },
   };
 </script>
