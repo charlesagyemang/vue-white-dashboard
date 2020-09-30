@@ -42,13 +42,25 @@
                            <div class="col-md-3">
                              <h5 class="text-uppercase text-muted">Car Owner</h5>
                              <multiselect
-                                  v-model="carForm.carOwner"
+                                  v-model="carForm.owner"
                                   deselect-label="Can't remove this value"
                                   track-by="fullName"
                                   label="fullName"
                                   placeholder="Select one"
                                   :searchable="true"
                                   :options="owner.owners">
+                              </multiselect>
+                           </div>
+                           <div class="col-md-3">
+                             <h5 class="text-uppercase text-muted">Current Driver</h5>
+                             <multiselect
+                                  v-model="carForm.driver"
+                                  deselect-label="Can't remove this value"
+                                  track-by="fullName"
+                                  label="fullName"
+                                  placeholder="Select one"
+                                  :searchable="true"
+                                  :options="driver.drivers">
                               </multiselect>
                            </div>
                            <div class="col-md-3">
@@ -180,26 +192,47 @@ export default {
     },
 
     handleUpdateCar() {
-      console.log(JSON.stringify(this.carForm));
 
-      // this.$store.dispatch('car/editCar', {
-      //   carId: this.$routes.params.id,
-      //   carDataToUpdate: this.carForm,
-      // })
-      // .then((car) =>{
-      //   this.modals.updateCarStatusModal = false;
-      //   this.$notify({
-      //     type: 'success',
-      //     title: `Status Updated Successfully. Changed To ${car.status}`,
-      //   });
-      // }).catch((error) => {
-      //   this.modals.updateCarStatusModal = false;
-      //   this.$notify({
-      //     type: 'danger',
-      //     title: `Status Failed To Update: Error => ${error.message}`,
-      //   });
-      // });
-      
+
+      const bodyToSend = {
+        modelName: this.carForm.modelName,
+        modelYear: this.carForm.modelYear,
+        color: this.carForm.color,
+        status: this.carForm.status,
+        carStatus: this.carForm.carStatus,
+        carType: this.carForm.carType,
+        costOfAquiring: this.carForm.costOfAquiring,
+        carWorkingCity: this.carForm.carWorkingCity, //ACCRA GHANA
+        carOwnerId: this.carForm.owner.id,// OWNERID
+        serviceType: this.carForm.serviceType, // UBER-SERVICES, TAXI-SERVICES, DUMP-TRACK-SEVICES
+        dateRegistered: this.carForm.dateRegistered,// 22ND MARCH 2021
+        carNumber: this.carForm.carNumber, // GS 4567 - 20
+        costOfShipping: this.carForm.costOfShipping, // $890
+        costOfClearing: this.carForm.costOfClearing, // GHC 39493
+        costOfSettingUp: this.carForm.costOfSettingUp, // GHC 7,000
+      }
+
+      console.log(JSON.stringify(bodyToSend));
+
+      this.$store.dispatch('car/editCar', {
+        carId: this.$route.params.id,
+        carDataToUpdate: bodyToSend,
+      })
+      .then(() =>{
+        this.$notify({
+          type: 'success',
+          title: `Updated Successfully`,
+        });
+        this.$router.push({
+          path: '/dashboard/car-list',
+        })
+      }).catch((error) => {
+        this.$notify({
+          type: 'danger',
+          title: `Status Failed To Update: Error => ${error.message}`,
+        });
+      });
+
     },//handleUpdateCarStatus
 
 
