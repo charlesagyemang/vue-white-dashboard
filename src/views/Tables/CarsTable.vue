@@ -26,7 +26,7 @@
           <th>Cost</th>
           <th>OP City</th>
           <th>Owner</th>
-          <th>Completion</th>
+          <th>Driver</th>
         </template>
 
         <template slot-scope="{row}">
@@ -78,17 +78,22 @@
             {{row.carWorkingCity}}
           </td>
 
-          <td class="car">
-            Name: {{row.carOwner.name}}<br>
-            Email: {{row.carOwner.email}}<br>
-            City: {{row.carOwner.city}}<br>
+          <td  class="car">
+            Name: {{row.owner.fullName}}<br>
+            Email: {{row.owner.email}}<br>
+            City: {{row.owner.phoneNumber}}<br>
           </td>
 
-          <td class="current-driver">
-            Name: {{row.currentDriver.name}}<br>
-            Location: {{row.currentDriver.email}}<br>
-            City: {{row.currentDriver.city}}<br>
+          <td v-if="row.driver" class="current-driver">
+            Name: {{row.driver.fullName}}<br>
+            Location: {{row.driver.email}}<br>
+            City: {{row.driver.phoneNumber}}<br>
           </td>
+
+          <td v-else class="current-driver">
+            Driver Has Not Been Assigned
+          </td>
+
 
 
 
@@ -421,7 +426,7 @@ import store from '@/store/store'
         selectedCar: {},
         currentlySelectedCAr: {},
         carForm: {
-          currentDriver: '',
+          driver: '',
           dateRegistered: '',
         },
         allCarStatusList: [

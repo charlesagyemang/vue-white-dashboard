@@ -13,15 +13,15 @@ export default {
     return apiClient.get('/car/get/all', headers(token));
   },
   getCar (token, id) {
-    return apiClient.get(`/mock/cars/${id}`, headers(token))
+    return apiClient.get(`/car/${id}`, headers(token))
   },
   postCar (token, car) {
-    return apiClient.post('/mock/create.new', car, headers(token))
+    return apiClient.post('/car/create', car, headers(token))
   },
   editCar (token, carId, carDataToUpdate) {
-    return apiClient.patch(`/mock/cars/edit/${carId}`, carDataToUpdate, headers(token))
+    return apiClient.patch(`/car/edit/${carId}`, carDataToUpdate, headers(token))
   },
   deleteCar (token, carIdToDelete) {
-    return apiClient.delete(`/mock/cars/delete/${carIdToDelete}`, headers(token))
+    return apiClient.delete(`/car/delete/${carIdToDelete}`, headers(token))
   }
 }

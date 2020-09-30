@@ -41,6 +41,9 @@
                 <button @click.prevent="handleOwnerActions(row.id, `/dashboard/view-single-driver/${row.id}`)" class="dropdown-item">View Full Details</button>
                 <button @click.prevent="handleOwnerActions(row.id, `/dashboard/edit-single-driver/${row.id}`)" class="dropdown-item">Edit Driver</button>
                 <button @click="handleModalOpenings(row, 'attachACarModal')" class="dropdown-item">Assign A Car To Driver</button>
+                <button @click="handleModalOpenings(row, 'personalDetailsModal')" class="dropdown-item">Edit Basic Details</button>
+                <button @click="handleModalOpenings(row, 'guarantorDetailsModal')" class="dropdown-item">Edit Guarantor Details</button>
+                <button @click="handleModalOpenings(row, 'formerEmployerDetailsModal')" class="dropdown-item">Edit Former Employer Details</button>
                 <button @click="handleModalOpenings(row, 'changeCarAssignmentModal')" class="dropdown-item">Change Car Assignment Status</button>
                 <button @click="handleModalOpenings(row, 'updateDriverStatusModal')" class="dropdown-item">Change Driver Status</button>
               </template>
@@ -155,16 +158,167 @@
                       class="border-0">
                     <template>
                         <div class="text-center text-muted mb-4">
-                            <h4>Update (Driver Name) Status</h4>
+                            <h4> Change Driver Status </h4>
                         </div>
                         <form role="form">
                            <multiselect
                              v-model="selectedDriverStatus"
                              :options="allCarStatus">
-                          </multiselect>
-                          <div class="text-center">
-                              <base-button @click.prevent="handleUpdateDriverStatus" type="success" class="my-4">Submit</base-button>
-                          </div>
+                           </multiselect>
+                            <div class="text-center">
+                                <base-button @click.prevent="handleUpdateDriverStatus" type="success" class="my-4">Submit</base-button>
+                            </div>
+                        </form>
+                    </template>
+                </card>
+            </modal>
+        </div>
+
+        <div class="col-md-4">
+            <modal :show.sync="modals.personalDetailsModal"
+                   body-classes="p-0"
+                   modal-classes="modal-dialog-centered modal-sm">
+                <card type="secondary" shadow
+                      header-classes="bg-white pb-5"
+                      body-classes="px-lg-5 py-lg-5"
+                      class="border-0">
+                    <template>
+                        <div class="text-center text-muted mb-4">
+                            <h4>Update {{currentlySelectedDriver.fullName}}'s details</h4>
+                        </div>
+                        <form role="form">
+                          <h5 class="text-uppercase text-muted">Full Name ( {{currentlySelectedDriver.fullName}} )</h5>
+                           <base-input
+                              v-model="personalDetailsForm.fullName"
+                              addon-left-icon="ni ni-key-25"
+                              :placeholder="currentlySelectedDriver.fullName"
+                              >
+                            </base-input>
+
+                              <h5 class="text-uppercase text-muted">Phone Number ( {{currentlySelectedDriver.phoneNumber}} )</h5>
+                              <base-input
+                                 v-model="personalDetailsForm.phoneNumber"
+                                 addon-left-icon="ni ni-money-coins"
+                                 :placeholder="currentlySelectedDriver.phoneNumber"
+                                 >
+                               </base-input>
+
+                              <h5 class="text-uppercase text-muted">Address ( {{currentlySelectedDriver.address}} )</h5>
+                              <base-input
+                                 v-model="personalDetailsForm.address"
+                                 addon-left-icon="ni ni-money-coins"
+                                 :placeholder="currentlySelectedDriver.address"
+                                 >
+                               </base-input>
+                            <div class="text-center">
+                                <base-button @click.prevent="handleUpdatePersonalDetails" type="primary" class="my-4">Submit</base-button>
+                            </div>
+                        </form>
+                    </template>
+                </card>
+            </modal>
+        </div>
+
+        <div class="col-md-4">
+            <modal :show.sync="modals.guarantorDetailsModal"
+                   body-classes="p-0"
+                   modal-classes="modal-dialog-centered modal-sm">
+                <card type="secondary" shadow
+                      header-classes="bg-white pb-5"
+                      body-classes="px-lg-5 py-lg-5"
+                      class="border-0">
+                    <template>
+                        <div class="text-center text-muted mb-4">
+                            <h4>Update {{currentlySelectedDriver.fullName}}'s details</h4>
+                        </div>
+                        <form role="form">
+                          <h5 class="text-uppercase text-muted">Guarantor Full Name ( {{currentlySelectedDriver.guarantorFullName}} )</h5>
+                           <base-input
+                              v-model="guarantorDetailsForm.guarantorFullName"
+                              addon-left-icon="ni ni-key-25"
+                              :placeholder="currentlySelectedDriver.guarantorFullName"
+                              >
+                            </base-input>
+
+                              <h5 class="text-uppercase text-muted">Guarantor Phone Number ( {{currentlySelectedDriver.guarantorPhoneNumber}} )</h5>
+                              <base-input
+                                 v-model="guarantorDetailsForm.guarantorPhoneNumber"
+                                 addon-left-icon="ni ni-money-coins"
+                                 :placeholder="currentlySelectedDriver.guarantorPhoneNumber"
+                                 >
+                               </base-input>
+                               <h5 class="text-uppercase text-muted"> Email ( {{currentlySelectedDriver.guarantorEmail}} )</h5>
+                               <base-input
+                                  v-model="guarantorDetailsForm.guarantorEmail"
+                                  addon-left-icon="ni ni-money-coins"
+                                  :placeholder="currentlySelectedDriver.guarantorEmail"
+                                  >
+                                </base-input>
+
+                              <h5 class="text-uppercase text-muted">Address ( {{currentlySelectedDriver.guarantorAddress}} )</h5>
+                              <base-input
+                                 v-model="guarantorDetailsForm.guarantorAddress"
+                                 addon-left-icon="ni ni-money-coins"
+                                 :placeholder="currentlySelectedDriver.guarantorAddress"
+                                 >
+                               </base-input>
+                            <div class="text-center">
+                                <base-button @click.prevent="handleUpdateGuarantorDetails" type="primary" class="my-4">Submit</base-button>
+                            </div>
+                        </form>
+                    </template>
+                </card>
+            </modal>
+        </div>
+
+
+        <div class="col-md-4">
+            <modal :show.sync="modals.formerEmployerDetailsModal"
+                   body-classes="p-0"
+                   modal-classes="modal-dialog-centered modal-sm">
+                <card type="secondary" shadow
+                      header-classes="bg-white pb-5"
+                      body-classes="px-lg-5 py-lg-5"
+                      class="border-0">
+                    <template>
+                        <div class="text-center text-muted mb-4">
+                            <h4>Update {{currentlySelectedDriver.fullName}}'s details</h4>
+                        </div>
+                        <form role="form">
+                          <h5 class="text-uppercase text-muted">Guarantor Full Name ( {{currentlySelectedDriver.formerEmployerFullName}} )</h5>
+                           <base-input
+                              v-model="guarantorDetailsForm.formerEmployerFullName"
+                              addon-left-icon="ni ni-key-25"
+                              :placeholder="currentlySelectedDriver.formerEmployerFullName"
+                              >
+                            </base-input>
+
+                              <h5 class="text-uppercase text-muted"> Phone Number ( {{currentlySelectedDriver.formerEmployerPhoneNumber}} )</h5>
+                              <base-input
+                                 v-model="guarantorDetailsForm.formerEmployerPhoneNumber"
+                                 addon-left-icon="ni ni-money-coins"
+                                 :placeholder="currentlySelectedDriver.formerEmployerPhoneNumber"
+                                 >
+                               </base-input>
+
+                               <h5 class="text-uppercase text-muted"> Email ( {{currentlySelectedDriver.formerEmployerEmail}} )</h5>
+                               <base-input
+                                  v-model="guarantorDetailsForm.formerEmployerEmail"
+                                  addon-left-icon="ni ni-money-coins"
+                                  :placeholder="currentlySelectedDriver.formerEmployerEmail"
+                                  >
+                                </base-input>
+
+                              <h5 class="text-uppercase text-muted">Address ( {{currentlySelectedDriver.formerEmployerAddress}} )</h5>
+                              <base-input
+                                 v-model="guarantorDetailsForm.formerEmployerAddress"
+                                 addon-left-icon="ni ni-money-coins"
+                                 :placeholder="currentlySelectedDriver.formerEmployerAddress"
+                                 >
+                               </base-input>
+                            <div class="text-center">
+                                <base-button @click.prevent="handleUpdateFormerEmployerDetails" type="primary" class="my-4">Submit</base-button>
+                            </div>
                         </form>
                     </template>
                 </card>
@@ -277,30 +431,105 @@ import store from '@/store/store'
       },//handleUpdateDriverStatus
 
 
+      handleUpdatePersonalDetails() {
+
+        console.log(this.personalDetailsForm);
+        console.log(this.currentlySelectedDriver.id);
+
+
+        store.dispatch('driver/editDriver', {
+          driverId: this.currentlySelectedDriver.id,
+          driverDataToUpdate: this.personalDetailsForm,
+        })
+        .then((driver) =>{
+          this.modals.personalDetailsModal = false;
+          this.$notify({
+            type: 'success',
+            title: `Status Updated Successfully. Changed To ${driver.driverStatus}`,
+          });
+        }).catch((error) => {
+          this.modals.personalDetailsModal = false;
+          this.$notify({
+            type: 'danger',
+            title: `Status Failed To Update: Error => ${error.message}`,
+          });
+        });
+
+      },//handleUpdatePersonalDetails
+
+      handleUpdateGuarantorDetails() {
+
+        console.log(this.guarantorDetailsForm);
+        console.log(this.currentlySelectedDriver.id);
+
+
+        store.dispatch('driver/editDriver', {
+          driverId: this.currentlySelectedDriver.id,
+          driverDataToUpdate: this.guarantorDetailsForm,
+        })
+        .then(() =>{
+          this.modals.guarantorDetailsModal = false;
+          this.$notify({
+            type: 'success',
+            title: `Updated Successfully`,
+          });
+        }).catch((error) => {
+          this.modals.guarantorDetailsModal = false;
+          this.$notify({
+            type: 'danger',
+            title: `Status Failed To Update: Error => ${error.message}`,
+          });
+        });
+
+      },//handleUpdateGuarantorDetails
+
+
+      handleUpdateFormerEmployerDetails() {
+
+        console.log(this.guarantorDetailsForm);
+        console.log(this.currentlySelectedDriver.id);
+
+
+        store.dispatch('driver/editDriver', {
+          driverId: this.currentlySelectedDriver.id,
+          driverDataToUpdate: this.guarantorDetailsForm,
+        })
+        .then(() =>{
+          this.modals.formerEmployerDetailsModal = false;
+          this.$notify({
+            type: 'success',
+            title: `Updated Successfully`,
+          });
+        }).catch((error) => {
+          this.modals.formerEmployerDetailsModal = false;
+          this.$notify({
+            type: 'danger',
+            title: `Status Failed To Update: Error => ${error.message}`,
+          });
+        });
+
+      },//handleUpdateFormerEmployerDetails
+
+
       handleAttachCarToDriver() {
-        let currentDriver = this.currentlySelectedDriver;
-        let driverId = currentDriver.id;
-        console.log(driverId);
-        delete currentDriver.id;
-        delete currentDriver.carId;
-        currentDriver = {
-          ...currentDriver,
+
+        let currentDriver = {
           carId: this.selectedCarToAddToDriver.id,
           carAssignmentStatus: "ASSIGNED",
           driverStatus: "ASSIGNED_CAR",
         };
 
-        console.log(JSON.stringify(currentDriver));
+        console.log(currentDriver);
 
         store.dispatch('driver/editDriver', {
-          driverId,
+          driverId: this.currentlySelectedDriver.id,
           driverDataToUpdate: currentDriver
         })
-        .then((driver) =>{
+        .then(() =>{
           this.modals.attachACarModal = false;
           this.$notify({
             type: 'success',
-            title: `Status Updated Successfully. Changed To ${driver.carId}`,
+            title: `Updated Successfully`,
           });
         }).catch((error) => {
           this.modals.attachACarModal = false;
@@ -336,6 +565,9 @@ import store from '@/store/store'
           attachACarModal: false,
           updateDriverStatusModal: false,
           changeCarAssignmentModal: false,
+          personalDetailsModal: false,
+          formerEmployerDetailsModal: false,
+          guarantorDetailsModal: false,
         },
         total: 30,
         allCarStatus: [
@@ -356,6 +588,12 @@ import store from '@/store/store'
           "ASSIGNED",
           "TAKEN_AWAY",
         ],
+        allDriverStatus: [
+          "active",
+          "inactive",
+        ],
+        personalDetailsForm: {},
+        guarantorDetailsForm: {},
       }
     },
     computed: {

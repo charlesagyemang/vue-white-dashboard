@@ -38,11 +38,11 @@
                          <div class="row">
                            <div class="col-md-3">
                                <h5 class="text-uppercase text-muted">Car Working City</h5>
-                               <base-input addon-left-icon="ni ni-square-pin" placeholder="E.g Accra"></base-input>
+                               <base-input v-model="carForm.carWorkingCity" addon-left-icon="ni ni-square-pin" placeholder="E.g Accra"></base-input>
                            </div>
                            <div class="col-md-3">
                              <h5 class="text-uppercase text-muted">Car Owner</h5>
-                             <multiselect v-model="carForm.carOwner" label="fullName" :options="owner.owners"></multiselect>
+                             <multiselect v-model="carForm.carOwnerId" label="fullName" :options="owner.owners"></multiselect>
                            </div>
                            <div class="col-md-3">
                                <h5 class="text-uppercase text-muted">Current Driver</h5>
@@ -192,14 +192,15 @@ export default {
     }// end of data
   },
   methods: {
-    handleCreateCar() {
+    handleCreateCar(e) {
+      e.preventDefault();
       // required:
       const requiredBody = {
         modelName: this.carForm.modelName,
         modelYear: this.carForm.modelYear,
         color: this.carForm.color,
         carStatus: this.carForm.carStatus,
-        carOwner: this.carForm.carOwner,
+        carOwnerId: this.carForm.carOwnerId,
         carType: this.carForm.carType,
         costOfAquiring: this.carForm.costOfAquiring,
       }
@@ -209,7 +210,35 @@ export default {
       if (noneIsEmpty) {
         console.log("noneIsEmpty", "Go Ahead Create A Car");
         // CREATE A Car
-        console.log(JSON.stringify(this.carForm));
+
+        const bodyToSend = {
+          modelName: this.carForm.modelName,
+          modelYear: this.carForm.modelYear,
+          color: this.carForm.color,
+          status: "active",
+          carStatus: this.carForm.carStatus,
+          carType: this.carForm.carType,
+          costOfAquiring: this.carForm.costOfAquiring,
+          carWorkingCity: this.carForm.carWorkingCity, //ACCRA GHANA
+          carOwnerId: this.carForm.carOwnerId.id,// OWNERID
+          currentDriverId: this.carForm.currentDriverId.id, // FULL DRIVER DETAILS
+          serviceType: this.carForm.serviceType, // UBER-SERVICES, TAXI-SERVICES, DUMP-TRACK-SEVICES
+          dateRegistered: this.carForm.dateRegistered, // 22ND MARCH 2021
+          carNumber: this.carForm.carNumber, // GS 4567 - 20
+          costOfShipping: this.carForm.costOfShipping, // $890
+          costOfClearing: this.carForm.costOfClearing, // GHC 39493
+          costOfSettingUp: this.carForm.costOfSettingUp, // GHC 7,000
+        }
+
+        //
+        console.log(JSON.stringify(bodyToSend));
+        this.$store.dispatch('car/createCar', bodyToSend)
+        .then((car) => {
+          console.log("Yess", car);
+        }).catch((err) => {
+          console.log(err.message);
+        })
+        // console.log(driverId, ownerId);
       } else {
         alert("Error!! Please Fill All Required Fields")
         this.validationError = true;

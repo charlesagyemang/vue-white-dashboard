@@ -61,6 +61,7 @@ export const actions = {
     // eslint-disable-next-line
     return CarService.editCar(localStorage.uberToken, carId, carDataToUpdate)
     .then((response) => {
+      console.log("==edit====", response.data);
       commit('UPDATE_CAR', response.data)
       return response.data
     }).catch((error) => {

@@ -158,20 +158,20 @@
                                     </div>
                                     <div class="col-lg-6">
                                         <base-input alternative=""
-                                                    label="Email address"
+                                                    :label="'Email address ' + model.formerEmployerEmail || '' "
                                                     placeholder="jesse@example.com"
                                                     input-classes="form-control-alternative"
-                                                    v-model="model.formerEmployerEmail"
+                                                    v-model="newModel.formerEmployerEmail"
                                         />
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-lg-6">
                                         <base-input alternative=""
-                                                    label="Phone Number"
+                                                    :label="'Phone Number ' + model.formerEmployerPhoneNumber || '' "
                                                     placeholder="+1 354 88 77 22"
                                                     input-classes="form-control-alternative"
-                                                    v-model="model.formerEmployerPhoneNumber"
+                                                    v-model="newModel.formerEmployerPhoneNumber"
                                         />
                                     </div>
                                     <div class="col-lg-6">
@@ -209,21 +209,36 @@ export default {
       return this.driver.driver;
     },
   },
+  data () {
+    return {
+      newModel: {},
+    }
+  },
   methods: {
     handleEditOwner() {
-      const data = this.model;
-      const dataId = data.id;
 
-      delete data.carId
-      delete data.userId
-      delete data.other
-      delete data.createdAt
-      delete data.updatedAt
-      delete data.id
+      // const ownerDataToUpdate = {
+      //   fullName: this.model.fullName,
+      //   email: this.model.email,
+      //   phoneNumber: this.model.phoneNumber,
+      //   address: this.model.address,
+      //   guarantorFullName: this.model.guarantorFullName || "",
+      //   guarantorEmail: this.model.guarantorEmail  || "",
+      //   guarantorPhoneNumber: this.model.guarantorPhoneNumber || "",
+      //   guarantorAddress: this.model.guarantorAddress || "",
+      //   formerEmployerFullName: this.model.formerEmployerFullName || "",
+      //   formerEmployerEmail: this.model.formerEmployerEmail || "",
+      //   formerEmployerPhoneNumber: this.model.formerEmployerPhoneNumber || "",
+      //   formerEmployerAddress: this.model.formerEmployerAddress || "",
+      // }
 
+      console.log(this.newModel);
+
+      //
       this.$store.dispatch('driver/editDriver', {
-        driverId: dataId,
-        ownerDataToUpdate: data})
+        driverId: this.model.id,
+        ownerDataToUpdate: this.newModel,
+      })
       .then((driver) =>{
         console.log("=====", driver);
         this.$notify({
