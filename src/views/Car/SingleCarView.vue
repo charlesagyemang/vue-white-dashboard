@@ -50,11 +50,11 @@
                                         </div>
                                         <div class="col-lg-3">
                                           <h4>Car Owner</h4>
-                                          <p>{{model.carOwner.name}}</p>
+                                          <p></p>
                                         </div>
                                         <div class="col-lg-3">
                                           <h4>Current Driver</h4>
-                                          <p>{{model.currentDriver.name}}</p>
+                                          <p></p>
                                         </div>
                                         <div class="col-lg-3">
                                           <h4>Car Type</h4>

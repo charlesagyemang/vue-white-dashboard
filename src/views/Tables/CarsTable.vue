@@ -55,7 +55,7 @@
           <th scope="row">
             <div class="media align-items-center">
               <a href="#" class="avatar rounded-circle mr-3">
-                <img alt="Car Image" :src="row.imageUrl">
+                <img alt="Car Image" src="/img/cars/picanto2.jpg">
               </a>
               <div class="media-body">
                 <span class="name mb-0 text-sm">{{row.modelName}} {{row.modelYear}}</span>
@@ -69,9 +69,8 @@
             </badge>
           </td>
           <td class="cost-of-aquiring">
-            Aquiring: {{row.costOfAquiring}}<br>
-            Shipping: {{row.costOfAquiring}}<br>
-            Clearing: {{row.costOfAquiring}}<br>
+            Aquiring: {{row.costOfAquiring || "NAN"}}<br>
+            Shipping: {{row.costOfShipping || "NAN"}}<br>
           </td>
 
           <td class="op-city">
