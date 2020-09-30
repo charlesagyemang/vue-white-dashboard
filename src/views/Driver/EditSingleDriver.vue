@@ -217,21 +217,6 @@ export default {
   methods: {
     handleEditOwner() {
 
-      // const ownerDataToUpdate = {
-      //   fullName: this.model.fullName,
-      //   email: this.model.email,
-      //   phoneNumber: this.model.phoneNumber,
-      //   address: this.model.address,
-      //   guarantorFullName: this.model.guarantorFullName || "",
-      //   guarantorEmail: this.model.guarantorEmail  || "",
-      //   guarantorPhoneNumber: this.model.guarantorPhoneNumber || "",
-      //   guarantorAddress: this.model.guarantorAddress || "",
-      //   formerEmployerFullName: this.model.formerEmployerFullName || "",
-      //   formerEmployerEmail: this.model.formerEmployerEmail || "",
-      //   formerEmployerPhoneNumber: this.model.formerEmployerPhoneNumber || "",
-      //   formerEmployerAddress: this.model.formerEmployerAddress || "",
-      // }
-
       console.log(this.newModel);
 
       //
