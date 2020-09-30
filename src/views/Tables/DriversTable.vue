@@ -39,7 +39,7 @@
               </a>
               <template>
                 <button @click.prevent="handleOwnerActions(row.id, `/dashboard/view-single-driver/${row.id}`)" class="dropdown-item">View Full Details</button>
-                <button @click.prevent="handleOwnerActions(row.id, `/dashboard/edit-single-driver/${row.id}`)" class="dropdown-item">Edit Driver</button>
+                <!-- <button @click.prevent="handleOwnerActions(row.id, `/dashboard/edit-single-driver/${row.id}`)" class="dropdown-item">Edit Driver</button> -->
                 <button @click="handleModalOpenings(row, 'attachACarModal')" class="dropdown-item">Assign A Car To Driver</button>
                 <button @click="handleModalOpenings(row, 'personalDetailsModal')" class="dropdown-item">Edit Basic Details</button>
                 <button @click="handleModalOpenings(row, 'guarantorDetailsModal')" class="dropdown-item">Edit Guarantor Details</button>
