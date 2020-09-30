@@ -44,24 +44,12 @@
                              <multiselect
                                   v-model="carForm.carOwner"
                                   deselect-label="Can't remove this value"
-                                  track-by="name"
-                                  label="name"
+                                  track-by="fullName"
+                                  label="fullName"
                                   placeholder="Select one"
                                   :searchable="true"
-                                  :options="carOwnersList">
+                                  :options="owner.owners">
                               </multiselect>
-                           </div>
-                           <div class="col-md-3">
-                               <h5 class="text-uppercase text-muted">Current Driver</h5>
-                               <multiselect
-                                  v-model="carForm.currentDriver"
-                                  deselect-label="Can't remove this value"
-                                  track-by="name"
-                                  label="name"
-                                  placeholder="Select one"
-                                  :searchable="true"
-                                  :options="allDriversList">
-                               </multiselect>
                            </div>
                            <div class="col-md-3">
                              <h5 class="text-uppercase text-muted">Car Type</h5>
@@ -117,7 +105,7 @@
                          <div class="row">
                            <div class="col">
                              <div class="text-center">
-                                 <base-button @click.prevent="handleCreateCar" block  type="primary" size="lg" class="my-4">Update Car Details</base-button>
+                                 <base-button @click.prevent="handleUpdateCar" block  type="primary" size="lg" class="my-4">Update Car Details</base-button>
                              </div>
                            </div>
                            <div class="col">
@@ -141,16 +129,22 @@ import { mapState } from 'vuex'
 
 export default {
 
+  beforeCreate(){
+    if (this.$store.state.driver.drivers.length < 1) {
+      this.$store.dispatch('driver/fetchDrivers').then(() =>{
+          console.log(this.driver.drivers );
+      });
+    }
+
+    if (this.$store.state.owner.owners.length < 1) {
+      this.$store.dispatch('owner/fetchOwners').then(() =>{
+          console.log(this.owner.owners );
+      });
+    }
+  },
+
   data(){
     return {
-      createOwner: {
-        username: '',
-        email: '',
-        phoneNumber: '',
-        address: '',
-        country: '',
-        other: {},
-      },
       validationError: false,
       carStatusList: [
         'BOUGHT',
@@ -160,40 +154,6 @@ export default {
         'WORKING',
         'SOLD',
         'GIVEN_OUT'
-      ],
-      carOwnersList: [
-        {
-          "name": "Owner - 1",
-          "email": "email - owner1@email.com",
-          "address": "Western Cape21"
-        },
-        {
-          "name": "Owner - 2",
-          "email": "email - owner2@email.com",
-          "address": "Western Cape21"
-        },
-        {
-          "name": "Owner - 21",
-          "email": "email - owner3@email.com",
-          "address": "Western Cape21"
-        },
-      ],
-      allDriversList: [
-        {
-          "name": "Driver - 1",
-          "email": "email - driver1@email.com",
-          "address": "Western Cape21"
-        },
-        {
-          "name": "Driver - 2",
-          "email": "email - driver2@email.com",
-          "address": "Western Cape21"
-        },
-        {
-          "name": "Driver - 21",
-          "email": "email - driver21@email.com",
-          "address": "Western Cape21"
-        },
       ],
       carServiceTypeList: [
         'UBER-SERVICES',
@@ -205,7 +165,6 @@ export default {
         'HUNCK BACK',
         'TRUCK'
       ],
-
     }// end of data
   },
   methods: {
@@ -219,6 +178,31 @@ export default {
         alert("Error!! Please Fill All Required Fields")
       }
     },
+
+    handleUpdateCar() {
+      console.log(JSON.stringify(this.carForm));
+
+      // this.$store.dispatch('car/editCar', {
+      //   carId: this.$routes.params.id,
+      //   carDataToUpdate: this.carForm,
+      // })
+      // .then((car) =>{
+      //   this.modals.updateCarStatusModal = false;
+      //   this.$notify({
+      //     type: 'success',
+      //     title: `Status Updated Successfully. Changed To ${car.status}`,
+      //   });
+      // }).catch((error) => {
+      //   this.modals.updateCarStatusModal = false;
+      //   this.$notify({
+      //     type: 'danger',
+      //     title: `Status Failed To Update: Error => ${error.message}`,
+      //   });
+      // });
+      
+    },//handleUpdateCarStatus
+
+
     validateBody(payload){
       delete payload.other
       let meto = true
@@ -234,7 +218,7 @@ export default {
     },
   },
   computed: {
-    ...mapState(['car']),
+    ...mapState(['car', 'driver', 'owner']),
     carForm(){
       return this.car.car;
     },

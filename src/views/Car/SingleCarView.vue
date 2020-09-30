@@ -112,12 +112,6 @@
 <script>
 import { mapState } from 'vuex'
   export default {
-    name: 'user-profile',
-    beforeCreate () {
-      //get id and make api call to single driver service
-      console.log(this.$route.params.id);
-      console.log("Before Create");
-    },
     computed: {
       ...mapState(['car']),
       namer() {

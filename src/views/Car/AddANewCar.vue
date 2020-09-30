@@ -215,7 +215,7 @@ export default {
           modelName: this.carForm.modelName,
           modelYear: this.carForm.modelYear,
           color: this.carForm.color,
-          status: "active",
+          status: "status",
           carStatus: this.carForm.carStatus,
           carType: this.carForm.carType,
           costOfAquiring: this.carForm.costOfAquiring,
@@ -235,8 +235,19 @@ export default {
         this.$store.dispatch('car/createCar', bodyToSend)
         .then((car) => {
           console.log("Yess", car);
+          this.$notify({
+            type: 'success',
+            title: `Created Successfully`,
+          });
+          this.$router.push({
+            path: '/dashboard/car-list',
+          });
         }).catch((err) => {
           console.log(err.message);
+          this.$notify({
+            type: 'danger',
+            title: `Status Failed To Update: Error => ${err.message}`,
+          });
         })
         // console.log(driverId, ownerId);
       } else {

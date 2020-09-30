@@ -52,7 +52,7 @@
           <th scope="username">
             <div class="media align-items-center">
               <a href="#" class="avatar rounded-circle mr-3">
-                <img alt="Car Image" :src="row.imageUrl">
+                <img alt="Car Image" src="/img/cars/picanto2.jpg">
               </a>
               <div class="media-body">
                 <span class="name mb-0 text-sm">{{row.fullName}}</span>

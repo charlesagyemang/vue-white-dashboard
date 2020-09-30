@@ -208,7 +208,14 @@ export default {
   },
   methods: {
     handlecreateDriver() {
-      const noneIsEmpty = this.validateBody(this.createDriver);
+
+      const noneIsEmpty = this.validateBody({
+        fullName: this.createDriver.fullName,
+        email: this.createDriver.email,
+        phoneNumber: this.createDriver.phoneNumber,
+        address: this.createDriver.address,
+      });
+
       if (noneIsEmpty) {
         console.log("noneIsEmpty", "Go Agead Create Owner");
         // CREATE OWNER

@@ -27,6 +27,8 @@
           <th>OP City</th>
           <th>Owner</th>
           <th>Driver</th>
+          <th>Car Status</th>
+
         </template>
 
         <template slot-scope="{row}">
@@ -41,7 +43,7 @@
               <template>
                 <button @click.prevent="handleOwnerActions(row.id, `/dashboard/view-single-car/${row.id}`)" class="dropdown-item">View Full Details</button>
                 <button @click.prevent="handleOwnerActions(row.id, `/dashboard/edit-single-car/${row.id}`)" class="dropdown-item">Edit Car</button>
-                <button @click="handleModalOpenings(row, 'updateCarStatusModal')" class="dropdown-item">Update Owner Status</button>
+                <button @click="handleModalOpenings(row, 'updateCarStatusModal')" class="dropdown-item">Update Car Status</button>
                 <button @click="handleModalOpenings(row, 'addInsurance')" class="dropdown-item">Add Insurance</button>
                 <button @click="handleModalOpenings(row, 'addRoadWorthy')" class="dropdown-item">Add Road Worthy</button>
                 <button @click="handleModalOpenings(row, 'addIncomeTax')" class="dropdown-item">Add Income Tax</button>
@@ -93,8 +95,9 @@
             Driver Has Not Been Assigned
           </td>
 
-
-
+          <td class="carStatus">
+            {{row.carStatus}}
+          </td>
 
         </template>
 
@@ -520,18 +523,13 @@ import store from '@/store/store'
       },//handleOwnerActions
 
       handleUpdateCarStatus() {
-        let currentCar = this.car.car;
-        let carId = currentCar.id;
-        console.log(carId);
-        delete currentCar.status;
-        delete currentCar.id;
-        currentCar = {
-          ...currentCar,
-          status: this.selectedCarStatus,
+
+        let currentCar = {
+          carStatus: this.selectedCarStatus,
         };
 
         store.dispatch('car/editCar', {
-          carId,
+          carId: this.currentlySelectedCAr.id,
           carDataToUpdate: currentCar
         })
         .then((car) =>{
