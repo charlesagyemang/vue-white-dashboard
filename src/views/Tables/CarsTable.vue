@@ -28,6 +28,12 @@
           <th>Owner</th>
           <th>Driver</th>
           <th>Car Status</th>
+          <th>Insurnace</th>
+          <th>Road Worthy</th>
+          <th>Income Taxes</th>
+          <th>Monthly Expenses</th>
+          <th>Document Links</th>
+
 
         </template>
 
@@ -97,6 +103,26 @@
 
           <td class="carStatus">
             {{row.carStatus}}
+          </td>
+
+          <td class="insurance">
+            {{row.insurances.length}}
+          </td>
+
+          <td class="road-worthy">
+            {{row.roadworthies.length}}
+          </td>
+
+          <td class="income-tax">
+            {{row.incometaxes.length}}
+          </td>
+
+          <td class="monthly-expense">
+            {{row.monthlyexpenses.length}}
+          </td>
+
+          <td class="document-links">
+            {{row.documentlinks.length}}
           </td>
 
         </template>
@@ -349,7 +375,7 @@
                           </base-input>
                           <h5 class="text-uppercase text-muted">Paste Document Link Here</h5>
                            <base-input
-                              v-model="documentLinksForm.link"
+                              v-model="documentLinksForm.itemLink"
                               addon-left-icon="ni ni-briefcase-24"
                               placeholder="Eg. https://drive.google.com/738"
                               >
@@ -481,7 +507,7 @@ import store from '@/store/store'
 
         documentLinksForm: {
           itemName: '',
-          link: '',
+          itemLink: '',
         },// documentLinks Form
 
       }// end of return
@@ -552,6 +578,23 @@ import store from '@/store/store'
         if (isNotEmpty) {
           alert(JSON.stringify(this.insuranceForm));
           // Create insurance
+          store.dispatch('car/addInsurance', {
+            insuranceDetails: {...this.insuranceForm, carId: this.currentlySelectedCAr.id}
+          })
+          .then((car) =>{
+            this.modals.addInsurance = false;
+            this.$notify({
+              type: 'success',
+              title: `Insurance Successfully Added To ${car.status}`,
+            });
+          }).catch((error) => {
+            this.modals.addInsurance = false;
+            this.$notify({
+              type: 'danger',
+              title: `Status Failed To Update: Error => ${error.message}`,
+            });
+          });
+
         } else {
           console.log(isNotEmpty);
           this.$notify({
@@ -564,14 +607,31 @@ import store from '@/store/store'
       handleAddRoadWorthyToCar(){
         const isNotEmpty = this.validateBody(this.roadWorthyForm)
         if (isNotEmpty) {
-          alert(JSON.stringify(this.roadWorthyForm));
+          alert(JSON.stringify({...this.roadWorthyForm, carId: this.currentlySelectedCAr.id}));
           // Create roadWorthy
-        } else {
-          console.log(isNotEmpty);
-          this.$notify({
-            type: 'danger',
-            title: `Error => Please Fill All Fields`,
-          });
+            store.dispatch('car/addRoadworthy', {
+              roadworthyDetails: {...this.roadWorthyForm, carId: this.currentlySelectedCAr.id}
+            })
+            .then((car) =>{
+              this.modals.addRoadWorthy = false;
+              this.$notify({
+                type: 'success',
+                title: `Roadworthy Successfully Added To ${car.status}`,
+              });
+            }).catch((error) => {
+              this.modals.addRoadWorthy = false;
+              this.$notify({
+                type: 'danger',
+                title: `Status Failed To Add: Error => ${error.message}`,
+              });
+            });
+
+          } else {
+            console.log(isNotEmpty);
+            this.$notify({
+              type: 'danger',
+              title: `Error => Please Fill All Fields`,
+            });
         }
       },//handleAddRoadWorthyToCar
 
@@ -580,6 +640,24 @@ import store from '@/store/store'
         if (isNotEmpty) {
           alert(JSON.stringify(this.incomeTaxForm));
           // Create incomeTax
+
+          store.dispatch('car/addIncometax', {
+            incometaxDetails: {...this.incomeTaxForm, carId: this.currentlySelectedCAr.id}
+          })
+          .then((car) =>{
+            this.modals.addIncomeTax = false;
+            this.$notify({
+              type: 'success',
+              title: `Income Tax Successfully Added To ${car.modelName}`,
+            });
+          }).catch((error) => {
+            this.modals.addIncomeTax = false;
+            this.$notify({
+              type: 'danger',
+              title: `Status Failed To Add: Error => ${error.message}`,
+            });
+          });
+
         } else {
           console.log(isNotEmpty);
           this.$notify({
@@ -594,6 +672,22 @@ import store from '@/store/store'
         if (isNotEmpty) {
           alert(JSON.stringify(this.monthlyExpenseForm));
           // Create incomeTax
+          store.dispatch('car/addMonthlyexpense', {
+            monthlyexpenseDetails: {...this.monthlyExpenseForm, carId: this.currentlySelectedCAr.id}
+          })
+          .then((car) =>{
+            this.modals.addMonthlyExpense = false;
+            this.$notify({
+              type: 'success',
+              title: `Monthly Expense Successfully Added To ${car.modelName}`,
+            });
+          }).catch((error) => {
+            this.modals.addMonthlyExpense = false;
+            this.$notify({
+              type: 'danger',
+              title: `Status Failed To Add: Error => ${error.message}`,
+            });
+          });
         } else {
           console.log(isNotEmpty);
           this.$notify({
@@ -608,6 +702,22 @@ import store from '@/store/store'
         if (isNotEmpty) {
           alert(JSON.stringify(this.documentLinksForm));
           // Create incomeTax
+          store.dispatch('car/addDocumentlink', {
+            documentlinkDetails: {...this.documentLinksForm, carId: this.currentlySelectedCAr.id}
+          })
+          .then((car) =>{
+            this.modals.addDocumentLink = false;
+            this.$notify({
+              type: 'success',
+              title: `Monthly Expense Successfully Added To ${car.modelName}`,
+            });
+          }).catch((error) => {
+            this.modals.addDocumentLink = false;
+            this.$notify({
+              type: 'danger',
+              title: `Status Failed To Add: Error => ${error.message}`,
+            });
+          });
         } else {
           console.log(isNotEmpty);
           this.$notify({

@@ -69,6 +69,67 @@ export const actions = {
     })
   },
 
+  addInsurance ({ commit }, { insuranceDetails }) {
+    // eslint-disable-next-line
+    return CarService.postInsurance(localStorage.uberToken, insuranceDetails)
+    .then((response) => {
+      console.log("==edit====", response.data);
+      commit('UPDATE_CAR', response.data)
+      return response.data
+    }).catch((error) => {
+      throw error
+    })
+  },
+
+  addRoadworthy ({ commit }, { roadworthyDetails }) {
+    // eslint-disable-next-line
+    return CarService.postRoadworthy(localStorage.uberToken, roadworthyDetails)
+    .then((response) => {
+      console.log("==edit====", response.data);
+      commit('UPDATE_CAR', response.data)
+      return response.data
+    }).catch((error) => {
+      throw error
+    })
+  },
+
+  /////////////////////
+  addIncometax ({ commit }, { incometaxDetails }) {
+    // eslint-disable-next-line
+    return CarService.postIncometax(localStorage.uberToken, incometaxDetails)
+    .then((response) => {
+      console.log("==edit====", response.data);
+      commit('UPDATE_CAR', response.data)
+      return response.data
+    }).catch((error) => {
+      throw error
+    })
+  },
+
+  addMonthlyexpense ({ commit }, { monthlyexpenseDetails }) {
+    // eslint-disable-next-line
+    return CarService.postMonthlyexpense(localStorage.uberToken, monthlyexpenseDetails)
+    .then((response) => {
+      console.log("==edit====", response.data);
+      commit('UPDATE_CAR', response.data)
+      return response.data
+    }).catch((error) => {
+      throw error
+    })
+  },
+
+  addDocumentlink ({ commit }, { documentlinkDetails }) {
+    // eslint-disable-next-line
+    return CarService.postDocumentlink(localStorage.uberToken, documentlinkDetails)
+    .then((response) => {
+      console.log("==edit====", response.data);
+      commit('UPDATE_CAR', response.data)
+      return response.data
+    }).catch((error) => {
+      throw error
+    })
+  },
+
   fetchCarById ({ commit, getters }, id) {
     const car = getters.getCarById(id)
     commit('SET_CAR', car)

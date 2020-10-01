@@ -190,7 +190,7 @@
                           <h5 class="text-uppercase text-muted">Full Name ( {{currentlySelectedDriver.fullName}} )</h5>
                            <base-input
                               v-model="personalDetailsForm.fullName"
-                              addon-left-icon="ni ni-key-25"
+                              addon-left-icon="ni ni-circle-08"
                               :placeholder="currentlySelectedDriver.fullName"
                               >
                             </base-input>
@@ -198,7 +198,7 @@
                               <h5 class="text-uppercase text-muted">Phone Number ( {{currentlySelectedDriver.phoneNumber}} )</h5>
                               <base-input
                                  v-model="personalDetailsForm.phoneNumber"
-                                 addon-left-icon="ni ni-money-coins"
+                                 addon-left-icon="ni ni-mobile-button"
                                  :placeholder="currentlySelectedDriver.phoneNumber"
                                  >
                                </base-input>
@@ -206,7 +206,7 @@
                               <h5 class="text-uppercase text-muted">Address ( {{currentlySelectedDriver.address}} )</h5>
                               <base-input
                                  v-model="personalDetailsForm.address"
-                                 addon-left-icon="ni ni-money-coins"
+                                 addon-left-icon="ni ni-square-pin"
                                  :placeholder="currentlySelectedDriver.address"
                                  >
                                </base-input>
@@ -235,7 +235,7 @@
                           <h5 class="text-uppercase text-muted">Guarantor Full Name ( {{currentlySelectedDriver.guarantorFullName}} )</h5>
                            <base-input
                               v-model="guarantorDetailsForm.guarantorFullName"
-                              addon-left-icon="ni ni-key-25"
+                              addon-left-icon="ni ni-circle-08"
                               :placeholder="currentlySelectedDriver.guarantorFullName"
                               >
                             </base-input>
@@ -243,14 +243,14 @@
                               <h5 class="text-uppercase text-muted">Guarantor Phone Number ( {{currentlySelectedDriver.guarantorPhoneNumber}} )</h5>
                               <base-input
                                  v-model="guarantorDetailsForm.guarantorPhoneNumber"
-                                 addon-left-icon="ni ni-money-coins"
+                                 addon-left-icon="ni ni-mobile-button"
                                  :placeholder="currentlySelectedDriver.guarantorPhoneNumber"
                                  >
                                </base-input>
                                <h5 class="text-uppercase text-muted"> Email ( {{currentlySelectedDriver.guarantorEmail}} )</h5>
                                <base-input
                                   v-model="guarantorDetailsForm.guarantorEmail"
-                                  addon-left-icon="ni ni-money-coins"
+                                  addon-left-icon="ni ni-send"
                                   :placeholder="currentlySelectedDriver.guarantorEmail"
                                   >
                                 </base-input>
@@ -258,7 +258,7 @@
                               <h5 class="text-uppercase text-muted">Address ( {{currentlySelectedDriver.guarantorAddress}} )</h5>
                               <base-input
                                  v-model="guarantorDetailsForm.guarantorAddress"
-                                 addon-left-icon="ni ni-money-coins"
+                                 addon-left-icon="ni ni-pin-3"
                                  :placeholder="currentlySelectedDriver.guarantorAddress"
                                  >
                                </base-input>
@@ -285,10 +285,10 @@
                             <h4>Update {{currentlySelectedDriver.fullName}}'s details</h4>
                         </div>
                         <form role="form">
-                          <h5 class="text-uppercase text-muted">Guarantor Full Name ( {{currentlySelectedDriver.formerEmployerFullName}} )</h5>
+                          <h5 class="text-uppercase text-muted"> Full Name ( {{currentlySelectedDriver.formerEmployerFullName}} )</h5>
                            <base-input
                               v-model="guarantorDetailsForm.formerEmployerFullName"
-                              addon-left-icon="ni ni-key-25"
+                              addon-left-icon="ni ni-circle-08"
                               :placeholder="currentlySelectedDriver.formerEmployerFullName"
                               >
                             </base-input>
@@ -296,7 +296,7 @@
                               <h5 class="text-uppercase text-muted"> Phone Number ( {{currentlySelectedDriver.formerEmployerPhoneNumber}} )</h5>
                               <base-input
                                  v-model="guarantorDetailsForm.formerEmployerPhoneNumber"
-                                 addon-left-icon="ni ni-money-coins"
+                                 addon-left-icon="ni ni-mobile-button"
                                  :placeholder="currentlySelectedDriver.formerEmployerPhoneNumber"
                                  >
                                </base-input>
@@ -304,7 +304,7 @@
                                <h5 class="text-uppercase text-muted"> Email ( {{currentlySelectedDriver.formerEmployerEmail}} )</h5>
                                <base-input
                                   v-model="guarantorDetailsForm.formerEmployerEmail"
-                                  addon-left-icon="ni ni-money-coins"
+                                  addon-left-icon="ni ni-send"
                                   :placeholder="currentlySelectedDriver.formerEmployerEmail"
                                   >
                                 </base-input>
@@ -312,7 +312,7 @@
                               <h5 class="text-uppercase text-muted">Address ( {{currentlySelectedDriver.formerEmployerAddress}} )</h5>
                               <base-input
                                  v-model="guarantorDetailsForm.formerEmployerAddress"
-                                 addon-left-icon="ni ni-money-coins"
+                                 addon-left-icon="ni ni-pin-3"
                                  :placeholder="currentlySelectedDriver.formerEmployerAddress"
                                  >
                                </base-input>

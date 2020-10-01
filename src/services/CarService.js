@@ -23,5 +23,27 @@ export default {
   },
   deleteCar (token, carIdToDelete) {
     return apiClient.delete(`/car/delete/${carIdToDelete}`, headers(token))
-  }
+  },
+
+  ////////////////////////////////////////
+  postInsurance (token, insurance) {
+    return apiClient.post('/insurance/create', insurance, headers(token))
+  },
+
+  postRoadworthy (token, roadworthy) {
+    return apiClient.post('/roadworthy/create', roadworthy, headers(token))
+  },
+
+  postIncometax (token, incometax) {
+    return apiClient.post('/incometax/create', incometax, headers(token))
+  },
+
+  postMonthlyexpense (token, monthlyexpense) {
+    return apiClient.post('/monthlyexpense/create', monthlyexpense, headers(token))
+  },
+
+  postDocumentlink (token, documentlink) {
+    return apiClient.post('/documentlink/create', documentlink, headers(token))
+  },
+  ////////////////////////////////////////
 }
