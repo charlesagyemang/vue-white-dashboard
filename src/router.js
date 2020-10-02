@@ -80,6 +80,7 @@ export default new Router({
           name: 'Edit Owner Details',
           component: () => import('./views/Owner/EditSingleOwner.vue')
         },
+
         {
           path: '/dashboard/driver-list',
           name: 'Driver List',
@@ -99,6 +100,28 @@ export default new Router({
           path: '/dashboard/edit-single-driver/:id',
           name: 'Edit Single Driver',
           component: () => import('./views/Driver/EditSingleDriver.vue')
+        },
+
+
+        {
+          path: '/dashboard/sales-list',
+          name: 'All Sales',
+          component: () => import('./views/Sales/SalesList.vue')
+        },
+        {
+          path: '/dashboard/add-a-sales',
+          name: 'Add Sales',
+          component: () => import('./views/Sales/AddNewSales.vue')
+        },
+        {
+          path: '/dashboard/view-single-sales/:id',
+          name: 'Single Sales Details',
+          component: () => import('./views/Sales/SingleSalesView.vue')
+        },
+        {
+          path: '/dashboard/edit-single-sales/:id',
+          name: 'Edit Single Sales',
+          component: () => import('./views/Sales/EditSingleSales.vue')
         },
       ]
     },

@@ -6,26 +6,19 @@
     <div class="container-fluid mt--7">
         <div class="row">
             <div class="col">
-                <cars-table title="All Cars Table"></cars-table>
+                <owners-table title="All Owners List"></owners-table>
             </div>
         </div>
     </div>
-    <br><br>
-
-
-
   </div>
 </template>
 
 <script>
-import CarsTable from '@/views/Tables/CarsTable'
-
-
+import OwnersTable from '@/views/Tables/OwnersTable'
 
 export default {
   components: {
-    CarsTable,
-
+    OwnersTable,
   },
 }
 </script>

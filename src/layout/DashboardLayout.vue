@@ -17,6 +17,7 @@
         <sidebar-item :link="{name: 'Owners', icon: 'ni ni-circle-08', path: '/dashboard/owner-list'}"/>
         <sidebar-item :link="{name: 'Drivers', icon: 'ni ni-bus-front-12', path: '/dashboard/driver-list'}"/>
         <sidebar-item :link="{name: 'Cars', icon: 'ni ni-delivery-fast', path: '/dashboard/car-list'}"/>
+        <sidebar-item :link="{name: 'Sales', icon: 'ni ni-money-coins', path: '/dashboard/sales-list'}"/>
         <sidebar-item :link="{name: 'User Profile', icon: 'ni ni-single-02', path: '/dashboard/profile'}"/>
 
 

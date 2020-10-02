@@ -22,7 +22,6 @@
 
           <th>Actions</th>
           <th>Model</th>
-          <th>Status</th>
           <th>Cost</th>
           <th>OP City</th>
           <th>Owner</th>
@@ -70,12 +69,7 @@
               </div>
             </div>
           </th>
-          <td class="status">
-            <badge class="badge-dot mr-4" :type="getStatusColor(row.status)">
-              <i :class="`bg-${getStatusColor(row.status)}`"></i>
-              <span class="status">{{row.status}}</span>
-            </badge>
-          </td>
+
           <td class="cost-of-aquiring">
             Aquiring: {{row.costOfAquiring || "NAN"}}<br>
             Shipping: {{row.costOfShipping || "NAN"}}<br>
@@ -128,11 +122,6 @@
         </template>
 
       </base-table>
-    </div>
-
-    <div class="card-footer d-flex justify-content-end"
-         :class="type === 'dark' ? 'bg-transparent': ''">
-      <base-pagination :total="total" ></base-pagination>
     </div>
 
     <div class="row">

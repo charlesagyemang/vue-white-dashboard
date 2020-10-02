@@ -63,36 +63,73 @@
             </div>
         </base-header>
 
-        <!--Charts-->
         <div class="container-fluid mt--7">
-            <!--Tables-->
-            <div class="row mt-5">
-                <div class="col-xl-8 mb-5 mb-xl-0">
-                    <cars-table></cars-table>
-                </div>
-                <div class="col-xl-4">
-                    <owners-table></owners-table>
+            <div class="row">
+                <div class="col">
+                  <tabs fill class="flex-column flex-md-row">
+                  <card shadow>
+                      <tab-pane>
+                          <span slot="title">
+                              Insurnace
+                          </span>
+                          <insurance-table title="Insurance"></insurance-table>
+                      </tab-pane>
+
+                      <tab-pane title="Profile">
+                          <span slot="title">
+
+                              Road Worthy
+                          </span>
+                          <road-worthy-table title="Road Worthy"></road-worthy-table>
+                      </tab-pane>
+
+                      <tab-pane>
+                           <span slot="title">
+                              Income Tax
+                            </span>
+                            <income-tax-table title="Income Tax"></income-tax-table>
+                      </tab-pane>
+
+                      <tab-pane>
+                           <span slot="title">
+
+                              Monthly Expense
+                            </span>
+                          <monthly-expenses-table title="Monthly Expenses"></monthly-expenses-table>
+                      </tab-pane>
+
+                      <tab-pane>
+                           <span slot="title">
+                              <!-- <i class="ni ni-calendar-grid-58"/> -->
+                              Document Links
+                            </span>
+                          <document-links-table title="Income Tax"></document-links-table>
+                      </tab-pane>
+
+                  </card>
+              </tabs>
                 </div>
             </div>
-            <!--End tables-->
         </div>
 
     </div>
 </template>
 <script>
-  // Tables
 
-  import CarsTable from '@/views/Tables/CarsTable'
-  import OwnersTable from '@/views/Tables/OwnersTable'
+  import InsuranceTable from '@/views/Tables/InsuranceTable'
+  import RoadWorthyTable from '@/views/Tables/RoadWorthyTable'
+  import IncomeTaxTable from '@/views/Tables/IncomeTaxTable'
+  import MonthlyExpensesTable from '@/views/Tables/MonthlyExpensesTable'
+  import DocumentLinksTable from '@/views/Tables/DocumentLinksTable'
 
   export default {
     components: {
-      CarsTable,
-      OwnersTable,
+      InsuranceTable,
+      RoadWorthyTable,
+      IncomeTaxTable,
+      MonthlyExpensesTable,
+      DocumentLinksTable,
     },
-    methods: {
-    },
-
   };
 </script>
 <style></style>
