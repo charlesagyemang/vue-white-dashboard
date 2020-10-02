@@ -57,19 +57,19 @@
                             </div>
                             <div class="text-center">
                                 <h3>
-                                    {{namer}}<span class="font-weight-light"></span>
+                                    {{driver.driver.fullName}}<span class="font-weight-light"></span>
                                 </h3>
                                 <div class="h5 font-weight-300">
-                                    <i class="ni location_pin mr-2"></i>Bucharest, Romania
+                                    <i class="ni location_pin mr-2"></i>{{driver.driver.address}}
                                 </div>
                                 <div class="h5 mt-4">
-                                    <i class="ni business_briefcase-24 mr-2"></i>Driver Of GS 2898 - 20
+                                    <i class="ni business_briefcase-24 mr-2"></i>Driver Of {{driver.driver.currentCar.carNumber}}
                                 </div>
                                 <div>
-                                    <i class="ni education_hat mr-2"></i>Kia Morning Lx 2010
+                                    <i class="ni education_hat mr-2"></i>{{driver.driver.currentCar.modelName}}({{driver.driver.currentCar.modelYear}})
                                 </div>
                                 <hr class="my-4" />
-                                <p>Currently On Main Contract Model 3</p>
+                                <pre>{{driver.driver.driverStatus}}</pre>
                             </div>
                         </div>
                     </div>
@@ -91,21 +91,21 @@
                                     <div class="row">
                                         <div class="col-lg-6">
                                           <h4>Full Name</h4>
-                                          <p>Kwabena Boateng Amoah Joseph</p>
+                                          <p>{{driver.driver.fullName}}</p>
                                         </div>
                                         <div class="col-lg-6">
                                           <h4>Email</h4>
-                                          <p>beastlkyquist@mm.com</p>
+                                          <p>{{driver.driver.email}}</p>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-lg-6">
                                           <h4>Address</h4>
-                                          <p>19 Banana Street East Legon, Accra</p>
+                                          <p>{{driver.driver.address}}</p>
                                         </div>
                                         <div class="col-lg-6">
                                           <h4>Phone Number</h4>
-                                          <p>+233 288 77 22 77</p>
+                                          <p>{{driver.driver.phoneNumber}}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -116,21 +116,21 @@
                                   <div class="row">
                                       <div class="col-lg-6">
                                         <h4>Full Name</h4>
-                                        <p>Kwabena Boateng Amoah Joseph</p>
+                                        <p>{{driver.driver.guarantorFullName}}</p>
                                       </div>
                                       <div class="col-lg-6">
                                         <h4>Email</h4>
-                                        <p>beastlkyquist@mm.com</p>
+                                        <p>{{driver.driver.guarantorEmail}}</p>
                                       </div>
                                   </div>
                                   <div class="row">
                                       <div class="col-lg-6">
                                         <h4>Address</h4>
-                                        <p>19 Banana Street East Legon, Accra</p>
+                                        <p>{{driver.driver.guarantorAddress}}</p>
                                       </div>
                                       <div class="col-lg-6">
                                         <h4>Phone Number</h4>
-                                        <p>+233 288 77 22 77</p>
+                                        <p>{{driver.driver.guarantorPhoneNumber}}</p>
                                       </div>
                                   </div>
                                 </div>
@@ -141,21 +141,21 @@
                                   <div class="row">
                                       <div class="col-lg-6">
                                         <h4>Full Name</h4>
-                                        <p>Kwabena Boateng Amoah Joseph</p>
+                                        <p>{{driver.driver.formerEmployerFullName}}</p>
                                       </div>
                                       <div class="col-lg-6">
                                         <h4>Email</h4>
-                                        <p>beastlkyquist@mm.com</p>
+                                        <p>{{driver.driver.formerEmployerEmail}}</p>
                                       </div>
                                   </div>
                                   <div class="row">
                                       <div class="col-lg-6">
                                         <h4>Address</h4>
-                                        <p>19 Banana Street East Legon, Accra</p>
+                                        <p>{{driver.driver.formerEmployerAddress}}</p>
                                       </div>
                                       <div class="col-lg-6">
                                         <h4>Phone Number</h4>
-                                        <p>+233 288 77 22 77</p>
+                                        <p>{{driver.driver.formerEmployerPhoneNumber}}</p>
                                       </div>
                                   </div>
                                 </div>
@@ -168,12 +168,20 @@
     </div>
 </template>
 <script>
+import {mapState} from 'vuex';
   export default {
     name: 'user-profile',
     beforeCreate () {
       //get id and make api call to single driver service
       console.log(this.$route.params.id);
-      console.log("Before Create");
+      this.$store.dispatch('driver/fetchDriverByIdExternal')
+      .then((resp) => {
+        console.log("Driver", resp);
+      })
+      .catch(() => {
+        console.log("Couldnt Fetch");
+      })
+
     },
     data() {
       return {
@@ -191,6 +199,7 @@
       }
     },
     computed: {
+      ...mapState(['driver']),
       namer() {
         return localStorage.uberName
       }

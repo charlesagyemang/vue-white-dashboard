@@ -30,7 +30,7 @@ export const actions = {
           localStorage.uberOwnerId = user.owner.id;
         } else {
           localStorage.uberName = user.driver.fullName;
-          localStorage.driverId = user.driver.id;
+          localStorage.uberDriverId = user.driver.id;
         }
         // eslint-disable-next-line
         localStorage.uberEmail = user.email;

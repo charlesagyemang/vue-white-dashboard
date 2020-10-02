@@ -74,6 +74,17 @@ export const actions = {
     return driver
   },
 
+  fetchDriverByIdExternal ( { commit } ) {
+    return DriverService.getDriver(localStorage.uberToken, localStorage.uberDriverId)
+    .then((response) => {
+      commit('SET_DRIVER', response.data);
+      // commit('SET_DRIVER_CAR', response.data.cars);
+      return response.data
+    }).catch((error) => {
+      throw error
+    })
+  },
+
   deleteDriver ({ commit }, driverIdToDelete) {
     // eslint-disable-next-line
     return DriverService.deleteDriver(localStorage.uberToken, driverIdToDelete).then((response) => {
