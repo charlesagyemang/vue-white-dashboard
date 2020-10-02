@@ -10,6 +10,57 @@
             </div>
         </div>
     </div>
+    <br><br>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col">
+              <tabs fill class="flex-column flex-md-row">
+              <card shadow>
+                  <tab-pane>
+                      <span slot="title">
+                          Insurnace
+                      </span>
+                      <insurance-table title="Insurance"></insurance-table>
+                  </tab-pane>
+
+                  <tab-pane title="Profile">
+                      <span slot="title">
+
+                          Road Worthy
+                      </span>
+                      <road-worthy-table title="Road Worthy"></road-worthy-table>
+                  </tab-pane>
+
+                  <tab-pane>
+                       <span slot="title">
+                          Income Tax
+                        </span>
+                        <income-tax-table title="Income Tax"></income-tax-table>
+                  </tab-pane>
+
+                  <tab-pane>
+                       <span slot="title">
+
+                          Monthly Expense
+                        </span>
+                      <p class="description">Monthly Expense</p>
+                  </tab-pane>
+
+                  <tab-pane>
+                       <span slot="title">
+                          <i class="ni ni-calendar-grid-58"/>
+                          Document Links
+                        </span>
+                      <p class="description">Document Links</p>
+                  </tab-pane>
+
+              </card>
+          </tabs>
+            </div>
+        </div>
+    </div>
+
 
 
   </div>
@@ -17,10 +68,16 @@
 
 <script>
 import CarsTable from '@/views/Tables/CarsTable'
+import InsuranceTable from '@/views/Tables/InsuranceTable'
+import RoadWorthyTable from '@/views/Tables/RoadWorthyTable'
+import IncomeTaxTable from '@/views/Tables/IncomeTaxTable'
 
 export default {
   components: {
     CarsTable,
+    InsuranceTable,
+    RoadWorthyTable,
+    IncomeTaxTable,
   },
 }
 </script>

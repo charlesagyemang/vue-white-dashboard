@@ -46,4 +46,25 @@ export default {
     return apiClient.post('/documentlink/create', documentlink, headers(token))
   },
   ////////////////////////////////////////
+
+
+  ////////////////GET ALL TAB/////////////
+
+  getInsurances (token) {
+    return apiClient.get('/insurance/get/all', headers(token));
+  },
+
+  getMonthlyexpenses (token) {
+    return apiClient.get('/monthlyexpense/get/all', headers(token));
+  },
+
+  getIncometaxes (token) {
+    return apiClient.get('/incometax/get/all', headers(token));
+  },
+
+  getRoadworthies (token) {
+    return apiClient.get('/roadworthy/get/all', headers(token));
+  },
+
+  ///////////////////////////////////////
 }

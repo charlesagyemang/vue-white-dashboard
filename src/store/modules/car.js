@@ -4,7 +4,11 @@ export const namespaced = true
 
 export const state = {
   cars: [],
-  car: {}
+  car: {},
+  carInsurnaces: [],
+  carRoadworthies:[],
+  carIncometaxes: [],
+  carMonthlyexpenses: [],
 }
 
 export const mutations = {
@@ -15,6 +19,22 @@ export const mutations = {
 
   SET_CARS (state, cars) {
     state.cars = cars
+  },
+
+  SET_CAR_INSURANCES (state, carInsurnaces) {
+    state.carInsurnaces = carInsurnaces
+  },
+
+  SET_CAR_ROADWORTHIES (state, carRoadWorthies) {
+    state.carRoadworthies = carRoadWorthies
+  },
+
+  SET_CAR_INCOMETAXES (state, carIncomeTaxes) {
+    state.carIncometaxes = carIncomeTaxes
+  },
+
+  SET_CAR_MONTHLYEXPENSES (state, carMonthlyExpenses) {
+    state.carMonthlyexpenses = carMonthlyExpenses
   },
 
   SET_CAR (state, car) {
@@ -52,6 +72,48 @@ export const actions = {
     return CarService.getCars(localStorage.uberToken)
       .then((response) => {
         commit('SET_CARS', response.data)
+      }).catch((error) => {
+        throw error
+      })
+  },
+
+  fetchCarInsurnaces ({ commit }) {
+    // eslint-disable-next-line
+    return CarService.getInsurances(localStorage.uberToken)
+      .then((response) => {
+        commit('SET_CAR_INSURANCES', response.data)
+      }).catch((error) => {
+        throw error
+      })
+  },
+
+  fetchCarRoadworthies ({ commit }) {
+    // eslint-disable-next-line
+    return CarService.getRoadworthies(localStorage.uberToken)
+      .then((response) => {
+        commit('SET_CAR_ROADWORTHIES', response.data)
+      }).catch((error) => {
+        throw error
+      })
+  },
+
+
+  fetchCarIncometaxes ({ commit }) {
+    // eslint-disable-next-line
+    return CarService.getIncometaxes(localStorage.uberToken)
+      .then((response) => {
+        commit('SET_CAR_INCOMETAXES', response.data)
+      }).catch((error) => {
+        throw error
+      })
+  },
+
+
+  fetchCarMonthlyexpenses ({ commit }) {
+    // eslint-disable-next-line
+    return CarService.getMonthlyexpenses(localStorage.uberToken)
+      .then((response) => {
+        commit('SET_CAR_MONTHLYEXPENSES', response.data)
       }).catch((error) => {
         throw error
       })
