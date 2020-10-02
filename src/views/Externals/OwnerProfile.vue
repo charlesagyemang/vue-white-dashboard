@@ -18,54 +18,8 @@
 
         <div class="container-fluid mt--7">
             <div class="row">
-                <div class="col-xl-4 order-xl-2 mb-5 mb-xl-0">
-                    <div class="card card-profile shadow">
-                        <div class="row justify-content-center">
-                            <div class="col-lg-3 order-lg-2">
-                                <div class="card-profile-image">
-                                    <a href="#">
-                                        <img src="/img/cars/dump-truck.jpg" class="rounded-circle">
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card-header text-center border-0 pt-8 pt-md-4 pb-0 pb-md-4">
-                            <div class="d-flex justify-content-between">
-                            </div>
-                        </div>
-                        <div class="card-body pt-0 pt-md-4">
-                            <div class="row">
-                                <div class="col">
-                                    <div class="card-profile-stats d-flex justify-content-center mt-md-5">
-                                        <div>
-                                            <span class="heading">3</span>
-                                            <span class="description">Cars</span>
-                                        </div>
-                                        <div>
-                                            <span class="heading">3</span>
-                                            <span class="description">Drivers</span>
-                                        </div>
 
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="text-center">
-                                <h3>
-                                    Jessica Jones<span class="font-weight-light">, 27</span>
-                                </h3>
-                                <div class="h5 font-weight-300">
-                                    <i class="ni location_pin mr-2"></i>Bucharest, Romania
-                                </div>
-                                <div class="h5 mt-4">
-                                    <i class="ni business_briefcase-24 mr-2"></i>Solution Manager - Creative Tim Officer
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-xl-8 order-xl-1">
+                <div class="col-xl-12 order-xl-1">
                     <card shadow type="secondary">
                         <div slot="header" class="bg-white border-0">
                             <div class="row align-items-center">
@@ -171,27 +125,28 @@
     </div>
 </template>
 <script>
+
+  import {mapState} from 'vuex';
+
   export default {
     name: 'user-profile',
-    data() {
-      return {
-        model: {
-          fullName: '',
-          email: '',
-          phoneNumber: '',
-          alternatePhoneNumber: '',
-          address: '',
-          city: '',
-          country: '',
-          zipCode: '',
-          other: {},
-        }
-      }
+    created() {
+      this.$store.dispatch('owner/fetchOwnerByIdExternal')
+      .then((resp) => {
+        console.log(resp);
+      })
+      .catch(() => {
+        console.log("Failed");
+      })
     },
     computed: {
+      ...mapState(['owner']),
       namer() {
         return localStorage.uberName
-      }
+      },
+      model(){
+        return this.owner.owner;
+      },
     },
   };
 </script>

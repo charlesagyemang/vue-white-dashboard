@@ -20,7 +20,7 @@
                   :data="tableData">
 
         <template slot="columns">
-          <th>Actions</th>
+          <th>View Full Details</th>
           <th>Model</th>
           <th>Status</th>
           <th>Cost</th>
@@ -30,19 +30,7 @@
 
         <template slot-scope="{row}">
           <td class="more-actions">
-            <base-dropdown class="dropdown"
-                           position="left">
-              <a slot="title" class="btn btn-sm btn-icon-only text-light" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <i class="fas fa-ellipsis-v"></i>
-              </a>
-
-              <template>
-                <a class="dropdown-item" href="#">View Full Details</a>
-                <a class="dropdown-item" href="#">View Insurance</a>
-                <a class="dropdown-item" href="#">View Road Worthy</a>
-                <a class="dropdown-item" href="#">View Registration Details</a>
-              </template>
-            </base-dropdown>
+            <a class="btn btn-primary" :href="'/owners/dashboard/view-single-car/'+ row.id">View Full Details</a>
           </td>
 
           <th scope="row">
@@ -58,7 +46,7 @@
           <td class="status">
             <badge class="badge-dot mr-4" :type="getStatusColor(row.status)">
               <i :class="`bg-${getStatusColor(row.status)}`"></i>
-              <span class="status">{{row.status}}</span>
+              <span class="status">{{row.carStatus}}</span>
             </badge>
           </td>
           <td class="cost-of-aquiring">
@@ -83,6 +71,9 @@
 <script>
  import {mapState} from 'vuex';
   export default {
+    beforeCreate() {
+      this.$store.dispatch('owner/fetchOwnerByIdExternal')
+    },
     name: 'owners-cars-table',
     props: {
       type: {

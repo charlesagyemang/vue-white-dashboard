@@ -152,6 +152,11 @@ export default new Router({
           component: () => import('./views/Externals/OwnerCarList.vue')
         },
         {
+          path: '/owners/dashboard/view-single-car/:id',
+          name: 'view-owner-single-car',
+          component: () => import('./views/Car/OwnerSingleCarView.vue'),
+        },
+        {
           path: '/owners/dashboard/profile',
           name: 'owner-profile',
           component: () => import('./views/Externals/OwnerProfile.vue')
