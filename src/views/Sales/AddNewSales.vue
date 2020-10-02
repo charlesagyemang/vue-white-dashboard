@@ -10,7 +10,7 @@
                     <div slot="header" class="bg-white border-0">
                         <div class="row align-items-center">
                             <div class="col-8">
-                                <h3 class="mb-0">Fill The Form below To Add SALES <router-link class="btn btn-primary" to="/dashboard/owner-list">View All Owners</router-link></h3>
+                                <h3 class="mb-0">Fill The Form below To Add SALES <router-link class="btn btn-primary" to="/dashboard/sales-list">View All Sales</router-link></h3>
                             </div>
                         </div>
                     </div>
@@ -53,25 +53,30 @@
                                     </div>
                                 </div>
                                 <div class="row">
-                                  <div class="col-lg-3">
+                                  <div class="col-lg-6">
+
                                     <h5>Status</h5>
                                     <multiselect v-model="salesForm.status" :options="salesStatus"></multiselect>
                                   </div>
-                                  <div class="col-lg-3">
+                                  <div class="col-lg-6">
+
                                     <h5>Payment Method</h5>
                                     <multiselect v-model="salesForm.paymentMethod" :options="salesPaymentMethods"></multiselect>
                                   </div>
-                                  <div class="col-lg-3">
+                                  <div class="col-lg-6">
+                                    <br>
                                       <h5>Select Driver</h5>
                                       <multiselect v-model="salesForm.driver" label="fullName" :options="driver.drivers"></multiselect>
                                   </div>
-                                  <div class="col-lg-3">
+                                  <div class="col-lg-6">
+                                    <br>
                                     <h5>Select Car</h5>
                                     <multiselect v-model="salesForm.car" label="modelName" :options="car.cars"></multiselect>
 
                                   </div>
 
                                     <div class="col-lg-12">
+                                      <br>
                                         <base-input alternative=""
                                                     label="Details"
                                                     placeholder="Details Of Sales"
@@ -79,12 +84,12 @@
                                                     v-model="salesForm.details"
                                         />
                                     </div>
+                                    <div class="container">
+                                      <button @click.prevent="handleCreateOwner" class="btn btn-lg btn-primary">Add Sales</button>
+                                    </div>
                                 </div>
                             </div>
-                            <hr class="my-4" />
-                            <div class="pl-lg-4">
-                              <button @click.prevent="handleCreateOwner" class="btn btn-primary">Add Sales</button>
-                            </div>
+
                         </form>
                     </template>
                 </card>
