@@ -5,118 +5,85 @@
     </base-header>
     <div class="container-fluid mt--7">
         <div class="row">
-            <div class="col-xl-4 order-xl-2 mb-5 mb-xl-0">
-                <div class="card card-profile shadow">
-                    <div class="card-body pt-0 pt-md-4">
-                        <div class="text-center">
-                            <h3>
-                                Jessica Jones
-                            </h3>
-                            <div class="h5 font-weight-300">
-                                <i class="ni location_pin mr-2"></i>Admin
-                            </div>
-                            <div class="h5 mt-4">
-                                <router-link class="btn btn-primary" to="/dashboard/owner-list">View All Owners</router-link>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-xl-8 order-xl-1">
+            <div class="col-xl-12 order-xl-1">
                 <card shadow type="secondary">
                     <div slot="header" class="bg-white border-0">
                         <div class="row align-items-center">
                             <div class="col-8">
-                                <h3 class="mb-0">Fill The Form below To Add A New Owner</h3>
+                                <h3 class="mb-0">Fill The Form below To Add SALES <router-link class="btn btn-primary" to="/dashboard/owner-list">View All Owners</router-link></h3>
                             </div>
                         </div>
                     </div>
                     <template>
                         <form>
-                            <h6 class="heading-small text-muted mb-4">User information</h6>
+
                             <div class="pl-lg-4">
                                 <div class="row">
-                                    <div class="col-lg-6">
+                                    <div class="col-lg-3">
                                         <base-input alternative=""
-                                                    label="Full Name"
-                                                    placeholder="Full Name"
+                                                    label="Date Received"
+                                                    placeholder="Date Received"
                                                     input-classes="form-control-alternative"
-                                                    v-model="model.fullName"
+                                                    v-model="salesForm.dateReceived"
                                         />
                                     </div>
-                                    <div class="col-lg-6">
+                                    <div class="col-lg-3">
                                         <base-input alternative=""
-                                                    label="Email address"
-                                                    placeholder="jesse@example.com"
+                                                    label="Days Sales Covers"
+                                                    placeholder="10"
                                                     input-classes="form-control-alternative"
-                                                    v-model="model.email"
+                                                    v-model="salesForm.daysSalesAmountCovers"
+                                        />
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <base-input alternative=""
+                                                    label="Amount Received"
+                                                    placeholder="450"
+                                                    input-classes="form-control-alternative"
+                                                    v-model="salesForm.amountReceived"
+                                        />
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <base-input alternative=""
+                                                    label="Amount Expected"
+                                                    placeholder="450"
+                                                    input-classes="form-control-alternative"
+                                                    v-model="salesForm.amount"
                                         />
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-lg-6">
+                                  <div class="col-lg-3">
+                                    <h5>Status</h5>
+                                    <multiselect v-model="salesForm.status" :options="salesStatus"></multiselect>
+                                  </div>
+                                  <div class="col-lg-3">
+                                    <h5>Payment Method</h5>
+                                    <multiselect v-model="salesForm.paymentMethod" :options="salesPaymentMethods"></multiselect>
+                                  </div>
+                                  <div class="col-lg-3">
+                                      <h5>Select Driver</h5>
+                                      <multiselect v-model="salesForm.driver" label="fullName" :options="driver.drivers"></multiselect>
+                                  </div>
+                                  <div class="col-lg-3">
+                                    <h5>Select Car</h5>
+                                    <multiselect v-model="salesForm.car" label="modelName" :options="car.cars"></multiselect>
+
+                                  </div>
+
+                                    <div class="col-lg-12">
                                         <base-input alternative=""
-                                                    label="Phone Number"
-                                                    placeholder="+1 354 88 77 22"
+                                                    label="Details"
+                                                    placeholder="Details Of Sales"
                                                     input-classes="form-control-alternative"
-                                                    v-model="model.phoneNumber"
-                                        />
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <base-input alternative=""
-                                                    label="Alternate Phone Number"
-                                                    placeholder="+233 277 11 99 19"
-                                                    input-classes="form-control-alternative"
-                                                    v-model="model.alternatePhoneNumber"
+                                                    v-model="salesForm.details"
                                         />
                                     </div>
                                 </div>
                             </div>
                             <hr class="my-4" />
-                            <!-- Address -->
-                            <h6 class="heading-small text-muted mb-4">Address information</h6>
                             <div class="pl-lg-4">
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <base-input alternative=""
-                                                    label="Address"
-                                                    placeholder="Home Address"
-                                                    input-classes="form-control-alternative"
-                                                    v-model="model.address"
-                                        />
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-lg-4">
-                                        <base-input alternative=""
-                                                    label="City"
-                                                    placeholder="City"
-                                                    input-classes="form-control-alternative"
-                                                    v-model="model.city"
-                                        />
-                                    </div>
-                                    <div class="col-lg-4">
-                                        <base-input alternative=""
-                                                    label="Country"
-                                                    placeholder="Country"
-                                                    input-classes="form-control-alternative"
-                                                    v-model="model.country"
-                                        />
-                                    </div>
-                                    <div class="col-lg-4">
-                                        <base-input alternative=""
-                                                    label="Postal/Zip Code"
-                                                    placeholder="Postal code"
-                                                    input-classes="form-control-alternative"
-                                                    v-model="model.zipCode"
-                                        />
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="pl-lg-4">
-                              <button @click.prevent="handleCreateOwner" class="btn btn-primary">Add Owner</button>
+                              <button @click.prevent="handleCreateOwner" class="btn btn-primary">Add Sales</button>
                             </div>
                         </form>
                     </template>
@@ -131,9 +98,25 @@
 
 <script>
 
+import {mapState} from 'vuex';
 
 export default {
+  beforeCreate(){
+    if (this.$store.state.driver.drivers.length < 1) {
+      this.$store.dispatch('driver/fetchDrivers').then(() =>{
+          console.log("Driver", this.driver.drivers );
+      });
+    }
 
+    if (this.$store.state.car.cars.length < 1) {
+      this.$store.dispatch('car/fetchCars').then(() =>{
+          console.log("Cars", this.car.cars );
+      });
+    }
+  },
+  computed: {
+    ...mapState(['driver', 'car']),
+  },
   data(){
     return {
       model: {
@@ -148,6 +131,28 @@ export default {
         zipCode: '',
         other: {},
       },
+      salesForm: {
+        dateReceived: '12th March 2020',
+        daysSalesAmountCovers: '10',
+        amountReceived: '500',
+        amount: '500',
+        paymentMethod: 'VODAFONE_CASH',
+        carId: '',
+        driverId: '',
+        status: 'SENT_BY_DRIVER',
+        details: 'Sales for the week',
+      },
+      salesStatus: [
+        'SENT_BY_DRIVER',
+        'PENDING_RECEIPT',
+        'RECEIVED_BY_OWNER'
+      ],
+      salesPaymentMethods: [
+        'MTN_MOBILE_MONEY',
+        'VODAFONE_CASH',
+        'AIRTEL_TIGO_MONEY',
+        'GCB_BANK_DEPOSIT',
+      ],
     }// end of data
   },
   methods: {

@@ -6,7 +6,7 @@
     <div class="container-fluid mt--7">
         <div class="row">
             <div class="col">
-                <owners-table title="All Owners List"></owners-table>
+                <sales-table title="All Sales List"></sales-table>
             </div>
         </div>
     </div>
@@ -14,11 +14,12 @@
 </template>
 
 <script>
-import OwnersTable from '@/views/Tables/OwnersTable'
+
+import SalesTable from '@/views/Tables/SalesTable'
 
 export default {
   components: {
-    OwnersTable,
+    SalesTable,
   },
 }
 </script>
