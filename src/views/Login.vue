@@ -68,7 +68,7 @@
                   });
                 } else {
                   this.$router.push({
-                    path: `/driver/details/{resp.driver.id}`,
+                    path: `/driver/details/${resp.driver.id}`,
                   });
                 }
                 console.log("logssss",resp.role);
