@@ -9,6 +9,7 @@ export const state = {
   carRoadworthies:[],
   carIncometaxes: [],
   carMonthlyexpenses: [],
+  carDocumentlinks: [],
 }
 
 export const mutations = {
@@ -35,6 +36,10 @@ export const mutations = {
 
   SET_CAR_MONTHLYEXPENSES (state, carMonthlyExpenses) {
     state.carMonthlyexpenses = carMonthlyExpenses
+  },
+
+  SET_CAR_DOCUMENTLINKS (state, carDocumentLinks) {
+    state.carDocumentlinks = carDocumentLinks
   },
 
   SET_CAR (state, car) {
@@ -119,6 +124,16 @@ export const actions = {
       })
   },
 
+  fetchCarDocumentlinks ({ commit }) {
+    // eslint-disable-next-line
+    return CarService.getDocumentlinks(localStorage.uberToken)
+      .then((response) => {
+        commit('SET_CAR_DOCUMENTLINKS', response.data)
+      }).catch((error) => {
+        throw error
+      })
+  },
+
   editCar ({ commit }, { carId, carDataToUpdate }) {
     // eslint-disable-next-line
     return CarService.editCar(localStorage.uberToken, carId, carDataToUpdate)
@@ -186,6 +201,17 @@ export const actions = {
     .then((response) => {
       console.log("==edit====", response.data);
       commit('UPDATE_CAR', response.data)
+      return response.data
+    }).catch((error) => {
+      throw error
+    })
+  },
+
+  fetCarByIdExternal ({ commit }, { carId }) {
+    // eslint-disable-next-line
+    return CarService.getCar(localStorage.uberToken, carId)
+    .then((response) => {
+      commit('SET_CAR', response.data);
       return response.data
     }).catch((error) => {
       throw error

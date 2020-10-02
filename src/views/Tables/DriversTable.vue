@@ -24,6 +24,7 @@
           <th>Full Name</th>
           <th>email</th>
           <th>phoneNumber</th>
+          <th>Assigned Car</th>
           <th>address</th>
           <th>driverStatus</th>
           <th>car status</th>
@@ -67,6 +68,14 @@
 
           <td class="phone-number">
             {{row.phoneNumber}}
+          </td>
+
+          <td v-if="row.currentCar !== null" class="phone-number">
+            {{row.currentCar.modelName}}
+          </td>
+
+          <td v-else class="phone-number">
+            "Car Has Not Been Assigned Yet"
           </td>
 
           <td class="address">
@@ -515,12 +524,13 @@ import store from '@/store/store'
 
         let currentDriver = {
           carId: this.selectedCarToAddToDriver.id,
+          currentCar: this.selectedCarToAddToDriver,
           carAssignmentStatus: "ASSIGNED",
           driverStatus: "ASSIGNED_CAR",
         };
 
         console.log(currentDriver);
-
+        //
         store.dispatch('driver/editDriver', {
           driverId: this.currentlySelectedDriver.id,
           driverDataToUpdate: currentDriver

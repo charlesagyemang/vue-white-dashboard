@@ -44,15 +44,15 @@
 
                           Monthly Expense
                         </span>
-                      <p class="description">Monthly Expense</p>
+                      <monthly-expenses-table title="Monthly Expenses"></monthly-expenses-table>
                   </tab-pane>
 
                   <tab-pane>
                        <span slot="title">
-                          <i class="ni ni-calendar-grid-58"/>
+                          <!-- <i class="ni ni-calendar-grid-58"/> -->
                           Document Links
                         </span>
-                      <p class="description">Document Links</p>
+                      <document-links-table title="Income Tax"></document-links-table>
                   </tab-pane>
 
               </card>
@@ -71,6 +71,8 @@ import CarsTable from '@/views/Tables/CarsTable'
 import InsuranceTable from '@/views/Tables/InsuranceTable'
 import RoadWorthyTable from '@/views/Tables/RoadWorthyTable'
 import IncomeTaxTable from '@/views/Tables/IncomeTaxTable'
+import MonthlyExpensesTable from '@/views/Tables/MonthlyExpensesTable'
+import DocumentLinksTable from '@/views/Tables/DocumentLinksTable'
 
 export default {
   components: {
@@ -78,6 +80,8 @@ export default {
     InsuranceTable,
     RoadWorthyTable,
     IncomeTaxTable,
+    MonthlyExpensesTable,
+    DocumentLinksTable,
   },
 }
 </script>

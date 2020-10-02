@@ -66,5 +66,9 @@ export default {
     return apiClient.get('/roadworthy/get/all', headers(token));
   },
 
+  getDocumentlinks (token) {
+    return apiClient.get('/documentlink/get/all', headers(token));
+  },
+
   ///////////////////////////////////////
 }

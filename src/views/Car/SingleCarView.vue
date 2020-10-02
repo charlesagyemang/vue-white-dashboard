@@ -107,11 +107,147 @@
                 </div>
             </div>
         </div>
+
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col">
+                      <tabs fill class="flex-column flex-md-row">
+                      <card shadow>
+                          <tab-pane>
+                              <span slot="title">
+                                  Insurnace
+                              </span>
+                              <insurance-table-single
+                                  v-if="localInsurances.length > 0"
+                                  :title="'Insurnaces For  ' + model.modelName"
+                                  :tableData ="localInsurances"
+                                  :carname = "model.modelName"
+                                >
+                              </insurance-table-single>
+                          </tab-pane>
+
+                          <tab-pane title="Profile">
+                              <span slot="title">
+                                  Road Worthy
+                              </span>
+                              <road-worthy-table-single
+                                  v-if="localRoadWorthies.length > 0"
+                                  :title="'Road Worthy For  ' + model.modelName"
+                                  :tableData ="localRoadWorthies"
+                                  :carname = "model.modelName"
+                                >
+                              </road-worthy-table-single>
+                          </tab-pane>
+
+                          <tab-pane>
+                               <span slot="title">
+                                  Income Tax
+                                </span>
+                                <income-tax-table-single
+                                    v-if="localIncomeTaxes.length > 0"
+                                    :title="'Income Taxes For  ' + model.modelName"
+                                    :tableData ="localIncomeTaxes"
+                                    :carname = "model.modelName"
+                                  >
+                                </income-tax-table-single>
+                          </tab-pane>
+
+                          <tab-pane>
+                               <span slot="title">
+
+                                  Monthly Expense
+                                </span>
+                                <monthly-expenses-table-single
+                                  v-if="localMonthlyExpenses.length > 0"
+                                  :title="'Monthly Expenses For  ' + model.modelName"
+                                  :tableData ="localMonthlyExpenses"
+                                  :carname = "model.modelName"
+                                  >
+                                </monthly-expenses-table-single>
+                          </tab-pane>
+
+                          <tab-pane>
+                               <span slot="title">
+                                  <!-- <i class="ni ni-calendar-grid-58"/> -->
+                                  Document Links
+                                </span>
+                              <document-links-table-single
+                                v-if="localDocumentLinks.length > 0"
+                                :title="'Document Links For  ' + model.modelName"
+                                :tableData ="localDocumentLinks"
+                                :carname = "model.modelName"
+                                >
+                              </document-links-table-single>
+                          </tab-pane>
+
+                          <tab-pane>
+                               <span slot="title">
+                                  <!-- <i class="ni ni-calendar-grid-58"/> -->
+                                  Owner Details
+                                </span>
+                                <div class="row">
+                                    <div class="col-lg-3">
+                                      <h4>Name</h4>
+                                      <p>{{model.owner.fullName}}</p>
+                                    </div>
+                                    <div class="col-lg-3">
+                                      <h4>Email</h4>
+                                      <p>{{model.owner.email}}</p>
+                                    </div>
+                                    <div class="col-lg-3">
+                                      <h4>Phone</h4>
+                                      <p>{{model.owner.phoneNumber}}</p>
+                                    </div>
+                                </div>
+                          </tab-pane>
+
+                      </card>
+                  </tabs>
+                    </div>
+                </div>
+            </div>
     </div>
 </template>
 <script>
+
+import InsuranceTableSingle from '@/views/Tables/Single/InsuranceTableSingle'
+import RoadWorthyTableSingle from '@/views/Tables/Single/RoadWorthyTableSingle'
+import IncomeTaxTableSingle from '@/views/Tables/Single/IncomeTaxTableSingle'
+import MonthlyExpensesTableSingle from '@/views/Tables/Single/MonthlyExpensesTableSingle'
+import DocumentLinksTableSingle from '@/views/Tables/Single/DocumentLinksTableSingle'
+
 import { mapState } from 'vuex'
   export default {
+    created() {
+      this.$store.dispatch('car/fetCarByIdExternal', {carId: this.$route.params.id})
+      .then((resp) => {
+        console.log(resp.monthlyexpenses);
+        this.localDocumentLinks = resp.documentlinks;
+        this.localRoadWorthies = resp.roadworthies;
+        this.localIncomeTaxes = resp.incometaxes;
+        this.localMonthlyExpenses = resp.monthlyexpenses;
+        this.localInsurances = resp.insurances;
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+    },
+    components: {
+      InsuranceTableSingle,
+      RoadWorthyTableSingle,
+      IncomeTaxTableSingle,
+      MonthlyExpensesTableSingle,
+      DocumentLinksTableSingle,
+    },
+    data () {
+      return {
+        localDocumentLinks: [],
+        localRoadWorthies: [],
+        localInsurances: [],
+        localMonthlyExpenses: [],
+        localIncomeTaxes: [],
+      }
+    },
     computed: {
       ...mapState(['car']),
       namer() {
