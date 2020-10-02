@@ -50,11 +50,11 @@
                                         </div>
                                         <div class="col-lg-3">
                                           <h4>Car Owner</h4>
-                                          <p></p>
+                                          <p>{{model.owner.fullName}}</p>
                                         </div>
                                         <div class="col-lg-3">
                                           <h4>Current Driver</h4>
-                                          <p></p>
+                                          <p>{{model.driver.fullName}}</p>
                                         </div>
                                         <div class="col-lg-3">
                                           <h4>Car Type</h4>
@@ -100,7 +100,6 @@
 
                                   </div>
                                 </div>
-                                <hr class="my-4" />
                             </form>
                         </template>
                     </card>
@@ -197,6 +196,27 @@
                                     <div class="col-lg-3">
                                       <h4>Phone</h4>
                                       <p>{{model.owner.phoneNumber}}</p>
+                                    </div>
+                                </div>
+                          </tab-pane>
+
+                          <tab-pane>
+                               <span slot="title">
+                                  <!-- <i class="ni ni-calendar-grid-58"/> -->
+                                  Driver Details
+                                </span>
+                                <div class="row">
+                                    <div class="col-lg-3">
+                                      <h4>Name</h4>
+                                      <p>{{model.driver.fullName}}</p>
+                                    </div>
+                                    <div class="col-lg-3">
+                                      <h4>Email</h4>
+                                      <p>{{model.driver.email}}</p>
+                                    </div>
+                                    <div class="col-lg-3">
+                                      <h4>Phone</h4>
+                                      <p>{{model.driver.phoneNumber}}</p>
                                     </div>
                                 </div>
                           </tab-pane>

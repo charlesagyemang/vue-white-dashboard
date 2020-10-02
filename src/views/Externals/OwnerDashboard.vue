@@ -67,6 +67,15 @@
   import DriversTable from '@/views/Tables/OwnersDriversTable'
 
   export default {
+    created() {
+      this.$store.dispatch('owner/fetchOwnerByIdExternal')
+      .then((resp) => {
+        console.log(resp);
+      })
+      .catch(() => {
+        console.log("Failed");
+      })
+    },
     components: {
       CarsTable,
       DriversTable,

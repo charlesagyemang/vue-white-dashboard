@@ -4,7 +4,8 @@ export const namespaced = true
 
 export const state = {
   owners: [],
-  owner: {}
+  owner: {},
+  ownerCars: [],
 }
 
 export const mutations = {
@@ -19,6 +20,9 @@ export const mutations = {
 
   SET_OWNER (state, owner) {
     state.owner = owner
+  },
+  SET_OWNER_CARS (state, ownerCars) {
+    state.ownerCars = ownerCars
   },
 
   UPDATE_OWNER (state, ownerToUpdate) {
@@ -73,6 +77,18 @@ export const actions = {
     const owner = getters.getOwnerById(id)
     commit('SET_OWNER', owner)
     return owner
+  },
+
+  fetchOwnerByIdExternal ( { commit } ) {
+    // eslint-disable-next-line
+    return OwnerService.getOwner(localStorage.uberToken, localStorage.uberOwnerId)
+    .then((response) => {
+      commit('SET_OWNER', response.data);
+      commit('SET_OWNER_CARS', response.data.cars);
+      return response.data
+    }).catch((error) => {
+      throw error
+    })
   },
 
   deleteOwner ({ commit }, ownerIdToDelete) {

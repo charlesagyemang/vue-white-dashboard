@@ -48,7 +48,7 @@
           <th scope="row">
             <div class="media align-items-center">
               <a href="#" class="avatar rounded-circle mr-3">
-                <img alt="Car Image" :src="row.imageUrl">
+                <img alt="Car Image" src="/img/cars/picanto2.jpg">
               </a>
               <div class="media-body">
                 <span class="name mb-0 text-sm">{{row.modelName}} {{row.modelYear}}</span>
@@ -72,22 +72,16 @@
           </td>
 
           <td class="current-driver">
-            Name: {{row.currentDriver.name}}<br>
-            Location: {{row.currentDriver.email}}<br>
-            City: {{row.currentDriver.city}}<br>
+           {{row.driver.fullName}}
           </td>
         </template>
       </base-table>
     </div>
 
-    <div class="card-footer d-flex justify-content-end"
-         :class="type === 'dark' ? 'bg-transparent': ''">
-      <base-pagination :total="total" ></base-pagination>
-    </div>
-
   </div>
 </template>
 <script>
+ import {mapState} from 'vuex';
   export default {
     name: 'owners-cars-table',
     props: {
@@ -99,135 +93,6 @@
     data() {
       return {
         total: 30,
-        tableData: [
-          {
-            imageUrl: '/img/cars/picanto2.jpg',
-            modelName: 'KIA Morning',
-            status: 'BOUGHT',
-            modelYear: '2009',
-            costOfAquiring: '$3,000',
-            carWorkingCity: 'Accra',
-            carOwner: {
-              name: 'name',
-              email: 'email@email.com',
-              city: 'Goergia',
-            },
-            currentDriver: {
-              name: 'name',
-              email: 'email@email.com',
-              city: 'Goergia',
-            },
-            //currentDriver
-          },
-          {
-            imageUrl: '/img/cars/dump-truck.jpg',
-            modelName: 'Dump Track',
-            status: 'SHIPPED',
-            modelYear: '2020',
-            costOfAquiring: '$3,000',
-            carWorkingCity: 'Accra',
-            carOwner: {
-              name: 'name',
-              email: 'email@email.com',
-              city: 'Goergia',
-            },
-            currentDriver: {
-              name: 'name',
-              email: 'email@email.com',
-              city: 'Goergia',
-            },
-          },
-          {
-            imageUrl: '/img/cars/picanto2.jpg',
-            modelName: 'KIA Morning Lx',
-            status: 'SETTING_UP',
-            modelYear: '2009',
-            costOfAquiring: '$3,000',
-            carWorkingCity: 'Accra',
-            carOwner: {
-              name: 'name',
-              email: 'email@email.com',
-              city: 'Goergia',
-            },
-            currentDriver: {
-              name: 'name',
-              email: 'email@email.com',
-              city: 'Goergia',
-            },
-          },
-          {
-            imageUrl: '/img/cars/dump-truck.jpg',
-            modelName: 'Dump Track',
-            status: 'PROBATION',
-            modelYear: '2020',
-            costOfAquiring: '$3,000',
-            carWorkingCity: 'Accra',
-            carOwner: {
-              name: 'name',
-              email: 'email@email.com',
-              city: 'Goergia',
-            },
-            currentDriver: {
-              name: 'name',
-              email: 'email@email.com',
-              city: 'Goergia',
-            },
-          },
-          {
-            imageUrl: '/img/cars/picanto2.jpg',
-            modelName: 'KIA Morning Lx',
-            status: 'WORKING',
-            modelYear: '2010',
-            costOfAquiring: '$3,000',
-            carWorkingCity: 'Accra',
-            carOwner: {
-              name: 'name',
-              email: 'email@email.com',
-              city: 'Goergia',
-            },
-            currentDriver: {
-              name: 'name',
-              email: 'email@email.com',
-              city: 'Goergia',
-            },
-          },
-          {
-            imageUrl: '/img/cars/dump-truck.jpg',
-            modelName: 'Dump Track',
-            status: 'SOLD',
-            modelYear: '2020',
-            costOfAquiring: '$3,000',
-            carWorkingCity: 'Accra',
-            carOwner: {
-              name: 'name',
-              email: 'email@email.com',
-              city: 'Goergia',
-            },
-            currentDriver: {
-              name: 'name',
-              email: 'email@email.com',
-              city: 'Goergia',
-            },
-          },
-          {
-            imageUrl: '/img/cars/picanto2.jpg',
-            modelName: 'KIA Morning Lx',
-            status: 'GIVEN_OUT',
-            modelYear: '2010',
-            costOfAquiring: '$3,000',
-            carWorkingCity: 'Accra',
-            carOwner: {
-              name: 'name',
-              email: 'email@email.com',
-              city: 'Goergia',
-            },
-            currentDriver: {
-              name: 'name',
-              email: 'email@email.com',
-              city: 'Goergiaaaaa',
-            },
-          },
-        ],
       }
     },
     methods: {
@@ -242,6 +107,12 @@
           'GIVEN_OUT': 'success'
         }
         return statusColors[`${status}`]
+      },
+    },
+    computed: {
+      ...mapState(['owner']),
+      tableData () {
+          return this.owner.ownerCars
       },
     },
   }

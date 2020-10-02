@@ -64,11 +64,11 @@
                   });
                 } else if (resp.role === "OWNER") {
                   this.$router.push({
-                    path: `/owner/dashboard/${resp.owner.id}`,
+                    path: `/owner/dashboard`,
                   });
                 } else {
                   this.$router.push({
-                    path: `/driver/details/loobi${resp.driver.id}`,
+                    path: `/driver/details/{resp.driver.id}`,
                   });
                 }
                 console.log("logssss",resp.role);

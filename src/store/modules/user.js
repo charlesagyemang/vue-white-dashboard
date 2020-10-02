@@ -27,8 +27,10 @@ export const actions = {
           localStorage.uberName = user.email.split("@")[0];
         } else if (user.role === "OWNER") {
           localStorage.uberName = user.owner.fullName;
+          localStorage.uberOwnerId = user.owner.id;
         } else {
           localStorage.uberName = user.driver.fullName;
+          localStorage.driverId = user.driver.id;
         }
         // eslint-disable-next-line
         localStorage.uberEmail = user.email;

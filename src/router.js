@@ -142,22 +142,22 @@ export default new Router({
       component: OwnerDashboardLayout,
       children: [
         {
-          path: '/owner/dashboard/:id',
+          path: '/owner/dashboard',
           name: 'owner-dashboard',
           component: () => import('./views/Externals/OwnerDashboard.vue')
         },
         {
-          path: '/owner/dashboard/cars',
+          path: '/owners/dashboard/cars',
           name: 'owner-cars',
           component: () => import('./views/Externals/OwnerCarList.vue')
         },
         {
-          path: '/owner/dashboard/profile',
+          path: '/owners/dashboard/profile',
           name: 'owner-profile',
           component: () => import('./views/Externals/OwnerProfile.vue')
         },
         {
-          path: '/owner/dashboard/drivers',
+          path: '/owners/dashboard/drivers',
           name: 'owner-drivers',
           component: () => import('./views/Externals/OwnerDriverList.vue')
         },

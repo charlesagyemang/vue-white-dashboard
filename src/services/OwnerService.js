@@ -13,7 +13,7 @@ export default {
     return apiClient.get('/owner/get/all', headers(token));
   },
   getOwner (token, id) {
-    return apiClient.get(`/mock/owners/${id}`, headers(token))
+    return apiClient.get(`/owner/${id}`, headers(token))
   },
   postOwner (token, owner) {
     return apiClient.post('/owner/create', owner, headers(token))
