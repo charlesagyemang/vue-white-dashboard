@@ -167,7 +167,7 @@ export default {
           });
 
         });
-        alert(JSON.stringify(this.model));
+        //alert(JSON.stringify(this.model));
       } else {
         alert("Error!! Please Fill All Required Fields")
       }

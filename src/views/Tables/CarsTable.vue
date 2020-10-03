@@ -565,7 +565,7 @@ import store from '@/store/store'
       handleAddInsuranceToCar(){
         const isNotEmpty = this.validateBody(this.insuranceForm)
         if (isNotEmpty) {
-          alert(JSON.stringify(this.insuranceForm));
+          //alert(JSON.stringify(this.insuranceForm));
           // Create insurance
           store.dispatch('car/addInsurance', {
             insuranceDetails: {...this.insuranceForm, carId: this.currentlySelectedCAr.id}
@@ -596,7 +596,7 @@ import store from '@/store/store'
       handleAddRoadWorthyToCar(){
         const isNotEmpty = this.validateBody(this.roadWorthyForm)
         if (isNotEmpty) {
-          alert(JSON.stringify({...this.roadWorthyForm, carId: this.currentlySelectedCAr.id}));
+          //alert(JSON.stringify({...this.roadWorthyForm, carId: this.currentlySelectedCAr.id}));
           // Create roadWorthy
             store.dispatch('car/addRoadworthy', {
               roadworthyDetails: {...this.roadWorthyForm, carId: this.currentlySelectedCAr.id}
@@ -627,7 +627,7 @@ import store from '@/store/store'
       handleAddIncomeTaxToCar(){
         const isNotEmpty = this.validateBody(this.incomeTaxForm)
         if (isNotEmpty) {
-          alert(JSON.stringify(this.incomeTaxForm));
+          //alert(JSON.stringify(this.incomeTaxForm));
           // Create incomeTax
 
           store.dispatch('car/addIncometax', {
@@ -659,7 +659,7 @@ import store from '@/store/store'
       handleAddMonthlyExpenseToCar(){
         const isNotEmpty = this.validateBody(this.monthlyExpenseForm)
         if (isNotEmpty) {
-          alert(JSON.stringify(this.monthlyExpenseForm));
+          //alert(JSON.stringify(this.monthlyExpenseForm));
           // Create incomeTax
           store.dispatch('car/addMonthlyexpense', {
             monthlyexpenseDetails: {...this.monthlyExpenseForm, carId: this.currentlySelectedCAr.id}
@@ -689,7 +689,7 @@ import store from '@/store/store'
       handleAddDocumentToCar(){
         const isNotEmpty = this.validateBody(this.documentLinksForm)
         if (isNotEmpty) {
-          alert(JSON.stringify(this.documentLinksForm));
+          //alert(JSON.stringify(this.documentLinksForm));
           // Create incomeTax
           store.dispatch('car/addDocumentlink', {
             documentlinkDetails: {...this.documentLinksForm, carId: this.currentlySelectedCAr.id}
