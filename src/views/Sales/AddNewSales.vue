@@ -20,12 +20,17 @@
                             <div class="pl-lg-4">
                                 <div class="row">
                                     <div class="col-lg-3">
-                                        <base-input alternative=""
-                                                    label="Date Received"
-                                                    placeholder="Date Received"
-                                                    input-classes="form-control-alternative"
-                                                    v-model="salesForm.dateReceived"
-                                        />
+                                      <h5 class="text-uppercase text-muted">Date Received</h5>
+                                      <base-input addon-left-icon="ni ni-calendar-grid-58">
+                                            <flat-pickr slot-scope="{focus, blur}"
+                                                         @on-open="focus"
+                                                         @on-close="blur"
+                                                         :config="{allowInput: true}"
+                                                         class="form-control datepicker"
+                                                         v-model="salesForm.dateReceived"
+                                                         >
+                                            </flat-pickr>
+                                        </base-input>
                                     </div>
                                     <div class="col-lg-3">
                                         <base-input alternative=""
@@ -71,7 +76,7 @@
                                   <div class="col-lg-6">
                                     <br>
                                     <h5>Select Car</h5>
-                                    <multiselect v-model="salesForm.car" label="modelName" :options="car.cars"></multiselect>
+                                    <multiselect v-model="salesForm.car" label="carNumber" :options="car.cars"></multiselect>
 
                                   </div>
 
@@ -85,7 +90,7 @@
                                         />
                                     </div>
                                     <div class="container">
-                                      <button @click.prevent="handleCreateOwner" class="btn btn-lg btn-primary">Add Sales</button>
+                                      <button @click.prevent="handleAddSales" class="btn btn-lg btn-primary">Add Sales</button>
                                     </div>
                                 </div>
                             </div>
@@ -137,20 +142,20 @@ export default {
         other: {},
       },
       salesForm: {
-        dateReceived: '12th March 2020',
-        daysSalesAmountCovers: '10',
-        amountReceived: '500',
-        amount: '500',
+        dateReceived: '',
+        daysSalesAmountCovers: '6',
+        amountReceived: '450',
+        amount: '450',
         paymentMethod: 'VODAFONE_CASH',
-        carId: '',
-        driverId: '',
+        car: '',
+        driver: '',
         status: 'SENT_BY_DRIVER',
         details: 'Sales for the week',
       },
       salesStatus: [
         'SENT_BY_DRIVER',
         'PENDING_RECEIPT',
-        'RECEIVED_BY_OWNER'
+        'RECEIVED_BY_KEHILLAH'
       ],
       salesPaymentMethods: [
         'MTN_MOBILE_MONEY',
@@ -161,25 +166,50 @@ export default {
     }// end of data
   },
   methods: {
-    handleCreateOwner() {
-      const noneIsEmpty = this.validateBody(this.model);
+    handleAddSales() {
+
+      let salesBodyToSend = {
+          dateReceived: this.salesForm.dateReceived,
+          daysSalesAmountCovers: this.salesForm.daysSalesAmountCovers,
+          amountReceived: this.salesForm.amountReceived,
+          amount: this.salesForm.amount,
+          paymentMethod: this.salesForm.paymentMethod,
+          carId: "",
+          driverId: "",
+          status: this.salesForm.status,
+      }
+
+      if (this.salesForm.driver && this.salesForm.driver.id) {
+        salesBodyToSend.driverId = this.salesForm.driver.id
+      }
+
+      if (this.salesForm.car && this.salesForm.car.id) {
+        salesBodyToSend.carId = this.salesForm.car.id
+      }
+
+      console.log(JSON.stringify(salesBodyToSend));
+
+
+      const noneIsEmpty = this.validateBody(salesBodyToSend);
       if (noneIsEmpty) {
         console.log("noneIsEmpty", "Go Agead Create Owner");
-        // CREATE OWNER
-        this.$store.dispatch('owner/createOwner', this.model).then((owner) =>{
-          console.log("==== Created ====", owner);
+        // CREATE SALES
+        salesBodyToSend = {...salesBodyToSend, details: this.salesForm.details}
+        this.$store.dispatch('sales/createSales', salesBodyToSend).then((sales) =>{
+          console.log("==== Created ====", sales);
           this.$router.push({
-            path: '/dashboard/owner-list',
+            path: '/dashboard/sales-list',
           });
           this.$notify({
             type: 'success',
-            title: `Owner Created successfully`,
+            title: `Sales Created successfully`,
           });
-
         });
-        alert(JSON.stringify(this.model));
       } else {
-        alert("Error!! Please Fill All Required Fields")
+          this.$notify({
+            type: 'danger',
+            title: `ERROR: Please Make Sure All Fields Are Filled`,
+          });
       }
     },
     validateBody(payload){

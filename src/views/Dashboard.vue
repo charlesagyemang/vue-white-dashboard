@@ -55,8 +55,8 @@
                     >
 
                         <template slot="footer">
-                          <router-link to="/dashboard/driver-list" size="sm"  class="btn btn-info" name="button">All</router-link>
-                          <router-link to="/dashboard/add-a-driver" size="sm"   class="btn btn-info" name="button">Create</router-link>
+                          <router-link to="/dashboard/sales-list" size="sm"  class="btn btn-info" name="button">All</router-link>
+                          <router-link to="/dashboard/add-a-sales" size="sm"   class="btn btn-info" name="button">Create</router-link>
                         </template>
                     </stats-card>
                 </div>
