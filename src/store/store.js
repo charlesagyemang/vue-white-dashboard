@@ -6,6 +6,7 @@ import * as owner from '@/store/modules/owner'
 import * as car from '@/store/modules/car'
 import * as driver from '@/store/modules/driver'
 import * as sales from '@/store/modules/sales'
+import * as statistics from '@/store/modules/statistics'
 
 Vue.use(Vuex)
 
@@ -17,5 +18,6 @@ export default new Vuex.Store({
     driver,
     sales,
     notification,
+    statistics,
   }
 })
