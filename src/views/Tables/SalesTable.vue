@@ -6,8 +6,13 @@
       <div class="row align-items-center">
         <div class="col">
           <h3 class="mb-0" :class="type === 'dark' ? 'text-white': ''">
-            {{title}} <router-link to="/dashboard/add-a-sales" class="btn btn-primary">Add New Sales</router-link>
+            {{title}}
           </h3>
+
+        </div>
+        <div class="col">
+
+          <h1 class="mb-0" style="padding-left:40%;">{{sumOfShit}}</h1 >
         </div>
 
       </div>
@@ -223,6 +228,16 @@ import {mapState} from 'vuex';
       ...mapState(['sales', 'car', 'driver']),
       tableData(){
         return this.sales.saless
+      },
+      sumOfShit(){
+        let count = 0
+        if (this.sales.saless) {
+          this.sales.saless.forEach((item) => {
+            count += parseInt(item.amountReceived)
+          });
+          return `Total: GHC ${count.toString().split( /(?=(?:...)*$)/ )}`;
+        }
+        return "Loading......"
       },
     },
     methods: {

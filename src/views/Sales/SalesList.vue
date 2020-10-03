@@ -1,7 +1,8 @@
 <template lang="html">
   <div class="">
     <base-header type="gradient-default" class="pb-6 pb-8 pt-5 pt-md-8">
-      <span class="mask bg-info opacity-8"></span>
+      <!-- <span class="mask bg-info opacity-8"></span> -->
+      <!-- <h1 class="text-white" style="padding-left:70%; color:white">Total: GHC {{sumOfSales}}</h1> -->
     </base-header>
     <div class="container-fluid mt--7">
         <div class="row">
