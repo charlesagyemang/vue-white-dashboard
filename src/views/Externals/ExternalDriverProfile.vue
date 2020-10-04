@@ -10,13 +10,13 @@
                     <div class="col-lg-7 col-md-10">
                         <h1 class="display-2 text-white">Hello!</h1>
                         <h1 class="display-2 text-white">{{namer}}</h1>
-                        <p class="text-white mt-0 mb-5">This is your profile page. You can see the progress you've made with your work and manage your projects or assigned tasks</p>
+                        <p class="text-white mt-0 mb-5">Welcome To Your Personal Portal On Kehillah Transport Services. You Can Find Your Details Below</p>
                     </div>
                 </div>
             </div>
         </base-header>
 
-        <div class="container-fluid mt--7">
+        <div v-if="driver.driver" class="container-fluid mt--7">
             <div class="row">
                 <div class="col-xl-4 order-xl-2 mb-5 mb-xl-0">
                     <div class="card card-profile shadow">
@@ -24,35 +24,30 @@
                             <div class="col-lg-3 order-lg-2">
                                 <div class="card-profile-image">
                                     <a href="#">
-                                        <img src="/img/theme/team-4-800x800.jpg" class="rounded-circle">
+                                        <img src="/img/cars/picanto.jpg" class="rounded-circle">
                                     </a>
                                 </div>
                             </div>
                         </div>
-                        <div class="card-header text-center border-0 pt-8 pt-md-4 pb-0 pb-md-4">
-                          <div class="d-flex justify-content-between">
-                              <base-button size="sm" type="success" class="mr-4">Add Sales</base-button>
-                              <base-button size="sm" type="danger" class="float-right">Report Fault</base-button>
-                          </div>
-                        </div>
+
                         <div class="card-body pt-0 pt-md-4">
                             <div class="row">
                                 <div class="col">
                                     <div class="card-profile-stats d-flex justify-content-center mt-md-5">
                                         <div>
-                                            <span class="heading">22</span>
-                                            <span class="description">Weeks Done</span>
+                                            <span class="heading">{{salesCount}}</span>
+                                            <span class="description">Days Done</span>
                                         </div>
                                         <div>
-                                            <span class="heading">{{150 - 22}}</span>
-                                            <span class="description">Weeks Left</span>
+                                            <span class="heading">{{24 - salesCount}}</span>
+                                            <span class="description">Days Left</span>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
                               <div class="col">
-                                <base-progress type="success" :height="8" :value="parseInt(22/150 * 100)" label="22 out of 150 weeks"></base-progress>
+                                <base-progress type="success" :height="8" :value="parseInt(salesCount/24 * 100)" :label="salesCount + ' out of 24 days done in ' + driver.driver.driverStatus  "></base-progress>
                               </div>
                             </div>
                             <div class="text-center">
@@ -154,7 +149,7 @@
                                         <p>{{driver.driver.formerEmployerAddress}}</p>
                                       </div>
                                       <div class="col-lg-6">
-                                        <h4>Phone Number</h4>
+                                        <h4>Phone Number {{salesCount}}</h4>
                                         <p>{{driver.driver.formerEmployerPhoneNumber}}</p>
                                       </div>
                                   </div>
@@ -172,11 +167,9 @@ import {mapState} from 'vuex';
   export default {
     name: 'user-profile',
     beforeCreate () {
-      //get id and make api call to single driver service
-      console.log(this.$route.params.id);
       this.$store.dispatch('driver/fetchDriverByIdExternal')
       .then((resp) => {
-        console.log("Driver", resp);
+        console.log("Driver", resp.sales);
       })
       .catch(() => {
         console.log("Couldnt Fetch");
@@ -202,7 +195,14 @@ import {mapState} from 'vuex';
       ...mapState(['driver']),
       namer() {
         return localStorage.uberName
-      }
+      },
+      salesCount(){
+        if (this.driver.driver) {
+          const sales = this.driver.driver.sales;
+          return sales.length * 6
+        }
+        return 0
+      },
     },
   };
 </script>
