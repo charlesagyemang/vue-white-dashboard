@@ -30,6 +30,7 @@
           <th>Date</th>
           <th>Days Ticked</th>
           <th>Status</th>
+          <th>Payment Method</th>
           <th>Amount Received</th>
           <th>Amount Expected</th>
           <th>Car</th>
@@ -61,8 +62,12 @@
             {{row.daysSalesAmountCovers}}
           </td>
 
-          <td class="car">
+          <td class="status">
             {{row.status}}
+          </td>
+
+          <td class="paymentMethod">
+            {{row.paymentMethod}}
           </td>
 
           <td class="amountReceived">
