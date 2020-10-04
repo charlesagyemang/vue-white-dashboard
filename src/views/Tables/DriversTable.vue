@@ -71,7 +71,7 @@
           </td>
 
           <td v-if="row.currentCar !== null" class="phone-number">
-            {{row.currentCar.modelName}}
+            {{row.car.carNumber}} ({{row.car.modelName}})
           </td>
 
           <td v-else class="phone-number">
@@ -139,7 +139,7 @@
                         <form role="form">
                            <multiselect
                              track-by="modelName"
-                             label="modelName"
+                             label="carNumber"
                              v-model="selectedCarToAddToDriver"
                              :options="allDriversList">
                            </multiselect>

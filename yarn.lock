@@ -9194,6 +9194,13 @@ wide-align@^1.1.0:
   dependencies:
     string-width "^1.0.2 || 2"
 
+witty-flow-sms@^1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/witty-flow-sms/-/witty-flow-sms-1.1.1.tgz#33d74259565c505005b709686728064df1186285"
+  integrity sha512-EIWMSVf4h24ES/oimyz+J1K+ATqwOoeUDKjgGBimia+kJepdyRG2ObYD/QNJdjUFkNL2+xJbF6cg6vFPWNAa/A==
+  dependencies:
+    axios "^0.20.0"
+
 word-wrap@^1.2.3:
   version "1.2.3"
   resolved "https://registry.yarnpkg.com/word-wrap/-/word-wrap-1.2.3.tgz#610636f6b1f703891bd34771ccb17fb93b47079c"

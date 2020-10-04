@@ -6,9 +6,8 @@
       <div class="row align-items-center">
         <div class="col">
           <h3 class="mb-0" :class="type === 'dark' ? 'text-white': ''">
-            {{title}}
+            {{title}} <router-link class="btn btn-primary" to="/dashboard/add-a-sales">ADD A NEW SALES RECORD</router-link>
           </h3>
-
         </div>
         <div class="col">
 
@@ -48,6 +47,7 @@
               <template>
                 <button class="dropdown-item"  @click.prevent="handleEditSalesModal(row)">Edit</button>
                 <button class="dropdown-item" @click.prevent="handleDeleteSales(row.id)">Delete</button>
+                <button class="dropdown-item" @click.prevent="handleSendSmsToDriver(row.driver)">Send Driver Sms</button>
               </template>
             </base-dropdown>
           </td>
@@ -175,6 +175,7 @@
 </template>
 <script>
 import {mapState} from 'vuex';
+import { WFClient } from 'witty-flow-sms';
 
   export default {
     name: 'projects-table',
@@ -311,8 +312,16 @@ import {mapState} from 'vuex';
         });
 
       },
-
-
+      handleSendSmsToDriver(data){
+        const wittySmsClient = new WFClient('1f41908b-a9d7-4408-a0bf-4ee4665b3276', 'CvAILbsSdfjGAVVZr6RG0zgBv5jHUioh88vCuHu914');
+        console.log(data.phoneNumber);
+        wittySmsClient.sendSms('Kehillah', '0277119919', 'New Message')
+        .then((resp) => {
+          console.log(resp);
+        }).catch((error) => {
+          console.log(error);
+        })
+      },
     },
   }
 </script>
