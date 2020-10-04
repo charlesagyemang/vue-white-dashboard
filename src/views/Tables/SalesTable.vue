@@ -48,7 +48,6 @@
               </a>
               <template>
                 <button class="dropdown-item"  @click.prevent="handleEditSalesModal(row)">Edit</button>
-                <a class="dropdown-item" href="#">Update Status</a>
                 <button class="dropdown-item" @click.prevent="handleDeleteSales(row.id)">Delete</button>
               </template>
             </base-dropdown>
