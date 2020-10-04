@@ -221,6 +221,7 @@ import {mapState} from 'vuex';
           'VODAFONE_CASH',
           'AIRTEL_TIGO_MONEY',
           'GCB_BANK_DEPOSIT',
+          'PHYSICAL_CASH',
         ],
       }
     },

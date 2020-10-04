@@ -162,6 +162,7 @@ export default {
         'VODAFONE_CASH',
         'AIRTEL_TIGO_MONEY',
         'GCB_BANK_DEPOSIT',
+        'PHYSICAL_CASH',
       ],
     }// end of data
   },
