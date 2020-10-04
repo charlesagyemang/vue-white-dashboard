@@ -30,10 +30,10 @@
           <th>Date</th>
           <th>Driver</th>
           <th>Car</th>
+          <th>Amount Received</th>
           <th>Days Ticked</th>
           <th>Status</th>
           <th>Payment Method</th>
-          <th>Amount Received</th>
           <th>Details</th>
 
         </template>
@@ -65,6 +65,11 @@
             {{row.car.modelName}}({{row.car.modelYear}})
           </td>
 
+
+          <td class="amountReceived">
+            {{row.amountReceived}}
+          </td>
+
           <td scope="daysTicked">
             {{row.daysSalesAmountCovers}}
           </td>
@@ -75,10 +80,6 @@
 
           <td class="paymentMethod">
             {{row.paymentMethod}}
-          </td>
-
-          <td class="amountReceived">
-            {{row.amountReceived}}
           </td>
 
           <td class="car">
