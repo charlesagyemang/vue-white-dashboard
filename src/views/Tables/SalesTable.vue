@@ -28,13 +28,12 @@
 
           <th>Actions</th>
           <th>Date</th>
+          <th>Driver</th>
+          <th>Car</th>
           <th>Days Ticked</th>
           <th>Status</th>
           <th>Payment Method</th>
           <th>Amount Received</th>
-          <th>Amount Expected</th>
-          <th>Car</th>
-          <th>Driver</th>
           <th>Details</th>
 
         </template>
@@ -57,6 +56,15 @@
             {{row.dateReceived}}
           </td>
 
+          <td class="driver">
+            {{row.driver.fullName}}
+          </td>
+
+
+          <td class="car">
+            {{row.car.modelName}}({{row.car.modelYear}})
+          </td>
+
           <td scope="daysTicked">
             {{row.daysSalesAmountCovers}}
           </td>
@@ -71,18 +79,6 @@
 
           <td class="amountReceived">
             {{row.amountReceived}}
-          </td>
-
-          <td class="amountExpected">
-            {{row.amount}}
-          </td>
-
-          <td class="car">
-            {{row.car.modelName}}({{row.car.modelYear}})
-          </td>
-
-          <td class="car">
-            {{row.driver.fullName}}
           </td>
 
           <td class="car">
