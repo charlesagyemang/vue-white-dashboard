@@ -52,6 +52,7 @@ export const actions = {
     return SalesService.getSaless(localStorage.uberToken)
       .then((response) => {
         commit('SET_SALESS', response.data)
+        return response.data
       }).catch((error) => {
         throw error
       })

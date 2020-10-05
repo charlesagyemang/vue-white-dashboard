@@ -4,10 +4,13 @@
       <!-- <span class="mask bg-info opacity-8"></span> -->
       <!-- <h1 class="text-white" style="padding-left:70%; color:white">Total: GHC {{sumOfSales}}</h1> -->
     </base-header>
-    <div class="container-fluid mt--7">
+    <div v-if="items" class="container-fluid mt--7">
         <div class="row">
             <div class="col">
-                <sales-table title="All Sales List"></sales-table>
+                <table-item
+                  :fields = "fields"
+                  :items = "items"
+                ></table-item>
             </div>
         </div>
     </div>
@@ -16,11 +19,45 @@
 
 <script>
 
-import SalesTable from '@/views/Tables/SalesTable'
+// import SalesTable from '@/views/Tables/SalesTable'
+import TableItem from '@/views/Tables/TableItem'
+import {mapState} from 'vuex'
 
 export default {
+  beforeCreate(){
+    this.$store.dispatch('sales/fetchSaless').then((resp) => {console.log("inside table item", resp);});
+  },
   components: {
-    SalesTable,
+    // SalesTable,
+    TableItem
+  },
+  computed: {
+    ...mapState(['sales']),
+    items () {
+      return this.sales.saless
+    },
+    fields(){
+      let keys =   [
+          ["actions", "actions"],
+          ["Date Received", "dateReceived"],
+          ["Driver Details", "driver"],
+          ["Status", "status"],
+          ["Car Details", "car"],
+          ["Amount Received", "amount"],
+          ["Days Ticked", "daysSalesAmountCovers"],
+          ["Payment Method", "paymentMethod"],
+       ]
+      const sendKeys = []
+      keys.forEach((item) => {
+        sendKeys.push({
+          key: item[1],
+          label: item[0],
+          sortable: true,
+          sortDirection: 'desc'
+        })
+      });
+      return  sendKeys
+    },
   },
 }
 </script>
