@@ -382,11 +382,9 @@ import { WFClient } from 'witty-flow-sms';
 
       honda(){
         // const res = this.tableData
-        //   .filter(f => f.sortable)
-        //   .map(f => {
-        //     return { text: f.label, value: f.key }
-        // })
-        console.log(this.tableData);
+        const mono = ["foinney", "lomo"]
+        // const filteredElements = this.tableData.filter(f => f.driver.fullName.includes('promise'));
+        console.log(mono);
       },
 
     },
