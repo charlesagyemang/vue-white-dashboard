@@ -149,10 +149,11 @@ export default {
         paymentMethod: 'VODAFONE_CASH',
         car: '',
         driver: '',
-        status: 'SENT_BY_DRIVER',
-        details: 'Sales for the week',
+        status: 'DRIVER_YET_TO_SEND',
+        details: 'Week {Number} {Period} Sales',
       },
       salesStatus: [
+        'DRIVER_YET_TO_SEND',
         'SENT_BY_DRIVER',
         'PENDING_RECEIPT',
         'RECEIVED_BY_KEHILLAH'

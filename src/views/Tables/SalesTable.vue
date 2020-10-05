@@ -218,6 +218,7 @@ import { WFClient } from 'witty-flow-sms';
         selectedSalesToEdit: {},
 
         salesStatus: [
+          'DRIVER_YET_TO_SEND',
           'SENT_BY_DRIVER',
           'PENDING_RECEIPT',
           'RECEIVED_BY_KEHILLAH'
@@ -242,7 +243,7 @@ import { WFClient } from 'witty-flow-sms';
           this.sales.saless.forEach((item) => {
             if (item.status === 'RECEIVED_BY_KEHILLAH') {
               count += parseInt(item.amountReceived)
-            }      
+            }
           });
           return `Total: GHC ${count.toString().split( /(?=(?:...)*$)/ )}`;
         }
@@ -252,7 +253,8 @@ import { WFClient } from 'witty-flow-sms';
     methods: {
       getStatusColor(status) {
         const statusColors = {
-          'SENT_BY_DRIVER': 'danger',
+          'DRIVER_YET_TO_SEND': 'danger'
+          'SENT_BY_DRIVER': 'info',
           'PENDING_RECEIPT': 'primary',
           'RECEIVED_BY_KEHILLAH': 'success',
         }
