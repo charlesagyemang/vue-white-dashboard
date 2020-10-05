@@ -22,7 +22,6 @@
 
           <th>Actions</th>
           <th>Model</th>
-          <th>Car Number</th>
           <th>Car Status</th>
           <th>Cost</th>
           <th>OP City</th>
@@ -66,15 +65,10 @@
                 <img alt="Car Image" src="/img/cars/picanto2.jpg">
               </a>
               <div class="media-body">
-                <span class="name mb-0 text-sm">{{row.modelName}} {{row.modelYear}}</span>
+                <span class="name mb-0 text-sm">{{row.modelName}}<br>{{row.modelYear}} {{row.carNumber}}</span>
               </div>
             </div>
           </th>
-
-          <td class="car-number">
-            {{row.carNumber}}
-          </td>
-
 
           <td class="status">
            <badge class="badge-dot mr-4" :type="getStatusColor(row.carStatus)">
