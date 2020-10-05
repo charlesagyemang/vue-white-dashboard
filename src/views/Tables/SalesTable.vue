@@ -47,7 +47,7 @@
               <template>
                 <button class="dropdown-item"  @click.prevent="handleEditSalesModal(row)">Edit</button>
                 <button class="dropdown-item" @click.prevent="handleDeleteSales(row.id)">Delete</button>
-                <button class="dropdown-item" @click.prevent="handleSendSmsToDriver(row.driver)">Send Driver Sms</button>
+                <button class="dropdown-item" @click.prevent="handleSendSmsToDriver(row)">Send Driver Sms</button>
               </template>
             </base-dropdown>
           </td>
@@ -253,7 +253,7 @@ import { WFClient } from 'witty-flow-sms';
     methods: {
       getStatusColor(status) {
         const statusColors = {
-          'DRIVER_YET_TO_SEND': 'danger'
+          'DRIVER_YET_TO_SEND': 'danger',
           'SENT_BY_DRIVER': 'info',
           'PENDING_RECEIPT': 'primary',
           'RECEIVED_BY_KEHILLAH': 'success',
@@ -329,14 +329,48 @@ import { WFClient } from 'witty-flow-sms';
         });
 
       },
+      getNumberOfDaysFromSales(sales, period){
+        const periodData = {
+          'PROBATION' : 24,
+          'WORKING': 860 + 24,
+        }
+        let count = 0;
+        sales.forEach((item) => {
+          if (item.status === 'RECEIVED_BY_KEHILLAH') {
+            count += parseInt(item.daysSalesAmountCovers);
+          }
+        });
+
+        let daysLeft = periodData[`${period}`] - count;
+
+        if (daysLeft === 0) {
+          daysLeft = `You Have Completed The ${period} Period. Congrats!!`
+        } else {
+          daysLeft = `You Have ${daysLeft} out of ${periodData[`${period}`]} days left to complete the ${period} period.`
+        }
+        return {
+          daysDone: count,
+          daysLeft,
+        };
+
+      },
       handleSendSmsToDriver(data){
         const wittySmsClient = new WFClient('1f41908b-a9d7-4408-a0bf-4ee4665b3276', 'CvAILbsSdfjGAVVZr6RG0zgBv5jHUioh88vCuHu914');
-        console.log(data.phoneNumber);
-        wittySmsClient.sendSms('Kehillah', '0277119919', 'New Message')
+        const record = this.getNumberOfDaysFromSales(data.driver.sales, data.driver.driverStatus)
+        const message = `Hi, ${data.driver.fullName}. We have received an amount of GHC ${data.amountReceived} via ${data.paymentMethod}. This covers ${data.daysSalesAmountCovers} days of expected sales. This Means ${record.daysLeft} Good Job!`
+        wittySmsClient.sendSms('Kehillah', data.driver.phoneNumber, message)
         .then((resp) => {
           console.log(resp);
+          this.$notify({
+            type: 'success',
+            title: `Sms Sent Successfully`,
+          });
         }).catch((error) => {
           console.log(error);
+          this.$notify({
+            type: 'danger',
+            title: `Sms Failed To Send: ${error.message}`,
+          });
         })
       },
     },
