@@ -22,11 +22,11 @@
         <template slot="columns">
           <th>Actions</th>
           <th>Full Name</th>
+          <th>driverStatus</th>
           <th>email</th>
           <th>phoneNumber</th>
           <th>Assigned Car</th>
           <th>address</th>
-          <th>driverStatus</th>
           <th>car status</th>
         </template>
 
@@ -61,6 +61,17 @@
               </div>
             </div>
           </th>
+
+          <!-- <td class="status">
+            {{row.driverStatus}}
+          </td> -->
+
+          <td class="status">
+           <badge class="badge-dot mr-4" :type="getStatusColor(row.driverStatus)">
+             <i :class="`bg-${getStatusColor(row.driverStatus)}`"></i>
+             <span class="status">{{row.driverStatus}}</span>
+           </badge>
+         </td>
 
           <td class="email">
             {{row.email}}
@@ -354,6 +365,20 @@ import store from '@/store/store'
       }
     },
     methods: {
+
+      getStatusColor(status) {
+        const statusColors = {
+          'BOUGHT': 'dark',
+          'SHIPPED': 'danger',
+          'SETTING_UP': 'info',
+          'PROBATION': 'primary',
+          'WORKING': 'success',
+          'SOLD': 'danger',
+          'GIVEN_OUT': 'success'
+        }
+        return statusColors[`${status}`]
+      },//getStatusColor
+
 
       handleOwnerActions(id, route){
         store.dispatch('driver/fetchDriverById', id).then((driver) =>{

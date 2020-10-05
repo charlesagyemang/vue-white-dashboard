@@ -25,9 +25,9 @@
           <th>Actions</th>
           <th>Full Name</th>
           <th>email</th>
+          <th>status</th>
           <th>phoneNumber</th>
           <th>address</th>
-          <th>status</th>
           <th>Cars</th>
         </template>
 
@@ -64,16 +64,16 @@
             {{row.email}}
           </td>
 
+          <td class="status">
+            <badge :type="statusColor(row.status)">{{row.status}}</badge>
+          </td>
+
           <td class="phone-number">
             {{row.phoneNumber}}
           </td>
 
           <td class="address">
             {{row.address}}
-          </td>
-
-          <td class="status">
-            <badge :type="statusColor(row.status)">{{row.status}}</badge>
           </td>
 
           <td v-if="row.cars" class="">

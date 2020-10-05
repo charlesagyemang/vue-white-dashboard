@@ -22,11 +22,12 @@
 
           <th>Actions</th>
           <th>Model</th>
+          <th>Car Number</th>
+          <th>Car Status</th>
           <th>Cost</th>
           <th>OP City</th>
           <th>Owner</th>
           <th>Driver</th>
-          <th>Car Status</th>
           <th>Insurnace</th>
           <th>Road Worthy</th>
           <th>Income Taxes</th>
@@ -70,6 +71,18 @@
             </div>
           </th>
 
+          <td class="car-number">
+            {{row.carNumber}}
+          </td>
+
+
+          <td class="status">
+           <badge class="badge-dot mr-4" :type="getStatusColor(row.carStatus)">
+             <i :class="`bg-${getStatusColor(row.carStatus)}`"></i>
+             <span class="status">{{row.carStatus}}</span>
+           </badge>
+         </td>
+
           <td class="cost-of-aquiring">
             Aquiring: {{row.costOfAquiring || "NAN"}}<br>
             Shipping: {{row.costOfShipping || "NAN"}}<br>
@@ -93,10 +106,6 @@
 
           <td v-else class="current-driver">
             Driver Has Not Been Assigned
-          </td>
-
-          <td class="carStatus">
-            {{row.carStatus}}
           </td>
 
           <td class="insurance">

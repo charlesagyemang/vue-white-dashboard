@@ -62,7 +62,7 @@
 
 
           <td class="car">
-            {{row.car.modelName}}({{row.car.modelYear}})
+            {{row.car.carNumber}}<br>{{row.car.modelName}} <br> {{row.car.modelYear}}
           </td>
 
 
@@ -74,9 +74,13 @@
             {{row.daysSalesAmountCovers}}
           </td>
 
+
           <td class="status">
-            {{row.status}}
-          </td>
+           <badge class="badge-dot mr-4" :type="getStatusColor(row.status)">
+             <i :class="`bg-${getStatusColor(row.status)}`"></i>
+             <span class="status">{{row.status}}</span>
+           </badge>
+         </td>
 
           <td class="paymentMethod">
             {{row.paymentMethod}}
@@ -236,7 +240,9 @@ import { WFClient } from 'witty-flow-sms';
         let count = 0
         if (this.sales.saless) {
           this.sales.saless.forEach((item) => {
-            count += parseInt(item.amountReceived)
+            if (item.status === 'RECEIVED_BY_KEHILLAH') {
+              count += parseInt(item.amountReceived)
+            }      
           });
           return `Total: GHC ${count.toString().split( /(?=(?:...)*$)/ )}`;
         }
@@ -244,6 +250,15 @@ import { WFClient } from 'witty-flow-sms';
       },
     },
     methods: {
+      getStatusColor(status) {
+        const statusColors = {
+          'SENT_BY_DRIVER': 'danger',
+          'PENDING_RECEIPT': 'primary',
+          'RECEIVED_BY_KEHILLAH': 'success',
+        }
+        return statusColors[`${status}`]
+      },//getStatusColor
+
       getLatestData() {
         this.$store.dispatch('sales/fetchSaless').then(() =>{
             console.log(this.car.carIncometaxes );
