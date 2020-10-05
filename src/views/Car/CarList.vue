@@ -7,6 +7,12 @@
         <div class="row">
             <div class="col">
                 <cars-table title="All Cars Table"></cars-table>
+
+                <!-- <table-item
+                :fields ="['koobi', 'muche']"
+                :
+                >
+                </table-item> -->
             </div>
         </div>
     </div>
@@ -19,13 +25,14 @@
 
 <script>
 import CarsTable from '@/views/Tables/CarsTable'
+// import TableItem from '@/views/Tables/TableItem'
 
 
 
 export default {
   components: {
     CarsTable,
-
+    // TableItem,
   },
 }
 </script>

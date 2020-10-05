@@ -6,14 +6,20 @@
       <div class="row align-items-center">
         <div class="col">
           <h3 class="mb-0" :class="type === 'dark' ? 'text-white': ''">
-            {{title}} <router-link class="btn btn-primary" to="/dashboard/add-a-sales">ADD A NEW SALES RECORD</router-link>
+            {{title}} <router-link class="btn btn-primary" to="/dashboard/add-a-sales">ADD NEW</router-link>
           </h3>
         </div>
         <div class="col">
-
-          <h1 class="mb-0" style="padding-left:40%;">{{sumOfShit}}</h1 >
+          <base-input
+            @keyup = "honda"
+            v-model="filterData"
+            class="mb-0"
+            placeholder="filter">
+          </base-input>
         </div>
-
+        <div class="col">
+          <h1 class="mb-0">{{sumOfShit}}</h1 >
+        </div>
       </div>
     </div>
 
@@ -66,9 +72,9 @@
           </td>
 
 
-          <td class="amountReceived">
-            {{row.amountReceived}}
-          </td>
+          <th class="amountReceived">
+            GHC {{row.amountReceived}}
+          </th>
 
           <td scope="daysTicked">
             {{row.daysSalesAmountCovers}}
@@ -216,7 +222,7 @@ import { WFClient } from 'witty-flow-sms';
         },
 
         selectedSalesToEdit: {},
-
+        filterData: "",
         salesStatus: [
           'DRIVER_YET_TO_SEND',
           'SENT_BY_DRIVER',
@@ -352,8 +358,8 @@ import { WFClient } from 'witty-flow-sms';
           daysDone: count,
           daysLeft,
         };
-
       },
+
       handleSendSmsToDriver(data){
         const wittySmsClient = new WFClient('1f41908b-a9d7-4408-a0bf-4ee4665b3276', 'CvAILbsSdfjGAVVZr6RG0zgBv5jHUioh88vCuHu914');
         const record = this.getNumberOfDaysFromSales(data.driver.sales, data.driver.driverStatus)
@@ -373,6 +379,16 @@ import { WFClient } from 'witty-flow-sms';
           });
         })
       },
+
+      honda(){
+        // const res = this.tableData
+        //   .filter(f => f.sortable)
+        //   .map(f => {
+        //     return { text: f.label, value: f.key }
+        // })
+        console.log(this.tableData);
+      },
+
     },
   }
 </script>
