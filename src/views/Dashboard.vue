@@ -214,7 +214,9 @@
         let count = 0
         if (this.sales.saless) {
           this.sales.saless.forEach((item) => {
-            count += parseInt(item.amountReceived)
+            if (item.status === 'RECEIVED_BY_KEHILLAH') {
+              count += parseInt(item.amountReceived)
+            }    
           });
           return `${count.toString().split( /(?=(?:...)*$)/ )}`;
         }
