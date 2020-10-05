@@ -82,7 +82,8 @@
           </td>
 
           <td v-if="row.currentCar !== null" class="phone-number">
-            {{row.car.carNumber}} ({{row.car.modelName}})
+            {{row.car.carNumber}}<br>
+            {{row.car.modelName}}
           </td>
 
           <td v-else class="phone-number">
