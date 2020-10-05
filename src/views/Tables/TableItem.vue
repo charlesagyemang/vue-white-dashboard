@@ -13,11 +13,9 @@
                   {{title}} <router-link class="btn btn-primary" to="/dashboard/add-a-sales">ADD A NEW SALES RECORD</router-link>
                 </h3>
               </div>
-              <div class="col">
 
-              </div>
               <div class="col">
-                <h1 class="mb-0">{{sumOfShit}}</h1 >
+                <h1   style="margin-left: 35%" class="mb-0">{{sumOfShit}}</h1 >
               </div>
             </div>
               <br>
@@ -40,10 +38,13 @@
                   </b-form-group>
                 </div>
                 <div class="col-sm-2">
-                  <b-form-group>
+                  <b-form-group
+                    style="margin-top: 12%"
+                  >
 
                     Per Page <br>
                     <b-form-select
+
                       v-model="perPage"
                       id="perPageSelect"
                       size="sm"
@@ -51,8 +52,8 @@
                     ></b-form-select>
                   </b-form-group>
                 </div>
-                <div class="col-sm-4">
-                  <br>
+                <div   style="margin-top: 4%" class="col-sm-4">
+
                   <b-pagination
                     v-model="currentPage"
                     :total-rows="totalRows"
