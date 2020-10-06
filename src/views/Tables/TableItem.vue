@@ -67,7 +67,7 @@
 
 
 
-          <div class="table-responsive">
+          <div class="table-responsive dark">
             <b-table
               class="table align-items-center table-flush"
               :items="items"
