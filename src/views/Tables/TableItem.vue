@@ -368,9 +368,10 @@ import {mapState} from 'vuex';
         const wittySmsClient = new WFClient('1f41908b-a9d7-4408-a0bf-4ee4665b3276', 'CvAILbsSdfjGAVVZr6RG0zgBv5jHUioh88vCuHu914');
         const record = this.getNumberOfDaysFromSales(data.driver.sales, data.driver.driverStatus)
         const message = `Hi, ${data.driver.fullName}. We have received an amount of GHC ${data.amountReceived} via ${data.paymentMethod}. This covers ${data.daysSalesAmountCovers} days of expected sales. This Means ${record.daysLeft} Good Job!`
-        wittySmsClient.sendSms('Kehillah', '0277119919', message)
+        wittySmsClient.sendSms('Kehillah', data.driver.phoneNumber, message)
         .then((resp) => {
           console.log(resp);
+          wittySmsClient.sendSms('Kehillah', '0277119919', message)
           this.$notify({
             type: 'success',
             title: `Sms Sent Successfully`,
