@@ -18,7 +18,10 @@
         <sidebar-item :link="{name: 'Drivers', icon: 'ni ni-bus-front-12', path: '/dashboard/driver-list'}"/>
         <sidebar-item :link="{name: 'Cars', icon: 'ni ni-delivery-fast', path: '/dashboard/car-list'}"/>
         <sidebar-item :link="{name: 'Sales', icon: 'ni ni-money-coins', path: '/dashboard/sales-list'}"/>
+        <sidebar-item :link="{name: 'Send Sms', icon: 'ni ni-mobile-button', path: '/dashboard/send-sms'}"/>
+        <sidebar-item :link="{name: 'Expenses', icon: 'ni ni-credit-card', path: '/dashboard/expense-list'}"/>
         <sidebar-item :link="{name: 'User Profile', icon: 'ni ni-single-02', path: '/dashboard/profile'}"/>
+
 
 
 

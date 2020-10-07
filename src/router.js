@@ -123,6 +123,18 @@ export default new Router({
           name: 'Edit Single Sales',
           component: () => import('./views/Sales/EditSingleSales.vue')
         },
+
+        {
+          path: '/dashboard/send-sms',
+          name: 'Send SMS',
+          component: () => import('./views/SendSms.vue')
+        },
+
+        {
+          path: '/dashboard/expense-list',
+          name: 'Expenses Table',
+          component: () => import('./views/Expenses/ExpenseList.vue')
+        },
       ]
     },
     {
