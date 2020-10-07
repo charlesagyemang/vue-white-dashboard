@@ -132,8 +132,14 @@ export default new Router({
 
         {
           path: '/dashboard/expense-list',
-          name: 'Expenses Table',
+          name: 'Expenses',
           component: () => import('./views/Expenses/ExpenseList.vue')
+        },
+
+        {
+          path: '/dashboard/pay-out-list',
+          name: 'Owner Payout List',
+          component: () => import('./views/Payout/PayoutList.vue')
         },
       ]
     },
