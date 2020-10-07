@@ -69,6 +69,20 @@ export default {
   getDocumentlinks (token) {
     return apiClient.get('/documentlink/get/all', headers(token));
   },
+  ///////////////////////////////////////
 
+
+  //////////////////EDIT SERVICE/////////////////////
+  editMonthlyExpense (token, monthlyExpenseId, monthlyExpenseDataToUpdate) {
+    return apiClient.patch(`/monthlyexpense/edit/${monthlyExpenseId}`, monthlyExpenseDataToUpdate, headers(token))
+  },
+  ////////////////// EDIT ENDS HERE/////////////////
+
+
+
+  /////////////////DELETE HERE////////////
+  deleteMonthlyExpense (token, monthlyExpenseIdToDelete) {
+    return apiClient.delete(`/monthlyexpense/delete/${monthlyExpenseIdToDelete}`, headers(token))
+  },
   ///////////////////////////////////////
 }

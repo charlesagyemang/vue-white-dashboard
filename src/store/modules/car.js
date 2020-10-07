@@ -18,6 +18,10 @@ export const mutations = {
     state.cars.unshift(car)
   },
 
+  ADD_MONTHLY_EXPENSE (state, monthyExpense) {
+    state.carMonthlyexpenses.unshift(monthyExpense)
+  },
+
   SET_CARS (state, cars) {
     state.cars = cars
   },
@@ -51,9 +55,20 @@ export const mutations = {
     state.cars.unshift(carToUpdate)
   },
 
+  UPDATE_MONTHLY_EXPENSES (state, monthlyExpenseToUpdate) {
+    state.carMonthlyexpenses = state.carMonthlyexpenses.filter(car => car.id !== monthlyExpenseToUpdate.id)
+    state.carMonthlyexpenses.unshift(monthlyExpenseToUpdate)
+  },
+
   DELETE_CAR (state, carIdToDelete) {
     state.cars = state.cars.filter(
       car => car.id !== carIdToDelete
+    )
+  },
+
+  DELETE_MONTHLY_EXPENSE (state, monthlyExpenseIdToDelete) {
+    state.carMonthlyexpenses = state.carMonthlyexpenses.filter(
+      monthlyExpense => monthlyExpense.id !== monthlyExpenseIdToDelete
     )
   }
 
@@ -146,6 +161,18 @@ export const actions = {
     })
   },
 
+  editMonthlyExpense ({ commit }, { monthlyExpenseId, monthlyExpenseDataToUpdate }) {
+    // eslint-disable-next-line
+    return CarService.editMonthlyExpense(localStorage.uberToken, monthlyExpenseId, monthlyExpenseDataToUpdate)
+    .then((response) => {
+      console.log("==Edit Success ful====", response.data);
+      commit('UPDATE_MONTHLY_EXPENSES', response.data);
+      return response.data
+    }).catch((error) => {
+      throw error
+    })
+  },
+
   addInsurance ({ commit }, { insuranceDetails }) {
     // eslint-disable-next-line
     return CarService.postInsurance(localStorage.uberToken, insuranceDetails)
@@ -224,10 +251,20 @@ export const actions = {
     return car
   },
 
+  ////////////////////
   deleteCar ({ commit }, carIdToDelete) {
     // eslint-disable-next-line
     return CarService.deleteCar(localStorage.uberToken, carIdToDelete).then((response) => {
       commit('DELETE_CAR', carIdToDelete);
+    }).catch((error) => {
+      throw error;
+    })
+  },
+
+  deleteMonthlyExpense ({ commit }, monthlyExpenseIdToDelete) {
+    // eslint-disable-next-line
+    return CarService.deleteMonthlyExpense(localStorage.uberToken, monthlyExpenseIdToDelete).then((response) => {
+      commit('DELETE_MONTHLY_EXPENSE', monthlyExpenseIdToDelete);
     }).catch((error) => {
       throw error;
     })
