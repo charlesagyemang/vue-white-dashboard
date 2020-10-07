@@ -18,8 +18,11 @@ export const mutations = {
     state.cars.unshift(car)
   },
 
-  ADD_MONTHLY_EXPENSE (state, monthyExpense) {
-    state.carMonthlyexpenses.unshift(monthyExpense)
+  ADD_MONTHLY_EXPENSE (state, arrayOfCarExpenses) {
+    console.log("dsipatch", arrayOfCarExpenses);
+    const carId = arrayOfCarExpenses[0].carId
+    state.carMonthlyexpenses.filter(f => f.carId !== carId);
+    state.carMonthlyexpenses.unshift(...arrayOfCarExpenses);
   },
 
   SET_CARS (state, cars) {
@@ -214,8 +217,9 @@ export const actions = {
     // eslint-disable-next-line
     return CarService.postMonthlyexpense(localStorage.uberToken, monthlyexpenseDetails)
     .then((response) => {
-      console.log("==edit====", response.data);
-      commit('UPDATE_CAR', response.data)
+      console.log("==edit====", response.data.monthlyexpenses);
+      commit('UPDATE_CAR', response.data);
+      commit('ADD_MONTHLY_EXPENSE', response.data.monthlyexpenses);
       return response.data
     }).catch((error) => {
       throw error

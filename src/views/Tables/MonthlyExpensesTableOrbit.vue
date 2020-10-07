@@ -49,7 +49,7 @@
           </td>
 
           <td scope="year">
-            <pre>{{row.year}}</pre>
+            {{row.year}}
           </td>
 
           <td scope="month">
