@@ -109,7 +109,7 @@
                 <div class="col-xl-6 col-lg-6">
                     <stats-card title="Monthly Expenses Count"
                                 type="gradient-warning"
-                                :sub-title="statistics.statistics.insuranceCount.toString() || 'Loading' "
+                                :sub-title="statistics.statistics.monthlyExpenseCount.toString() || 'Loading' "
                                 icon="ni ni-cart"
                                 class="mb-4 mb-xl-0"
                                 >
@@ -194,7 +194,7 @@
   export default {
     async created() {
       await this.$store.dispatch('statistics/getStatistics');
-      await this.$store.dispatch('sales/fetchSaless')
+      await this.$store.dispatch('sales/fetchSaless');
       console.log("Fetched");
     },
     components: {
@@ -216,7 +216,7 @@
           this.sales.saless.forEach((item) => {
             if (item.status === 'RECEIVED_BY_KEHILLAH') {
               count += parseInt(item.amountReceived)
-            }    
+            }
           });
           return `${count.toString().split( /(?=(?:...)*$)/ )}`;
         }
