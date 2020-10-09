@@ -6,7 +6,7 @@
     <div class="container-fluid mt--7">
         <div class="row">
             <div class="col">
-                  <monthly-expenses-table-orbit title="Monthly Expenses"></monthly-expenses-table-orbit>
+                  <payout-table title="Owner Payout"></payout-table>
             </div>
         </div>
     </div>
@@ -15,12 +15,12 @@
 
 <script>
 
-import MonthlyExpensesTableOrbit from '@/views/Tables/MonthlyExpensesTableOrbit'
+import PayoutTable from '@/views/Tables/PayoutTable'
 
 
 export default {
   components: {
-    MonthlyExpensesTableOrbit,
+    PayoutTable,
   },
   computed: {
     fields(){
