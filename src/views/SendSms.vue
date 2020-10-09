@@ -133,8 +133,8 @@ export default {
 
       return [
           {
-            key: 'default',
-            msg: `Hi ${driverName},`
+            key: 'contract-signed',
+            msg: `Hi ${driverName}, we have received a digital copy of your signed contract. Your contract says you will start work today (9th Oct 2020). Congrats on passing the probation test and coming this far. We are looking forward to an exciting 900 days with you. Be safe out there ${driverName.split(" ")[0]} and all the best,`
           },
           {
             key: 'probation-passed',
