@@ -36,17 +36,6 @@
           <th>Days Remaining</th>
           <th>Amount Remaining</th>
         </template>
-        <!--
-        owner: { fullName: 'Koomson Fredrick', id: 'ududuud' },
-        amount: "400",
-        paymentMethod: "VODAFONE_CASH",
-        paymentStatus: "SENT_BY_KEHILLAH",
-        payoutDate: new Date(),
-        periodPayoutCovers: "6",
-        periodLeft: "800",
-        remainingExpectedPayout: "40000",
-        nextExpectedPayoutDate: new Date(),
-       -->
 
         <template slot-scope="{row}">
           <td class="more-actions">
@@ -56,8 +45,8 @@
                 <i class="fas fa-ellipsis-v"></i>
               </a>
               <template>
-                <button @click.prevent="handleOpenEditExpenseModal(row)" class="dropdown-item">Edit</button>
-                <button @click.prevent="handleDeleteExpense(row.id)" class="dropdown-item">Delete</button>
+                <!-- <button @click.prevent="handleOpenEditExpenseModal(row)" class="dropdown-item">Edit</button>
+                <button @click.prevent="handleDeleteExpense(row.id)" class="dropdown-item">Delete</button> -->
               </template>
             </base-dropdown>
           </td>
