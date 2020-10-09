@@ -45,8 +45,8 @@
                 <i class="fas fa-ellipsis-v"></i>
               </a>
               <template>
-                <!-- <button @click.prevent="handleOpenEditExpenseModal(row)" class="dropdown-item">Edit</button>
-                <button @click.prevent="handleDeleteExpense(row.id)" class="dropdown-item">Delete</button> -->
+                <button @click.prevent="handleOpenEditPayoutModal(row)" class="dropdown-item">Edit</button>
+                <button @click.prevent="handleDeleteExpense(row.id)" class="dropdown-item">Delete</button>
               </template>
             </base-dropdown>
           </td>
@@ -175,7 +175,7 @@
                                       @click.prevent="handleAddOwnerPayout"
                                       type="primary"
                                       class="my-4">
-                                      Add Expense
+                                      Add Payout
                                     </base-button>
                                 </div>
                             </form>
@@ -197,43 +197,77 @@
                           class="border-0">
                         <template>
                             <div class="text-center text-muted mb-4">
-                                <h3>Add Car Expense</h3>
+                                <h3>Edit Payout</h3>
                             </div>
                             <form role="form">
-                                <h5 class="text-uppercase text-muted">Year</h5>
-                                <multiselect v-model="editPayoutForm.year" :options="years"></multiselect>
+
+                                <h5 class="text-uppercase text-muted">Payment Method</h5>
+                                <multiselect v-model="editPayoutForm.paymentMethod" :options="paymentMethods"></multiselect>
 
                                 <br>
-                                <h5 class="text-uppercase text-muted">Month</h5>
-                                <multiselect v-model="editPayoutForm.month" :options="months"></multiselect>
-
-                                <br>
-                                <h5 class="text-uppercase text-muted">Select A Car</h5>
-                                <multiselect :custom-label="driverCarNumber" label="carNumber" v-model="selectedCar" :options="car.cars"></multiselect>
+                                <h5 class="text-uppercase text-muted">Payment Status</h5>
+                                <multiselect  v-model="editPayoutForm.paymentStatus" :options="paymentStatuss"></multiselect>
 
                                 <br>
                                 <h5 class="text-uppercase text-muted">Amount</h5>
                                 <base-input
                                    v-model="editPayoutForm.amount"
                                    addon-left-icon="ni ni-money-coins"
-                                   placeholder="Eg. GHC 450"
-                                   >
+                                   placeholder="Eg. GHC 450">
                                  </base-input>
 
 
-                                 <h5 class="text-uppercase text-muted">Details</h5>
-                                 <base-input
-                                    v-model="editPayoutForm.other.details"
-                                    placeholder="Details"
-                                    >
-                                  </base-input>
+                                  <h5 class="text-uppercase text-muted">Payout Date</h5>
+                                   <base-input addon-left-icon="ni ni-calendar-grid-58">
+                                         <flat-pickr slot-scope="{focus, blur}"
+                                                      @on-open="focus"
+                                                      @on-close="blur"
+                                                      :config="{allowInput: true}"
+                                                      class="form-control datepicker"
+                                                      v-model="editPayoutForm.payoutDate"
+                                                      >
+                                         </flat-pickr>
+                                     </base-input>
+
+                                   <h5 class="text-uppercase text-muted">Days Payout Covers</h5>
+                                   <base-input
+                                      v-model="editPayoutForm.periodPayoutCovers"
+                                      placeholder="Payout Period"
+                                      >
+                                    </base-input>
+
+                                    <h5 class="text-uppercase text-muted">Days Left</h5>
+                                    <base-input
+                                       v-model="editPayoutForm.periodLeft"
+                                       placeholder="Period Left"
+                                       >
+                                     </base-input>
+
+                                     <h5 class="text-uppercase text-muted">Remaining Expected Amount</h5>
+                                     <base-input
+                                        v-model="editPayoutForm.remainingExpectedPayout"
+                                        placeholder="Amount Left"
+                                        >
+                                      </base-input>
+
+                                      <h5 class="text-uppercase text-muted">Next Payment Date</h5>
+                                       <base-input addon-left-icon="ni ni-calendar-grid-58">
+                                             <flat-pickr slot-scope="{focus, blur}"
+                                                          @on-open="focus"
+                                                          @on-close="blur"
+                                                          :config="{allowInput: true}"
+                                                          class="form-control datepicker"
+                                                          v-model="editPayoutForm.nextExpectedPayoutDate"
+                                                          >
+                                             </flat-pickr>
+                                         </base-input>
 
                                 <div class="text-center">
                                     <base-button
-                                      @click.prevent="handleEditMonthlyExpense"
+                                      @click.prevent="handleEditPayout"
                                       type="primary"
                                       class="my-4">
-                                      Edit Expense
+                                      Edit Payout
                                     </base-button>
                                 </div>
                             </form>
@@ -259,18 +293,6 @@ import {mapState} from 'vuex';
     },
     created (){
       // fetch all insurance
-      if (this.$store.state.car.carMonthlyexpenses.length < 1) {
-        this.$store.dispatch('car/fetchCarMonthlyexpenses').then(() =>{
-          console.log(this.car.carMonthlyexpenses );
-        });
-      }
-
-      if (this.$store.state.car.cars.length < 1) {
-        this.$store.dispatch('car/fetchCars').then(() =>{
-          console.log(this.car.cars );
-        });
-      }
-
       if (this.$store.state.owner.owners.length < 1) {
         this.$store.dispatch('owner/fetchOwners').then(() =>{
           console.log(this.owner.owners );
@@ -299,6 +321,8 @@ import {mapState} from 'vuex';
           remainingExpectedPayout: "40000",
           nextExpectedPayoutDate: new Date(),
         },// monthly expenses
+
+        editPayoutForm: {fullName: 'Koomson Fredrick', id: 'ududuud'},
 
         modals:{
           addPayoutModal: false,
@@ -346,8 +370,6 @@ import {mapState} from 'vuex';
           'December',
         ],
 
-        editPayoutForm: { other: {details: ''} },
-
       }
     },
     computed: {
@@ -357,27 +379,21 @@ import {mapState} from 'vuex';
       },
       getTotalPayouts(){
         let count = 0
-        this.car.carMonthlyexpenses.forEach((item) => {
+        this.payout.payouts.forEach((item) => {
           count += parseInt(item.amount)
         });
         return `Total: GHC ${count.toString().split( /(?=(?:...)*$)/ )}`
       },
     },
     methods: {
-      getLatestData() {
-        this.$store.dispatch('car/fetchCarMonthlyexpenses').then(() =>{
-            console.log(this.car.carMonthlyexpenses );
-        });
-      },
 
       handleOpenAddPayoutModal(){
         this.modals.addPayoutModal = true;
       },
 
-      handleOpenEditExpenseModal(row){
+      handleOpenEditPayoutModal(row){
         this.modals.editPayoutModal = true;
         this.editPayoutForm = row;
-        this.selectedCar = row.car;
       },
 
       handleAddOwnerPayout(){
@@ -419,25 +435,26 @@ import {mapState} from 'vuex';
 
       },//handleAddOwnerPayout
 
-      handleEditMonthlyExpense(){
+      handleEditPayout(){
         //EDIT STUFF
-        const monthlyExpenseDataToUpdate = {
-          year: this.editPayoutForm.year,
-          month: this.editPayoutForm.month,
-          amount: this.editPayoutForm.amount,
-          other: this.editPayoutForm.other,
-          carId: this.selectedCar.id
-        }
-        const monthlyExpenseId = this.editPayoutForm.id;
+        let payoutId = this.editPayoutForm.id;
+        let payOut = this.editPayoutForm;
+        delete payOut.id
+        delete payOut.owner
+        delete payOut.createdAt
+        delete payOut.updatedAt
+        delete payOut.other
 
-        this.$store.dispatch('car/editMonthlyExpense', {
-          monthlyExpenseId, monthlyExpenseDataToUpdate
+        console.log(JSON.stringify(payOut));
+
+        this.$store.dispatch('payout/editPayout', {
+          payoutId, payoutDataToUpdate: payOut
         })
         .then(() => {
           this.modals.editPayoutModal = false;
           this.$notify({
             type: 'success',
-            title: `Monthly Expense Successfully Added`,
+            title: `Data Edited Added`,
           });
         }).catch((error) => {
           this.modals.editPayoutModal = false;
