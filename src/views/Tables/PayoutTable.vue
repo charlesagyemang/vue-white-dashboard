@@ -46,7 +46,7 @@
               </a>
               <template>
                 <button @click.prevent="handleOpenEditPayoutModal(row)" class="dropdown-item">Edit</button>
-                <button @click.prevent="handleDeleteExpense(row.id)" class="dropdown-item">Delete</button>
+                <!-- <button @click.prevent="handleDeleteExpense(row.id)" class="dropdown-item">Delete</button> -->
               </template>
             </base-dropdown>
           </td>
