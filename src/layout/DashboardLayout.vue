@@ -21,8 +21,8 @@
         <sidebar-item :link="{name: 'Expenses', icon: 'ni ni-credit-card', path: '/dashboard/expense-list'}"/>
         <sidebar-item :link="{name: 'Owner Payouts', icon: 'ni ni-ui-04', path: '/dashboard/pay-out-list'}"/>
         <sidebar-item :link="{name: 'Send Sms', icon: 'ni ni-send', path: '/dashboard/send-sms'}"/>
+        <sidebar-item :link="{name: 'Model Checker', icon: 'ni ni-atom', path: '/dashboard/model-checker'}"/>
         <sidebar-item :link="{name: 'User Profile', icon: 'ni ni-single-02', path: '/dashboard/profile'}"/>
-
 
 
 

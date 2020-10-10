@@ -141,6 +141,12 @@ export default new Router({
           name: 'Owner Payout List',
           component: () => import('./views/Payout/PayoutList.vue')
         },
+
+        {
+          path: '/dashboard/model-checker',
+          name: 'Model Checker',
+          component: () => import('./views/ModelChecker.vue')
+        },
       ]
     },
     {
