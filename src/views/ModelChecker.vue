@@ -275,11 +275,11 @@
         const netProfitPercentage = ( netProfit / parseInt(data.assetCost) ) * 100
 
         this.currentResults = {
-          expectedRevenue,
-          grossProfit,
-          totalRecurringCost,
-          totalNonRecurring,
-          totalExpenses,
+          expectedRevenue: expectedRevenue.toString().split( /(?=(?:...)*$)/ ).join(","),
+          grossProfit: grossProfit.toString().split( /(?=(?:...)*$)/ ).join(","),
+          totalRecurringCost: totalRecurringCost.toString().split( /(?=(?:...)*$)/ ).join(","),
+          totalNonRecurring: totalNonRecurring.toString().split( /(?=(?:...)*$)/ ).join(","),
+          totalExpenses: totalExpenses.toString().split( /(?=(?:...)*$)/ ).join(","),
           netProfit: netProfit.toString().split( /(?=(?:...)*$)/ ).join(","),
           netProfitPercentage: parseFloat(netProfitPercentage.toFixed(1)),
         }
