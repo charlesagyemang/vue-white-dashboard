@@ -215,6 +215,12 @@ export default new Router({
         },
       ]
     },
+    // {
+    //   path: '/chat-with-us',
+    //   name: 'chat',
+    //   component: () => import('./views/Contact.vue')
+    // },
+
 
   ]
 })
