@@ -337,7 +337,11 @@ import { WFClient } from 'witty-flow-sms';
       getNumberOfDaysFromSales(sales, period){
         const periodData = {
           'PROBATION' : 24,
+<<<<<<< HEAD
           'WORKING': 900 + 24,
+=======
+          'WORKING': 860 + 24,
+>>>>>>> 897f47bf23892a5121f2355f4cefa023f16fbd18
         }
         let count = 0;
         sales.forEach((item) => {
@@ -348,8 +352,11 @@ import { WFClient } from 'witty-flow-sms';
 
         let daysLeft = periodData[`${period}`] - count;
 
+<<<<<<< HEAD
         console.log( "Period", periodData[`${period}`] );
 
+=======
+>>>>>>> 897f47bf23892a5121f2355f4cefa023f16fbd18
         if (daysLeft === 0) {
           daysLeft = `You Have Completed The ${period} Period. Congrats!!`
         } else {
@@ -365,6 +372,7 @@ import { WFClient } from 'witty-flow-sms';
         const wittySmsClient = new WFClient('1f41908b-a9d7-4408-a0bf-4ee4665b3276', 'CvAILbsSdfjGAVVZr6RG0zgBv5jHUioh88vCuHu914');
         const record = this.getNumberOfDaysFromSales(data.driver.sales, data.driver.driverStatus)
         const message = `Hi, ${data.driver.fullName}. We have received an amount of GHC ${data.amountReceived} via ${data.paymentMethod}. This covers ${data.daysSalesAmountCovers} days of expected sales. This Means ${record.daysLeft} Good Job!`
+<<<<<<< HEAD
         console.log(message);
         console.log(wittySmsClient);
         // data.driver.phoneNumber
@@ -382,6 +390,22 @@ import { WFClient } from 'witty-flow-sms';
         //     title: `Sms Failed To Send: ${error.message}`,
         //   });
         // })
+=======
+        wittySmsClient.sendSms('Kehillah', data.driver.phoneNumber, message)
+        .then((resp) => {
+          console.log(resp);
+          this.$notify({
+            type: 'success',
+            title: `Sms Sent Successfully`,
+          });
+        }).catch((error) => {
+          console.log(error);
+          this.$notify({
+            type: 'danger',
+            title: `Sms Failed To Send: ${error.message}`,
+          });
+        })
+>>>>>>> 897f47bf23892a5121f2355f4cefa023f16fbd18
       },
 
       honda(){
