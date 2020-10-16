@@ -10,7 +10,7 @@
             <div class="row">
               <div class="col">
                 <h3 class="mb-0">
-                  {{title}} <router-link class="btn btn-primary" to="/dashboard/add-a-sales">ADD A NEW SALES RECORD</router-link>
+                  {{title}} <router-link class="btn btn-primary" to="/dashboard/add-a-sales">ADD A NEW SALES RECORD..</router-link>
                 </h3>
               </div>
 
