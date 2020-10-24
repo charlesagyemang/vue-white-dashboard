@@ -96,7 +96,7 @@
                     <template>
                       <button class="dropdown-item"  @click.prevent="handleEditSalesModal(data.item)">Edit</button>
                       <button class="dropdown-item" @click.prevent="handleDeleteSales(data.item.id)">Delete</button>
-                      <button class="dropdown-item" @click.prevent="handleSendSmsToDriver(data.item)">Send Driver Sms</button>
+                      <button class="dropdown-item" @click.prevent="handleSendSmsToDriver(data.item)">Send Driver Sms..</button>
                     </template>
                   </base-dropdown>
               </template>
@@ -367,8 +367,8 @@ import {mapState} from 'vuex';
       handleSendSmsToDriver(data){
         const wittySmsClient = new WFClient('1f41908b-a9d7-4408-a0bf-4ee4665b3276', 'CvAILbsSdfjGAVVZr6RG0zgBv5jHUioh88vCuHu914');
         const record = this.getNumberOfDaysFromSales(data.driver.sales, data.driver.driverStatus)
-        const message = `Hi, ${data.driver.fullName}. We have received an amount of GHC ${data.amountReceived} via ${data.paymentMethod}. This covers ${data.daysSalesAmountCovers} days of expected sales. This Means ${record.daysLeft} Good Job!`
-        // data.driver.phoneNumber
+        const message = `Hi, ${data.driver.fullName}. We have received an amount of GHC ${data.amountReceived} via ${data.paymentMethod}. This sales amount covers ${data.daysSalesAmountCovers} days of expected sales. This Means you have worked a total of ${record.daysDone - 24} days. ${record.daysLeft} Good Job!`
+        console.log(message);
         wittySmsClient.sendSms('Kehillah', data.driver.phoneNumber, message)
         .then((resp) => {
           console.log(resp);
@@ -383,7 +383,7 @@ import {mapState} from 'vuex';
             type: 'danger',
             title: `Sms Failed To Send: ${error.message}`,
           });
-        })
+        });
       },
 
     },
