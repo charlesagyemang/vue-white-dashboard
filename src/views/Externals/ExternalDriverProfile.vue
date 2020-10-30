@@ -35,11 +35,11 @@
                                 <div class="col">
                                     <div class="card-profile-stats d-flex justify-content-center mt-md-5">
                                         <div>
-                                            <span class="heading">{{salesCount}}</span>
+                                            <span class="heading">{{getNumberOfDaysFromSales.daysDone}}</span>
                                             <span class="description">Days Done</span>
                                         </div>
                                         <div>
-                                            <span class="heading">{{24 - salesCount}}</span>
+                                            <span class="heading">{{getNumberOfDaysFromSales.daysLeft}}</span>
                                             <span class="description">Days Left</span>
                                         </div>
                                     </div>
@@ -47,13 +47,17 @@
                             </div>
                             <div class="row">
                               <div class="col">
-                                <base-progress type="success" :height="8" :value="parseInt(salesCount/24 * 100)" :label="salesCount + ' out of 24 days done in ' + driver.driver.driverStatus  "></base-progress>
+                                <base-progress type="success" :height="8" :value="parseInt(getNumberOfDaysFromSales.daysDone/getNumberOfDaysFromSales.daysLeft * 100)" :label="`${getNumberOfDaysFromSales.daysDone} out of ${getNumberOfDaysFromSales.daysLeft} days done`"></base-progress>
                               </div>
                             </div>
                             <div class="text-center">
+                                <h2>
+                                    {{driver.driver.driverStatus}} PERIOD<span class="font-weight-light"></span>
+                                </h2>
                                 <h3>
                                     {{driver.driver.fullName}}<span class="font-weight-light"></span>
                                 </h3>
+                                <!-- <pre>{{getNumberOfDaysFromSales}}</pre> -->
                                 <div class="h5 font-weight-300">
                                     <i class="ni location_pin mr-2"></i>{{driver.driver.address}}
                                 </div>
@@ -61,10 +65,10 @@
                                     <i class="ni business_briefcase-24 mr-2"></i>Driver Of {{driver.driver.currentCar.carNumber}}
                                 </div>
                                 <div>
-                                    <i class="ni education_hat mr-2"></i>{{driver.driver.currentCar.modelName}}({{driver.driver.currentCar.modelYear}})
+                                    <i class="ni education_hat mr-2"></i>{{driver.driver.currentCar.modelName}} ( {{driver.driver.currentCar.modelYear}} )
                                 </div>
                                 <hr class="my-4" />
-                                <pre>{{driver.driver.driverStatus}}</pre>
+                                <pre>{{driver.driver.driverStatus}} PERIOD</pre>
                             </div>
                         </div>
                     </div>
@@ -202,6 +206,33 @@ import {mapState} from 'vuex';
           return sales.length * 6
         }
         return 0
+      },
+      getNumberOfDaysFromSales(){
+        const periodData = {
+          'PROBATION' : 24 + 24,
+          'WORKING': 900 + 24,
+        }
+
+        let period =  this.driver.driver.driverStatus;
+
+        let count = 0;
+        this.driver.driver.sales.forEach((item) => {
+          if (item.status === 'RECEIVED_BY_KEHILLAH') {
+            count += parseInt(item.daysSalesAmountCovers);
+          }
+        });
+
+        let daysLeft = periodData[`${period}`] - count;
+
+        if (daysLeft === 0) {
+          daysLeft = `You Have Completed The ${period} Period. Congrats!!`
+        } else {
+          daysLeft = `You Have ${daysLeft} out of ${periodData[`${period}`] - 24} days left to complete the ${period} period.`
+        }
+        return {
+          daysDone: count - 24,
+          daysLeft: parseInt(periodData[`${period}`]) - 24
+        };
       },
     },
   };
