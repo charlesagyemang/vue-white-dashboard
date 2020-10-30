@@ -30,7 +30,7 @@
                                             <span class="description">Days Done</span>
                                         </div>
                                         <div>
-                                            <span class="heading">{{getNumberOfDaysFromSales.daysLeft}}</span>
+                                            <span class="heading">{{900 - getNumberOfDaysFromSales.daysDone}}</span>
                                             <span class="description">Days Left</span>
                                         </div>
                                     </div>
