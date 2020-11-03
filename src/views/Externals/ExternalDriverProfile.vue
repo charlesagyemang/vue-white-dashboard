@@ -204,6 +204,7 @@ import {mapState} from 'vuex';
           'WORKING': 900 + 24,
         }
 
+        // test fron tend
         let period =  this.driver.driver.driverStatus;
 
         let count = 0;
